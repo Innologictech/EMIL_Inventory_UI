@@ -1,0 +1,106 @@
+<div class="topnav">
+  <div class="container-fluid">
+    <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
+
+      <!-- Hamburger for mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#topnav-menu-content" aria-controls="topnav-menu-content"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Collapsible menu -->
+      <div class="collapse navbar-collapse" id="topnav-menu-content">
+        <ul class="navbar-nav">
+
+          <!-- Top-level items -->
+          <ng-container *ngFor="let item of menuItems">
+            <li class="nav-item dropdown">
+
+              <!-- Parent clickable -->
+              <a *ngIf="item.subItems?.length > 0"
+                 class="nav-link dropdown-toggle arrow-none"
+                 [routerLink]="item.link"
+                 routerLinkActive="active"
+                 (click)="onMenuClick(item.parentId, item)"
+                 role="button">
+                <i class="bx {{item.icon}} me-1"></i>
+                {{ item.label | translate }}
+                <div class="arrow-down"></div>
+              </a>
+
+              <a *ngIf="!item.subItems?.length"
+                 class="nav-link arrow-none"
+                 [routerLink]="item.link"
+                 routerLinkActive="active"
+                 role="button">
+                <i class="bx {{item.icon}} me-2"></i>
+                {{ item.label | translate }}
+              </a>
+
+              <!-- Subitems -->
+              <div *ngIf="item.subItems?.length > 0"
+                   class="dropdown-menu"
+                   [ngClass]="{'dropdown-mega-menu-xl px-2': item.subItems.length > 11, 'show': item.isCollapsed}">
+                
+                <ng-container *ngFor="let subitem of item.subItems">
+
+                  <!-- Normal subitem -->
+                  <a *ngIf="!hasItems(subitem) && item.subItems.length < 11"
+                     class="dropdown-item side-nav-link-ref"
+                     [routerLink]="subitem.link"
+                     routerLinkActive="active"
+                     [routerLinkActiveOptions]="{exact: true}">
+                    {{ subitem.label | translate }}
+                  </a>
+
+                  <!-- Nested submenu -->
+                  <div *ngIf="hasItems(subitem)" class="dropdown">
+                    <a class="dropdown-item dropdown-toggle"
+                       href="javascript:void(0);"
+                       (click)="onMenuClick(subitem.parentId, subitem)">
+                      {{ subitem.label | translate }}
+                      <div class="arrow-down"></div>
+                    </a>
+                    <div class="dropdown-menu" [ngClass]="{'show': subitem.isCollapsed}">
+                      <ng-container *ngFor="let subSubitem of subitem.subItems">
+                        <a *ngIf="!hasItems(subSubitem)"
+                           class="dropdown-item side-nav-link-ref"
+                           [routerLink]="subSubitem.link"
+                           routerLinkActive="active">
+                          {{ subSubitem.label | translate }}
+                        </a>
+
+                        <!-- Further nested submenu -->
+                        <div *ngIf="hasItems(subSubitem)" class="dropdown">
+                          <a class="dropdown-item dropdown-toggle"
+                             href="javascript:void(0);"
+                             (click)="onMenuClick(subSubitem.parentId, subSubitem)">
+                            {{ subSubitem.label | translate }}
+                          </a>
+                          <div class="dropdown-menu" [ngClass]="{'show': subSubitem.isCollapsed}">
+                            <ng-container *ngFor="let subSubSubitem of subSubitem.subItems">
+                              <a class="dropdown-item side-nav-link-ref"
+                                 [routerLink]="subSubSubitem.link"
+                                 routerLinkActive="active">
+                                {{ subSubSubitem.label | translate }}
+                              </a>
+                            </ng-container>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+
+                </ng-container>
+              </div>
+
+            </li>
+          </ng-container>
+
+        </ul>
+      </div>
+
+    </nav>
+  </div>
+</div>

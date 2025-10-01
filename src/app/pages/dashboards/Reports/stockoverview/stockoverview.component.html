@@ -1,0 +1,34 @@
+<div class="pe-4 ps-4">
+  <label class="fw-bold mt-3 fs-5 ms-5">
+    <span style="color: #ce242a;">Stock Overview</span> Report
+  </label>
+
+  <div class="card shadow-sm ms-5 mt-4 me-5">
+    <div class="card-body">
+      <form [formGroup]="stockOverview">
+        <div class="row col-12 mb-3">
+          <div class="col-md-4">
+            <label class="fw-semibold">product<span class="text-danger">*</span></label>
+            <input type="text" class="form-control mb-2" formControlName="stoponumber"
+              placeholder="Type and select product">Report stores for the selected product
+          </div>
+
+          <!-- Input + Submit in same column -->
+          <div class="col-md-4">
+            <label class="fw-semibold">Store</label>
+            <input type="text" class="form-control mb-2" formControlName="stoponumber"
+              placeholder="Selcet store">Results will shown from the selected stores only
+        </div>
+        <div class="col-md-4 mt-4" style="white-space: nowrap;">
+            <button type="submit" class="btn-md btnSubmit mt-2">Generate Report</button>
+
+        </div>
+
+     
+
+           
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

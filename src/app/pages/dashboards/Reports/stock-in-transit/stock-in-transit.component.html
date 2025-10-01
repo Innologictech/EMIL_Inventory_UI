@@ -1,0 +1,82 @@
+<div class="pe-4 ps-4">
+    <label class="fw-bold mt-3 fs-5 ms-5">
+        <span style="color: #ce242a;">Stock In Transit</span> Report
+    </label>
+
+    <div class="card shadow-sm ms-5 mt-4 me-5">
+        <div class="card-body">
+            <form [formGroup]="stocktransit">
+                <!-- Toolbar Row -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <!-- Left: Show Entries -->
+                    <div class="d-flex align-items-center">
+                        <label for="entries" class="me-2">Show</label>
+                        <select id="entries" class="form-select form-select-sm" style="width: auto;">
+                            <option value="5">5</option>
+                            <option value="10" selected>10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                        </select>
+                        <span class="ms-2">entries</span>
+                    </div>
+
+                    <!-- Center: Search -->
+                    <div class="d-flex align-items-center">
+                        <label for="search" class="me-2 fw-semibold">Search:</label>
+                        <input type="text" id="search" class="form-control form-control-sm" placeholder="Search..."
+                            style="width: 200px;" />
+                    </div>
+
+                    <!-- Right: Export Buttons -->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary btn-sm">
+                            <i class="bi bi-file-earmark-pdf text-white"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-sm">
+                            <i class="bi bi-file-earmark-excel text-white"></i>
+                        </button>
+                    </div>
+
+
+                </div>
+
+
+                <!-- Table -->
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>STO No.</th>
+                                <th>STO Item No.</th>
+                                <th>Product No.</th>
+                                <th>Product Description</th>
+                                <th>Supply Store</th>
+                                <th>Supply Store Name</th>
+                                <th>Quantity</th>
+                                <th>UOM</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

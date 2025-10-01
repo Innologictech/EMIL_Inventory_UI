@@ -1,0 +1,118 @@
+<div class="pe-4 ps-4">
+    <label class="fw-semibold mt-3 fs-5 ms-5">
+        Creating STO >> <span class="text-danger">My Store supplies to Warehouse</span>
+    </label>
+
+    <div class="card shadow-sm mt-4 me-5 ms-5">
+        <div class="card-body">
+            <form [formGroup]="myStoreForm" (ngSubmit)="onSubmit()">
+
+                <div class="row col-12 mb-3">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <label class="fw-semibold ">Delivery Date</label>
+                        <input type="date" class="form-control" formControlName="deliveryDate">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="fw-semibold ">Storage Location</label>
+                        <input type="text" class="form-control" formControlName="storageLocation">
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <div class="row col-12 mb-3">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <label class="fw-semibold ">Search for Receving Warehouse</label>
+                        <input type="text" class="form-control" formControlName="supplyStore">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="fw-semibold ">Receving Warehouse Code</label>
+                        <input type="text" class="form-control" formControlName="supplyStoreCode" readonly>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center mt-5">
+                    <div class="me-5">
+                        <h5>Items List</h5>
+                    </div>
+                    <div>
+                        <button type="button" class="btnSubmit" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                            Add Item
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <div *ngIf="itemsList.length > 0" class="table-responsive p-3" style="max-height:250px; overflow-y:auto;">
+                        <table class="table table-bordered table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Product Code</th>
+                                    <th>Quantity</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of itemsList; let i = index">
+                                    <td>{{item.product}}</td>
+                                    <td>{{item.productCode}}</td>
+                                    <td>{{item.quantity}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm" (click)="removeItem(i)">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- <div *ngIf="itemsList.length === 0" class="text-center text-muted p-3">
+                        No items added yet. Click "Add Item" to add products.
+                    </div> -->
+                </div>
+
+                <div class="text-center mt-5">
+                    <button type="submit" class="btnSubmit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">STO - Add Item</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="itemForm">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Product</label>
+                            <input type="text" class="form-control" formControlName="product">
+                        </div>
+                        <div class="col-md-4">
+                            <label>Product Code</label>
+                            <input type="text" class="form-control" formControlName="productCode">
+                        </div>
+                        <div class="col-md-4">
+                            <label>Quantity</label>
+                            <input type="number" class="form-control" formControlName="quantity">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btnClose" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btnSubmit" (click)="submitItem()" data-bs-dismiss="modal">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,746 @@
+<div class="container1">
+  <h1>KYC QUESTIONNAIRE</h1>
+  <p class="disclaimer">
+    By signing this KYC questionnaire, the Counterparty acknowledges and agrees that the Company may collect and process personal data as part of the KYC and AML process. Personal data may include, but is not limited to, the Counterpart's name, contact information, identification documents, and business-related information. Data Protection shall be governed by and construed in accordance with the laws of Singapore.
+  </p>
+
+  <form [formGroup]="kycForm">
+    <!-- Corporate Information Section -->
+<div class="bg-white shadow-lg rounded-xl p-8 max-w-6xl mx-auto mt-10">
+
+     <div style="background-color: rgb(121, 137, 154); color: white;" class="px-3 py-2">
+      <strong>Corporate Information</strong> 
+    </div>
+
+
+
+
+  <!-- Data Rows -->
+  <div class="col-lg-12 col-md-12 col-sm-12 p-1">
+    <div class="row m-3">
+         <label class="col-lg-3 col-md-3 col-sm-12 fw-bold">Full Registered Name of Counterparty </label>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+      <input type="text" formControlName="companyName" />
+    </div>
+    </div>
+    <!-- Row: Full Registered Name -->
+      <div class="row m-3">
+         <label class="col-lg-3 col-md-3 col-sm-12 fw-bold">Parent Company</label>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+      <input type="text" formControlName="parentCompany" />
+    </div>
+    </div>
+   
+     <div class="row m-3">
+         <label class="col-lg-3 col-md-3 col-sm-12 fw-bold">Registered Address</label>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+      <input type="text" formControlName="registeredAddress" />
+    </div>
+    </div>
+
+       <div class="row m-3">
+         <label class="col-lg-3 col-md-3 col-sm-12 fw-bold">Address of Head Office (if different)</label>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+      <input type="text" formControlName="headOfficeAddress" />
+    </div>
+    </div>
+
+      <div class="row m-3">
+         <label class="col-lg-3 col-md-3 col-sm-12 fw-bold">Website</label>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+      <input type="text" formControlName="website" />
+    </div>
+    </div>
+
+  
+  </div>
+</div>
+
+
+
+
+
+
+
+
+    <!-- Company Registration Section -->
+<div class="card col-12 mt-2">
+  <div class="row">
+    <!-- Left Column: Company Registration -->
+    <div class="col-lg-6 col-md-12">
+     <div style="background-color: rgb(121, 137, 154); color: white;" class="px-3 py-2">
+  <strong>Company Registration</strong>
+</div>
+
+
+      <div class="row m-2">
+        <label class="col-4 fw-bold">Incorporation Date</label>
+        <div class="col-8">
+          <input type="date"  formControlName="incorporationDate">
+        </div>
+      </div>
+
+      <div class="row m-2">
+        <label class="col-4 fw-bold">Country or State of Incorporation</label>
+        <div class="col-8">
+          <input type="text"  formControlName="incorporationCountry">
+        </div>
+      </div>
+
+      <div class="row m-2">
+        <label class="col-4 fw-bold">Company Registration Number</label>
+        <div class="col-8">
+          <input type="text"  formControlName="registrationNumber">
+        </div>
+      </div>
+
+      <div class="row m-2">
+        <label class="col-4 fw-bold">GST/VAT Number or W9 Number</label>
+        <div class="col-8">
+          <input type="text"  formControlName="taxNumber">
+        </div>
+      </div>
+
+      <div class="row m-2">
+        <label class="col-4 fw-bold">
+          Stock Exchange(s) and Listing(s)
+        </label>
+        <div class="col-8">
+          <input type="text"  formControlName="stockExchange">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column: Ownership / Status -->
+    <div class="col-lg-6 col-md-12">
+     <div style="background-color: rgb(121, 137, 154); color: white;" class="px-3 py-2">
+      <strong>Status / Ownership (Please Tick)</strong>
+      </div>
+
+        <div class="row align-items-center m-2">
+        <label class="col-md-5 col-form-label fw-bold">Public Company</label>
+        <div class="col-md-7">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" formControlName="publicCompany" id="publicCompany">
+            <label class="form-check-label" for="publicCompany"></label>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row align-items-center m-2">
+        <label class="col-md-5 col-form-label fw-bold">Private Company</label>
+        <div class="col-md-7">
+          <input type="checkbox" class="form-check-input" formControlName="privateCompany" id="privateCompany">
+          <label class="form-check-label" for="privateCompany"></label>
+
+        </div>
+      </div>
+
+      <div class="row align-items-center m-2">
+        <label class="col-5 col-form-label fw-bold">Partnership</label>
+        <div class="col-md-7">
+          <input type="checkbox" class="form-check-input" formControlName="partnership" id="partnership">
+            <label class="form-check-label" for="partnership"></label>
+
+        </div>
+      </div>
+
+      <div class="row align-items-center m-2">
+        <label class="col-5 col-form-label fw-bold">Individual</label>
+        <div class="col-md-7">
+          <input type="checkbox" class="form-check-input" formControlName="individual" id="individual">
+          <label class="form-check-label" for="individual"></label>
+
+        </div>
+      </div>
+
+      <div class="row lign-items-center m-2">
+        <label class="col-5 col-form-label fw-bold">State or Government Entity</label>
+        <div class="col-md-7">
+          <input type="checkbox" class="form-check-input" formControlName="governmentEntity" id="governmentEntity">
+          <label class="form-check-label" for="governmentEntity"></label>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 mt-3">
+  <div class="row m-2">
+    <label class="col-6 fw-bold">
+      If publicly quoted, please name Stock Exchange(s) and Listing(s)
+    </label>
+    <div class="col-6">
+      <input type="text"  formControlName="quotedExchangeDetails">
+    </div>
+  </div>
+  <div class="row m-2">
+    <label class="col-6 fw-bold">
+      Otherwise, please provide details of the ultimate beneficial owners of the company and their % share
+    </label>
+    <div class="col-6">
+      <input type="text"  formControlName="beneficialOwnersDetails">
+    </div>
+  </div>
+</div>
+
+
+    
+  </div>
+</div>
+
+
+
+<!-- Contact info -->
+
+<div class="card container mt-3">
+  <div class="row">
+    <!-- Column 1: Counterparty Primary Contact Info -->
+    <div class="col-lg-4 col-md-6 col-sm-12">
+     <div style="background-color: rgb(121, 137, 154); color: white;" class="px-3 py-2">
+        <strong>Counterparty Primary Contact Info</strong>
+    </div>
+
+
+      <div class="row mb-2 mt-3">
+        <label class="col-5 col-form-label">Name</label>
+        <div class="col-7">
+          <input type="text"  formControlName="primaryName">
+        </div>
+      </div>
+
+      <div class="row mb-2 mt-3">
+        <label class="col-5 col-form-label">Title</label>
+        <div class="col-7">
+          <input type="text"  formControlName="primaryTitle">
+        </div>
+      </div>
+
+      <div class="row mb-2 mt-3">
+        <label class="col-5 col-form-label">Telephone</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="primaryTelephone">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Mobile</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="primaryMobile">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Fax Number</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="primaryFax">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">E-mail</label>
+        <div class="col-7">
+          <input type="email"  formControlName="primaryEmail">
+        </div>
+      </div>
+    </div>
+
+    <!-- Column 2: Operations Contact Info -->
+    <div class="col-lg-4 col-md-6 col-sm-12">
+     <div style="background-color: rgb(121, 137, 154); color: white;" class="px-3 py-2">
+
+      <strong>Operations Contact Info</strong>
+      </div>
+
+      <div class="row mb-2 mt-3">
+        <label class="col-5 col-form-label">Name</label>
+        <div class="col-7">
+          <input type="text"  formControlName="operationsName">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Title</label>
+        <div class="col-7">
+          <input type="text"  formControlName="operationsTitle">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Telephone</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="operationsTelephone">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Mobile</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="operationsMobile">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Fax Number</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="operationsFax">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">E-mail</label>
+        <div class="col-7">
+          <input type="email"  formControlName="operationsEmail">
+        </div>
+      </div>
+    </div>
+
+    <!-- Column 3: Credit/Finance Contact Info -->
+    <div class="col-lg-4 col-md-6 col-sm-12">
+     <div style="background-color: rgb(121, 137, 154); color: white;" class="px-3 py-2">
+
+      <strong>Credit/Finance Contact Info</strong>
+      </div>
+
+      <div class="row mb-2 mt-3">
+        <label class="col-5 col-form-label">Name</label>
+        <div class="col-7">
+          <input type="text"  formControlName="financeName">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Title</label>
+        <div class="col-7">
+          <input type="text"  formControlName="financeTitle">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Telephone</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="financeTelephone">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Mobile</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="financeMobile">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Fax Number</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="financeFax">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">E-mail</label>
+        <div class="col-7">
+          <input type="email"  formControlName="financeEmail">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Accounting Contact info -->
+<div class="container">
+  <div class="row">
+     
+    <!-- Column 1: Accounting Department -->
+    <div class="col-lg-4 col-md-6 col-sm-12">
+     <div style="background-color: rgb(121, 137, 154); color: white;" class="px-3 py-2">
+        <strong>Accounting Department Contact Info</strong>
+        </div>
+        
+
+      <div class="row mb-2 mt-3">
+        <label class="col-5 col-form-label">Name</label>
+        <div class="col-7">
+          <input type="text"  formControlName="accountingName">
+        </div>
+      </div>
+
+      <div class="row mb-2 mt-3">
+        <label class="col-5 col-form-label">Title</label>
+        <div class="col-7">
+          <input type="text"  formControlName="accountingTitle">
+        </div>
+      </div>
+
+      <div class="row mb-2 mt-3">
+        <label class="col-5 col-form-label">Telephone</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="accountingTelephone">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Mobile</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="accountingMobile">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Fax Number</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="accountingFax">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">E-mail</label>
+        <div class="col-7">
+          <input type="email"  formControlName="accountingEmail">
+        </div>
+      </div>
+    </div>
+
+    <!-- Column 2: Director Contact A -->
+    <div class="col-lg-4 col-md-6 col-sm-12">
+     <div style="background-color: rgb(121, 137, 154); color: white;" class="px-3 py-2">
+        <strong>Director Contact Info A</strong>
+        </div>
+
+      <div class="row mb-2 mt-3">
+        <label class="col-5 col-form-label">Name</label>
+        <div class="col-7">
+          <input type="text"  formControlName="directorAName">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Title</label>
+        <div class="col-7">
+          <input type="text"  formControlName="directorATitle">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Telephone</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="directorATelephone">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Mobile</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="directorAMobile">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Fax Number</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="directorAFax">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">E-mail</label>
+        <div class="col-7">
+          <input type="email"  formControlName="directorAEmail">
+        </div>
+      </div>
+    </div>
+
+    <!-- Column 3: Director Contact B -->
+    <div class="col-lg-4 col-md-6 col-sm-12">
+     <div style="background-color: rgb(121, 137, 154); color: white;" class="px-3 py-2">
+        <strong>Director Contact Info B</strong>
+        </div>
+
+      <div class="row mb-2 mt-3">
+        <label class="col-5 col-form-label">Name</label>
+        <div class="col-7">
+          <input type="text"  formControlName="directorBName">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Title</label>
+        <div class="col-7">
+          <input type="text"  formControlName="directorBTitle">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Telephone</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="directorBTelephone">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Mobile</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="directorBMobile">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">Fax Number</label>
+        <div class="col-7">
+          <input type="tel"  formControlName="directorBFax">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-5 col-form-label">E-mail</label>
+        <div class="col-7">
+          <input type="email"  formControlName="directorBEmail">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Banking Information -->
+<div class="bg-white shadow-lg rounded-xl p-8 max-w-6xl mx-auto mt-10">
+  <div class="grid grid-cols-2">
+     <div style="background-color: rgb(121, 137, 154); color: white;" class="px-3 py-2">
+    <strong>Banking Information</strong>
+  </div>
+  </div>
+
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="row m-3">
+      <label class="col-lg-3 col-md-3 col-sm-12 fw-bold">Name of Principal Bankers</label>
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <input type="text" formControlName="principalbankers" />
+      </div>
+    </div>
+
+    <div class="row m-3">
+      <label class="col-lg-3 col-md-3 col-sm-12 fw-bold">Bank Branch Address</label>
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <input type="text" formControlName="branchaddress" />
+      </div>
+    </div>
+
+    <div class="row m-3">
+      <label class="col-lg-3 col-md-3 col-sm-12 fw-bold">Name of Account Manager & Contact Details</label>
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <input type="text" formControlName="contactdetails" />
+      </div>
+    </div>
+
+    <div class="row m-3">
+      <label class="col-lg-3 col-md-3 col-sm-12 fw-bold">Bank Details</label>
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <input type="text" formControlName="bankdetails" />
+      </div>
+    </div>
+
+    <div class="row m-3">
+      <label class="col-lg-3 col-md-3 col-sm-12 fw-bold">Account Number</label>
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <input type="text" formControlName="accountnumber" />
+      </div>
+    </div>
+
+    <div class="row m-3">
+      <label class="col-lg-3 col-md-3 col-sm-12 fw-bold">Account Name</label>
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <input type="text" formControlName="accountname" />
+      </div>
+    </div>
+
+    <div class="row m-3 mb-3" >
+      <label class="col-lg-3 col-md-3 col-sm-12 fw-bold">SWIFT CODE</label>
+      <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
+        <input type="text" formControlName="swiftcode" />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- KYC Confirmation -->
+
+<div class="container border mt-4 p-0">
+  <!-- Header -->
+     <div style="background-color: rgb(121, 137, 154); color: white;" class="px-3 py-2">
+    <strong>KYC Confirmation Requirements</strong>
+  </div>
+
+  <div class="row g-0">
+    <!-- Left Side (Text) -->
+    <div class="col-md-6 text-black p-3">
+      <p class="mb-0">
+        The company, its related companies, Directors, and beneficial owners 
+        <a href="#" class="text-black text-decoration-underline">confirms that it does not</a>
+        have any contracts, dealings, bank accounts, or business activities with/in Iran, Syria, Cuba, North Korea, 
+        the Crimea region, Russia, Venezuela, Belarus, Ukraine, or a sanctioned party/entity.
+      </p>
+    </div>
+
+    <!-- Right Side (Form Fields) -->
+    <div class="col-md-6">
+      <div class="row border-start h-100">
+        <!-- Tick to confirm -->
+        <div class="col-12 border-bottom p-2 d-flex align-items-center">
+          <label class="form-label small me-2 mb-0" style="width: 50%;">
+            Tick to confirm (if you are unable to confirm, please state reasons)
+          </label>
+          <input type="text"  style="width: 50%;">
+        </div>
+
+        <!-- Signature -->
+        <div class="col-12 p-2 d-flex align-items-center">
+          <label class="form-label small me-2 mb-0" style="width: 50%;">Signature:</label>
+          <input type="text"  style="width: 50%; height: 60px;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Documentation Requirements -->
+
+
+<div class="container bg-white shadow-lg rounded-4 p-4 mt-5">
+  <!-- Header -->
+  <div class="row">
+
+    <div style="background-color: rgb(121, 137, 154); color: white;" class="col-12 text-center py-3 rounded">
+      <h4 class="mb-0 fw-bold">KYC Documentation Requirements</h4>
+      <div class="text-white-50 fst-italic" style="font-size: 0.875rem;">
+        (where documents are not available, please state reason)
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Fields -->
+  <div class="mt-4">
+    <!-- Row 1 -->
+    <div class="row mb-3 align-items-start">
+      <label class="col-md-3 fw-bold">
+        1. List and identification documents (passport or national ID) of all Directors & Ultimate Shareholders/Beneficiaries
+      </label>
+      <div class="col-md-8">
+        <input type="text" formControlName="identificationdocument">
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="row mb-3 align-items-center">
+      <label class="col-md-3 fw-bold">
+        2. Certificate of Incorporation
+      </label>
+      <div class="col-md-8">
+        <input type="text"  formControlName="certificateincorporation">
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="row mb-3 align-items-start">
+      <label class="col-md-3 fw-bold">
+        3. A complete Organization Chart showing the company's group affiliation, ownership %, and ultimate beneficial shareholder
+      </label>
+      <div class="col-md-8">
+        <input type="text"  formControlName="shareholder">
+      </div>
+    </div>
+
+    <!-- Row 4 -->
+    <div class="row mb-3 align-items-center">
+      <label class="col-md-3 fw-bold">
+        4. Bank reference from principal bankers
+      </label>
+      <div class="col-md-8">
+        <input type="text" formControlName="bankers">
+      </div>
+    </div>
+
+    <!-- Row 5 -->
+    <div class="row mb-3 align-items-center">
+      <label class="col-md-3 fw-bold">
+        5. Last 2 years financial statements or audited accounts
+      </label>
+      <div class="col-md-8">
+        <input type="text" formControlName="accounts">
+      </div>
+    </div>
+
+    <!-- Row 6 -->
+    <div class="row mb-3 align-items-center">
+      <label class="col-md-3 fw-bold">
+        6. Latest Memorandum and Articles of Association or Constitution
+      </label>
+      <div class="col-md-8">
+        <input type="text" formControlName="association">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="card m-3">
+   <div style="background-color: rgb(121, 137, 154); color: white;" class="px-3 py-2 mb-2">
+  <h5>Name of Person Completing Questionnaire</h5>
+   </div>
+
+  <!-- Row 1 -->
+  <div class="row mb-3">
+    <!-- Position -->
+    <div class="col-md-6 d-flex align-items-center">
+      <label for="position" class="col-4 col-form-label">Position</label>
+      <div class="col-8">
+        <input type="text" id="position" formControlName="position">
+      </div>
+    </div>
+
+    <!-- Email Address -->
+    <div class="col-md-6 d-flex align-items-center">
+      <label for="emailaddress" class="col-4 col-form-label">Email Address</label>
+      <div class="col-8">
+        <input type="text" id="emailaddress" formControlName="emailaddress">
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2 -->
+  <div class="row mb-3">
+    <!-- Phone Number -->
+    <div class="col-md-6 d-flex align-items-center">
+      <label for="phonenumber" class="col-4 col-form-label">Phone Number</label>
+      <div class="col-8">
+        <input type="text" id="phonenumber"  formControlName="phonenumber">
+      </div>
+    </div>
+
+    <!-- Date -->
+    <div class="col-md-6 d-flex align-items-center mb-3">
+      <label for="date" class="col-4 col-form-label">Date</label>
+      <div class="col-8">
+        <input type="date" id="date" formControlName="date">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    <div class="form-actions">
+  <button type="submit" (click)="onSubmit()">Submit</button> 
+      <button type="button" (click)="resetForm()">Reset</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,101 @@
+<div class="pe-4 ps-4">
+  <label class="fw-bold mt-3 fs-5 ms-5">Dispatch Scanned Items</label>
+
+  <div class="card shadow-sm ms-5 mt-4 me-5">
+    <div class="card-body">
+      <!-- Action Buttons -->
+      <div
+        class="d-flex flex-wrap justify-content-end align-items-center mb-3 gap-2"
+        style="border:2px solid #dddddd; border-top:8px solid #dddddd;"
+      >
+        <div class="d-flex flex-wrap gap-2 m-2">
+          <button type="button" class="btn btn-outline-secondary">
+            <i class="mdi mdi-export"></i> Export
+          </button>
+          <button type="button" class="btn btn-outline-secondary">
+            <i class="mdi mdi-printer"></i> Print
+          </button>
+
+          <ng-container>
+            <button
+              *ngIf="!showSearch"
+              type="button"
+              class="btn btn-primary"
+              (click)="toggleSearch($event)"
+            >
+              <i class="mdi mdi-magnify"></i>
+            </button>
+
+            <input
+              *ngIf="showSearch"
+              type="text"
+              class="d-inline-block"
+              style="width:200px;"
+              placeholder="Search..."
+              (click)="$event.stopPropagation()"
+              (blur)="closeSearch()"
+            />
+          </ng-container>
+        </div>
+      
+
+      <!-- Table -->
+      <div class="table-responsive">
+        <table class="table table-bordered text-nowrap">
+          <thead>
+            <tr>
+              <th>Row ID</th>
+              <th>Order /STO No.</th>
+              <th>Order Item No</th>
+              <th>Sale Store</th>
+              <th>Delivered Store</th>
+              <th>Product Code</th>
+              <th>Product Desc</th>
+              <th>Ean Code</th>
+              <th>Serial No</th>
+              <th>Quantity</th>
+              <th>Scanned Time</th>
+              <th>Driver Code</th>
+              <th>Sap Updated</th>
+              <th>Ref. Conf. ID</th>
+            </tr>
+            <tr>
+              <th><input type="text" class="form-control form-control-sm" placeholder="Search Row ID" /></th>
+              <th><input type="text" class="form-control form-control-sm" placeholder="Search Order / STO" /></th>
+              <th><input type="text" class="form-control form-control-sm" placeholder="Search Order Item" /></th>
+              <th><input type="text" class="form-control form-control-sm" placeholder="Search Sale Store" /></th>
+              <th><input type="text" class="form-control form-control-sm" placeholder="Search Delivered Store" /></th>
+              <th><input type="text" class="form-control form-control-sm" placeholder="Search Product Code" /></th>
+              <th><input type="text" class="form-control form-control-sm" placeholder="Search Product Desc" /></th>
+              <th><input type="text" class="form-control form-control-sm" placeholder="Search Ean" /></th>
+              <th><input type="text" class="form-control form-control-sm" placeholder="Search Serial No" /></th>
+              <th><input type="text" class="form-control form-control-sm" placeholder="Search Quantity" /></th>
+              <th><input type="text" class="form-control form-control-sm" placeholder="Search Time" /></th>
+              <th><input type="text" class="form-control form-control-sm" placeholder="Search Driver" /></th>
+              <th><input type="text" class="form-control form-control-sm" placeholder="Search Sap Updated" /></th>
+              <th><input type="text" class="form-control form-control-sm" placeholder="Search Ref. Conf. ID" /></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let o of orders">
+              <td>{{ o.rowId }}</td>
+              <td>{{ o.orderNo }}</td>
+              <td>{{ o.orderItemNo }}</td>
+              <td>{{ o.saleStore }}</td>
+              <td>{{ o.deliveredStore }}</td>
+              <td>{{ o.productCode }}</td>
+              <td>{{ o.productDesc }}</td>
+              <td>{{ o.eanCode }}</td>
+              <td>{{ o.serialNo }}</td>
+              <td>{{ o.quantity }}</td>
+              <td>{{ o.scannedTime }}</td>
+              <td>{{ o.driverCode }}</td>
+              <td>{{ o.sapUpdated }}</td>
+              <td>{{ o.refConfId }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

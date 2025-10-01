@@ -1,0 +1,29 @@
+
+<h3>Create Vendor Onboarding link</h3>
+<div class="mt-5 d-flex justify-content-center">
+  <div class="card shadow p-4 w-100" style="max-width: 900px;">
+
+    <!-- Create Link Button -->
+    <button class="btn btn-primary w-400 mb-3" (click)="showLinkSection()">
+      <i class="bi bi-link-45deg me-2"></i> Create Link
+    </button>
+
+    <!-- Conditionally Visible Link Section -->
+    <div *ngIf="isLinkVisible">
+      <h4 class="text-center fw-medium mb-3">
+        Click the copy icon to copy the link to send it to your prospective Vendor
+      </h4>
+
+      <div class="input-group mt-2">
+        <!-- Optional: Show the link in an input field -->
+        <!-- <input type="text" class="form-control" [value]="vendorLink" readonly> -->
+       <button class="border-0 bg-transparent p-0" type="button" (click)="copyLink()" title="Copy Link">
+        <i class="bi bi-copy fs-7 bg-primary text-white p-2 rounded"></i>
+        </button>
+
+
+      </div>
+    </div>
+
+  </div>
+</div>

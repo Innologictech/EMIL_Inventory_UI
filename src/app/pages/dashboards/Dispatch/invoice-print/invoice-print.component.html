@@ -1,0 +1,44 @@
+<div class="pe-4 ps-4">
+  <label class="fw-bold mt-3 fs-5 ms-5">
+    Dispatch » <span style="color: #ce242a;">Invoice Print</span>
+   </label>
+   <div class="card shadow-sm mt-4 me-5 ms-5">
+  <div class="card-body justify-content-md-center">
+    <form [formGroup]="invoiceprint">
+      <div class="justify-content-center">
+        <div class="row col-12 mb-3">
+          <div class="col-md-3"></div>
+
+          <!-- Input + Submit in same column -->
+          <div class="col-md-6">
+            <label class="fw-semibold">Invoice Numberr</label>
+            <input type="text" class="form-control mb-2" formControlName="invoicenumber"
+              placeholder="Type to search Sales return invoice Number">
+
+          <label class="fw-semibold">Invoice Date</label>
+            <div class="position-relative">
+  <input type="text"
+         class="form-control pe-5"
+         formControlName="invoicedate"
+         bsDatepicker
+         [bsConfig]="bsConfig"
+         placeholder="Select Document Date"
+         #dp="bsDatepicker">
+
+  <i class="bi bi-calendar position-absolute top-50 end-0 translate-middle-y me-3"
+     style="cursor:pointer;"
+     (click)="dp.toggle()"></i>
+</div>
+
+
+
+            <!-- Submit button just below input, aligned to start -->
+            <button type="submit" class="btn-md btnSubmit mt-2">Submit</button>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>

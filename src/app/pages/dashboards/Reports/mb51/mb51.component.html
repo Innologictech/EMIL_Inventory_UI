@@ -1,0 +1,82 @@
+
+ <div class="pe-4 ps-4">
+        <label class="fw-bold mt-3 fs-5 ms-5">
+            Report » <span style="color: #ce242a;">MB51</span>
+        </label>
+
+        <div class="card shadow-sm mt-4">
+            <div class="card-body">
+                <!-- Filter Row -->
+                <div class="row filter-row">
+                    <div class="col-md-3">
+                        <div class="filter-label">Product</div>
+                        <input type="text" class="form-control" placeholder="Enter Product">
+                    </div>
+
+                   <div class="col-md-3">
+  <label class="fw-bold">Date Range <span class="text-danger">*</span></label>
+  <div class="position-relative">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="daterange"
+      bsDaterangepicker
+      [bsConfig]="bsRangeConfig"
+      placeholder="Select Date Range"/>
+    <i class="bi bi-calendar position-absolute top-50 end-0 translate-middle-y me-3"
+       style="cursor:pointer;"></i>
+  </div>
+</div>
+
+
+
+                    <div class="col-md-3">
+                        <div class="filter-label">Movement Type</div>
+                        <input type="text" class="form-control" placeholder="Enter Movement Type">
+                    </div>
+                    <div class="col-md-3">
+                        <div class="filter-label">Storage Location</div>
+                        <input type="text" class="form-control" placeholder="Enter Storage Location">
+                    </div>
+                </div>
+                
+                <!-- Generate Report Button -->
+                <div class="d-flex justify-content-right mt-3  mb-4">
+                    <button class="btn btn-primary">Generate Report</button>
+                </div>
+                
+                <!-- Table -->
+                <div class="table-container table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Movement Type</th>
+                                <th>Type</th>
+                                <th>Movement Type Desc.</th>
+                                <th>Posting Date</th>
+                                <th>Material Doc.</th>
+                                <th>Storage Loc.</th>
+                                <th>Store Name</th>
+                                <th>Store Code</th>
+                                <th>Product Desc.</th>
+                                <th>Product Code</th>
+                                <th>QTY</th>
+                                <th>Reference</th>
+                                <th>Doc Header Text</th>
+                                <th>Document Date</th>
+                                <th>Purchase Order</th>
+                                <th>Entered at Time</th>
+                                <th>User Name</th>
+                                <th>Supplier</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="18" class="no-data">No Data Found!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

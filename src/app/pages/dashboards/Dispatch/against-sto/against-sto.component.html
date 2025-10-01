@@ -1,0 +1,30 @@
+
+<div class="pe-4 ps-4" >
+<label class="fw-bold mt-3 fs-5 ms-5">
+    Dispatch » 
+    <span style="color: #ce242a;">Against STO</span>
+   </label>
+   <div class="card shadow-sm ms-5 mt-4 me-5">
+  <div class="card-body justify-content-md-center">
+    <form [formGroup]="againststo">
+      <div class="justify-content-center">
+        <div class="row col-12 mb-3">
+          <div class="col-md-3"></div>
+
+          <!-- Input + Submit in same column -->
+          <div class="col-md-6">
+            <label class="fw-semibold">STO PO Number</label>
+            <input type="text" class="form-control mb-2" formControlName="stoponumber"
+              placeholder="Type to search STO PO Number">
+
+            <!-- Submit button just below input, aligned to start -->
+            <button type="submit" class="btn-md btnSubmit mt-2">Submit</button>
+          </div>
+
+          <div class="col-md-3"></div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>

@@ -1,0 +1,77 @@
+<div class="pe-4 ps-4">
+    <label class="fw-bold mt-3 fs-5 ms-5">
+        Sales Deliveries
+    </label>
+    <div class="card shadow-sm mt-4">
+        <div class="card-body">
+            <!-- Date Range and Generate Button -->
+  <div class="d-flex align-items-center mb-3">
+
+  <label class="fw-bold me-1" for="dateRange">
+    Date Range <span class="text-danger">*</span>
+  </label>
+
+  <div class="position-relative" style="max-width: 300px; width: 200%;">
+    <!-- Input -->
+    <input type="text"
+           id="dateRange"
+           class="form-control pe-5"
+           placeholder="26-08-2025 - 26-09-2025"
+           readonly
+           bsDaterangepicker
+           [bsConfig]="bsRangeConfig"
+           #dp="bsDaterangepicker">
+
+    <!-- Icon inside input box -->
+    <i class="bi bi-calendar position-absolute top-50 end-0 translate-middle-y pe-2"
+       style="cursor:pointer;"
+       (click)="dp.toggle()"></i>
+  </div>
+
+  <!-- Generate Button -->
+  <button type="button" class="btn btn-primary ms-3">
+    Generate Report
+  </button>
+
+</div>
+
+
+            
+            <!-- Data Table -->
+            <div class="table-container table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>PGI Date</th>
+                            <th>Delivery No.</th>
+                            <th>Item</th>
+                            <th>POS Bill Number</th>
+                            <th>Customer Name</th>
+                            <th>Billing Date</th>
+                            <th>Billing Plant</th>
+                            <th>Plant Name</th>
+                            <th>Material</th>
+                            <th>Material Description</th>
+                            <th>Brand Name</th>
+                            <th>Material Group</th>
+                            <th>Delivered Qty</th>
+                            <th>Ord Qty</th>
+                            <th>EAN Number</th>
+                            <th>Delivery Plant</th>
+                            <th>Delivery Plant Name</th>
+                            <th>Created by</th>
+                            <th>PGI TIME</th>
+                            <th>301 M. Type Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="20" class="text-center">No Data Found!</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

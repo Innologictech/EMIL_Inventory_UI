@@ -1,0 +1,1475 @@
+<div>
+    <h3 style="color: #673AB7;">Vendor Onboarding Approvals List</h3>
+
+</div>
+<div *ngIf="approvalScreen" class="container-fluid mt-4 px-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            Show
+            <select class="form-select d-inline-block" style="width: 80px;" [(ngModel)]="selectedEntries"
+                (change)="onEntriesChange()">
+                <option [ngValue]="10">10</option> <!-- Change here -->
+                <option [ngValue]="25">25</option> <!-- Change here -->
+                <option [ngValue]="50">50</option> <!-- Change here -->
+                <option [ngValue]="100">100</option> <!-- Change here -->
+            </select> entries
+        </div>
+
+        <div>
+            <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText" />
+        </div>
+    </div>
+
+    <!-- Vendors Table -->
+    <div class="table-responsive " style="width: 100%; overflow-x: auto;">
+        <table class="table table-bordered table-striped table-hover text-center align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Vendor Name</th>
+                    <th>Status</th>
+                    <th>Level 1</th>
+                    <th>Level 2</th>
+                    <th>Level 3</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let v of filteredVendors; let i = index">
+                    <!-- <td class="text-center">{{ v.linkId  }}</td> -->
+                    <td class="text-center">{{ i + 1 }}</td>
+
+                    <td class="text-center">
+                        {{ v.corporateInformation?.fullRegisteredName }}
+                        <br>
+                        <small>{{ v.companyRegistration?.countryOfIncorporation }}</small>
+                    </td>
+                    <!-- <td class="text-center">{{ v.fullRegisteredName }} <br><small>{{ v.state }}</small></td> -->
+                    <td class="text-center">
+                        <span
+                            [ngClass]="{'status-approved': v.status==='Approved', 'status-pending': v.status==='Pending'}">
+                            {{ v.onboardStatus }}
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <div>{{ v.level1ApprovalName }}</div>
+                        <small *ngIf="v.level1ApprovalDate">{{ formatDateTime(v.level1ApprovalDate) }}</small>
+                    </td>
+
+
+                    <td class="text-center">
+                        <div>{{ v.level2ApprovalName }}</div>
+                        <small *ngIf="v.level2ApprovalDate">{{ formatDateTime(v.level2ApprovalDate) }}</small>
+                    </td>
+
+
+                    <td class="text-center">
+                        <div>{{ v.level3ApprovalName }}</div>
+                        <small *ngIf="v.level3ApprovalDate">{{ formatDateTime(v.level3ApprovalDate) }}</small>
+                    </td>
+                    <!-- <td class="text-center">{{ v.createdAt }}</td> -->
+                    <td class="text-center">{{ formatDateTime(v.createdAt) }}</td>
+                    <!-- <td>
+                    <div ngbDropdown class="d-inline-block">
+                        <button class="btn btn-sm btn-outline-secondary d-flex align-items-center" id="actionDropdown"
+                            ngbDropdownToggle>
+                            Action
+                            <i class="bi bi-chevron-down ms-2"></i>
+                        </button>
+                        <div ngbDropdownMenu aria-labelledby="actionDropdown">
+                            <button class="dropdown-item" ngbDropdownItem (click)="onEdit(v)">
+                                <i class="bi bi-pencil-square me-2"></i> Edit
+                            </button>
+
+                            <button class="dropdown-item" ngbDropdownItem (click)="onView(v)">
+                                <i class="bi bi-eye me-2"></i> View
+                            </button>
+                            <button class="dropdown-item" ngbDropdownItem (click)="onDownload(v)">
+                                <i class="bi bi-download me-2"></i> Download Vendor Profile
+                            </button>
+                        </div>
+                    </div>
+                </td> -->
+                    <td class="text-center">
+                        <div ngbDropdown class="btn-group d-inline-flex" style="background-color: #0cd0d0;">
+                            <!-- Action main button -->
+                            <button class="btn btn-sm btn-outline-secondary" style="color: white;">
+                                Action
+                            </button>
+
+                            <!-- Dropdown toggle (arrow button) -->
+                            <button style="color: white;"
+                                class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                id="actionDropdown" ngbDropdownToggle>
+                                <span class="visually-hidden">Toggle Dropdown</span>
+                            </button>
+
+                            <!-- Dropdown menu -->
+                            <div ngbDropdownMenu aria-labelledby="actionDropdown">
+                                <button class="dropdown-item" (click)="onEdit(v)">
+                                    <i class="bi bi-pencil-square me-2"></i> Edit
+                                </button>
+                                <button class="dropdown-item" (click)="onView(v)">
+                                    <i class="bi bi-eye me-2"></i> View
+                                </button>
+                                <button class="dropdown-item" (click)="onDownload(v)">
+                                    <i class="bi bi-download me-2"></i> Download Vendor Profile
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    <!-- <td>
+  <div ngbDropdown class="btn-group" style="background-color: #0cd0d0;">
+    <button class="btn btn-sm btn-outline-secondary" style="color: white;">
+      Action
+    </button>
+
+    <button style="color: white;" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+            id="actionDropdown"
+            ngbDropdownToggle>
+      <span class="visually-hidden">Toggle Dropdown</span>
+    </button>
+
+    <div ngbDropdownMenu aria-labelledby="actionDropdown">
+      <button class="dropdown-item" (click)="onEdit(v)">
+        <i class="bi bi-pencil-square me-2"></i> Edit
+      </button>
+      <button class="dropdown-item" (click)="onView(v)">
+        <i class="bi bi-eye me-2"></i> View
+      </button>
+      <button class="dropdown-item" (click)="onDownload(v)">
+        <i class="bi bi-download me-2"></i> Download Vendor Profile
+      </button>
+    </div>
+  </div>
+</td> -->
+
+
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <!-- Left side: showing entries -->
+        <div>
+            Showing {{ startEntry }} to {{ endEntry }} of {{ totalEntries }} entries
+        </div>
+
+        <!-- Right side: pagination -->
+        <nav>
+            <ul class="pagination mb-0">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                    <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
+                </li>
+
+                <li class="page-item" *ngFor="let page of totalPagesArray" [class.active]="page === currentPage">
+                    <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
+                </li>
+
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                    <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+
+
+</div>
+
+<div class="modal" tabindex="-1" [ngClass]="{ 'show d-block': showDownloadModal }" *ngIf="showDownloadModal"
+    style="background: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+            <div class="modal-header">
+                <h5 class="card-title">Download Zip</h5>
+                <button type="button" class="btn-close" (click)="showDownloadModal=false"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>
+                    Zip folder for <b>{{ selectedVendor }}</b> has been created successfully!
+                </p>
+                <a href="javascript:void(0)" (click)="onConfirmDownload()">Click to Download</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="isEditScreen || isViewScreen">
+
+
+    <button class="btn btn-secondary mb-2" style="background-color:#673AB7"
+        (click)="isEditScreen = false; isViewScreen = false; approvalScreen = true">
+        ← Back to List
+    </button>
+
+    <div class="card-body">
+
+
+
+        <!-- Header Section -->
+        <div (click)="toggleSection('bpInfo')" class="d-flex justify-content-between align-items-center px-3 py-2 mt-2"
+            style="background-color: #6f42c1; color: white; border-top-left-radius: 6px; border-top-right-radius: 6px;">
+            <strong>Business Partner Information</strong>
+            <button class="btn btn-sm text-white" (click)="toggleSection('bpInfo', $event)">
+                <i [class]="showBpInfo ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
+            </button>
+        </div>
+
+        <!-- Collapsible Form Section -->
+        <form [formGroup]="corporateForm" (ngSubmit)="submitForm()">
+            <div *ngIf="showBpInfo" class="border border-top-0 p-3 rounded-bottom">
+                <div class="col-md-12 col-lg-12 col-sm-12 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 style="color: #673AB7" class="mb-4">Corporate Information:</h4>
+
+                            <div class="row mb-3">
+                                <label class="col-md-3">Full Registered Name of Counterparty</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" formControlName="companyName" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-md-3">Parent Company</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" formControlName="parentCompany" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-md-3">Registered Address</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" formControlName="registeredAddress" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-md-3">Address of Head Office (if different)</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" formControlName="headOfficeAddress" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-md-3">Website</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" formControlName="website" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Company Registration -->
+                <div class="col-12 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+
+
+                            <div class="row mb-3">
+                                <!-- Left Field -->
+                                <h4 style="color: #673AB7" class="mb-4">Company Registration:</h4>
+                                <div class="col-md-6 ">
+                                    <div class="row mb-3">
+                                        <label class="col-md-4">Incorporation Date</label>
+                                        <div class="col-md-8">
+                                            <input
+                                        type="text"
+                                        class="form-control pe-5"
+                                        formControlName="incorporationDate"
+                                        bsDatepicker
+                                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                                        placeholder="DD-MM-YYYY"
+                                        #dp="bsDatepicker"   
+                                        readonly
+                                        />
+                                            <i  class="bi bi-calendar-event position-absolute top-50 end-0 translate-middle-y me-4"
+ 
+                                        style="cursor: pointer;"
+                                        (click)="dp.toggle()"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4">Company Registration Number</label>
+                                        <div class="col-md-8">
+                                            <input type="text" formControlName="registrationNumber"
+                                                class="form-control" />
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Right Field -->
+                                <div class="col-md-6">
+                                    <div class="row mb-2">
+                                        <label class="col-md-4">Country or State of Incorporation</label>
+                                        <div class="col-md-8">
+                                            <input type="text" formControlName="incorporationCountry"
+                                                class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label class="col-md-4">GST/VAT Number or W9 Number</label>
+                                        <div class="col-md-8">
+                                            <input type="text" formControlName="taxNumber" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mt-3">
+                                <div class="row mb-3">
+                                    <label class="col-md-6">Stock Exchange(s) and Listing(s)</label>
+                                    <div class="col-md-6">
+                                        <input type="text" formControlName="stockExchange" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-md-6">
+                                        If publicly quoted, please name Stock Exchange(s) and Listing(s)
+                                    </label>
+                                    <div class="col-md-6">
+                                        <input type="text" formControlName="quotedExchangeDetails" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-6">
+                                        Otherwise, please provide details of the ultimate beneficial owners of the
+                                        company and their % share
+                                    </label>
+                                    <div class="col-md-6">
+                                        <input type="text" formControlName="beneficialOwnersDetails"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-12">
+                                <h4 style="color: #673AB7" class="mb-4 mt-4">Status / Ownership (Please Tick):</h4>
+
+                                <div class="row align-items-center mb-3">
+
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-check-input" formControlName="publicCompany"
+                                            id="publicCompany" />
+                                    </div>
+                                    <label class="col-md-6">Public Company</label>
+                                </div>
+
+                                <div class="row align-items-center mb-3">
+
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-check-input" formControlName="privateCompany"
+                                            id="privateCompany" />
+                                    </div>
+                                    <label class="col-md-6">Private Company</label>
+                                </div>
+
+                                <div class="row align-items-center mb-3">
+
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-check-input" formControlName="partnership"
+                                            id="partnership" />
+                                    </div>
+                                    <label class="col-md-6">Partnership</label>
+                                </div>
+
+                                <div class="row align-items-center mb-3">
+
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-check-input" formControlName="individual"
+                                            id="individual" />
+                                    </div>
+                                    <label class="col-md-6">Individual</label>
+                                </div>
+
+                                <div class="row align-items-center mb-3">
+
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-check-input"
+                                            formControlName="governmentEntity" id="governmentEntity" />
+                                    </div>
+                                    <label class="col-md-6">State or Government Entity</label>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+        <!-- Primary Contacts -->
+        <div (click)="toggleSection('primaryContacts')"
+            class="d-flex justify-content-between align-items-center px-3 py-2 mt-3"
+            style="background-color: #6f42c1; color: white; border-top-left-radius: 6px; border-top-right-radius: 6px;">
+            <strong>Primary Contacts</strong>
+            <button class="btn btn-sm text-white" (click)="toggleSection('primaryContacts', $event)">
+                <i [class]="showPrimaryContacts ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
+            </button>
+        </div>
+
+        <div *ngIf="showPrimaryContacts" class="border border-top-0 p-3 rounded-bottom">
+            <form [formGroup]="personalForm" (ngSubmit)="submitForm()" class="w-100">
+
+                <div class="col-md-12 col-lg-12 col-sm-12 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h4 style="color: #673AB7">Counterparty Primary Contact Info</h4>
+
+                                <div class="row">
+                                    <!-- Left Column -->
+                                    <div class="col-md-6">
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Name</label>
+                                            <div class="col-md-9">
+                                                <input type="text" formControlName="cpname" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Title</label>
+                                            <div class="col-md-9">
+                                                <input type="text" formControlName="cptitle" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Telephone</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="cptelephone" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right Column -->
+                                    <div class="col-md-6">
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Mobile</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="cpmobile" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Fax Number</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="cpfaxnumber" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">E-mail</label>
+                                            <div class="col-md-9">
+                                                <input type="email" formControlName="cpemail" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Column 2: Operations Contact Info -->
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+
+                                <h4 style="color: #673AB7">Operations Contact Info</h4>
+
+                                <div class="row">
+                                    <!-- Left Column -->
+                                    <div class="col-md-6">
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Name</label>
+                                            <div class="col-md-9">
+                                                <input type="text" formControlName="opname" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Title</label>
+                                            <div class="col-md-9">
+                                                <input type="text" formControlName="optitle" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Telephone</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="optelephone" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right Column -->
+                                    <div class="col-md-6">
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Mobile</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="opmobile" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Fax Number</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="opfaxnumber" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">E-mail</label>
+                                            <div class="col-md-9">
+                                                <input type="email" formControlName="opemail" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Column 3: Credit/Finance Contact Info -->
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+
+                                <h4 style="color: #673AB7">Credit/Finance Contact Info</h4>
+
+                                <div class="row">
+                                    <!-- Left Column -->
+                                    <div class="col-md-6">
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Name</label>
+                                            <div class="col-md-9">
+                                                <input type="text" formControlName="cfname" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Title</label>
+                                            <div class="col-md-9">
+                                                <input type="text" formControlName="cftitle" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Telephone</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="cftelephone" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right Column -->
+                                    <div class="col-md-6">
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Mobile</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="cfmobile" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Fax Number</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="cffaxnumber" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">E-mail</label>
+                                            <div class="col-md-9">
+                                                <input type="email" formControlName="cfemail" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Card 2:  -->
+                <div class="col-lg-12 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h4 style="color: #673AB7">Accounting Department Contact Info</h4>
+
+                                <div class="row">
+                                    <!-- Left Column -->
+                                    <div class="col-md-6">
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Name</label>
+                                            <div class="col-md-9">
+                                                <input type="text" formControlName="adname" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Title</label>
+                                            <div class="col-md-9">
+                                                <input type="text" formControlName="adtitle" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Telephone</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="adtelephone" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right Column -->
+                                    <div class="col-md-6">
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Mobile</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="admobile" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Fax Number</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="adfaxnumber" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">E-mail</label>
+                                            <div class="col-md-9">
+                                                <input type="email" formControlName="ademail" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Column 2: Director Contact A -->
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h4 style="color: #673AB7">Director Contact Info A</h4>
+
+                                <div class="row">
+                                    <!-- Left Column -->
+                                    <div class="col-md-6">
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Name</label>
+                                            <div class="col-md-9">
+                                                <input type="text" formControlName="dcaname" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Title</label>
+                                            <div class="col-md-9">
+                                                <input type="text" formControlName="dcatitle" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Telephone</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="dcatelephone" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right Column -->
+                                    <div class="col-md-6">
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Mobile</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="dcamobile" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Fax Number</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="dcafaxnumber" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">E-mail</label>
+                                            <div class="col-md-9">
+                                                <input type="email" formControlName="dcaemail" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Column 3: Director Contact B -->
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h4 style="color: #673AB7">Director Contact Info B</h4>
+
+                                <div class="row">
+                                    <!-- Left Column -->
+                                    <div class="col-md-6">
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Name</label>
+                                            <div class="col-md-9">
+                                                <input type="text" formControlName="dcbname" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Title</label>
+                                            <div class="col-md-9">
+                                                <input type="text" formControlName="dcbtitle" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Telephone</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="dcbtelephone" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right Column -->
+                                    <div class="col-md-6">
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Mobile</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="dcbmobile" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">Fax Number</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" formControlName="dcbfaxnumber" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 mt-3">
+                                            <label class="col-md-3 ">E-mail</label>
+                                            <div class="col-md-9">
+                                                <input type="email" formControlName="dcbemail" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <!-- Bank Details -->
+
+        <div (click)="toggleSection('bankDetails')"
+            class="d-flex justify-content-between align-items-center px-3 py-2 mt-3"
+            style="background-color: #6f42c1; color: white; border-top-left-radius: 6px; border-top-right-radius: 6px;">
+            <strong>Bank Details</strong>
+            <button class="btn btn-sm text-white" (click)="toggleSection('bankDetails', $event)">
+                <i [class]="showBankDetails ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
+            </button>
+        </div>
+
+        <!-- Collapsible Bank Details Form -->
+        <div *ngIf="showBankDetails" class="border border-top-0 p-3 rounded-bottom">
+            <form [formGroup]="BankForm" class="w-100">
+                <div class="col-md-12 col-lg-12 col-sm-12 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 style="color: #673AB7">Banking Information</h4>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="row mt-3">
+                                    <label class="col-lg-3 col-md-3 col-sm-12">Name of Principal Bankers</label>
+                                    <div class="col-lg-9 col-md-9 col-sm-12">
+                                        <input type="text" formControlName="principalbankers" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <label class="col-lg-3 col-md-3 col-sm-12">Bank Branch Address</label>
+                                    <div class="col-lg-9 col-md-9 col-sm-12">
+                                        <input type="text" formControlName="branchaddress" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <label class="col-lg-3 col-md-3 col-sm-12">Name of Account Manager & Contact
+                                        Details</label>
+                                    <div class="col-lg-9 col-md-9 col-sm-12">
+                                        <input type="text" formControlName="contactdetails" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <label class="col-lg-3 col-md-3 col-sm-12">Bank Details</label>
+                                    <div class="col-lg-9 col-md-9 col-sm-12">
+                                        <input type="text" formControlName="bankdetails" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <label class="col-lg-3 col-md-3 col-sm-12">Account Number</label>
+                                    <div class="col-lg-9 col-md-9 col-sm-12">
+                                        <input type="text" formControlName="accountnumber" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <label class="col-lg-3 col-md-3 col-sm-12">Account Name</label>
+                                    <div class="col-lg-9 col-md-9 col-sm-12">
+                                        <input type="text" formControlName="accountname" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <label class="col-lg-3 col-md-3 col-sm-12">SWIFT CODE</label>
+                                    <div class="col-lg-9 col-md-9 col-sm-12">
+                                        <input type="text" formControlName="swiftcode" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+
+        <!-- Legal Documents -->
+
+        <div (click)="toggleSection('legalDocs')"
+            class="d-flex justify-content-between align-items-center px-3 py-2 mt-3"
+            style="background-color: #6f42c1; color: white; border-top-left-radius: 6px; border-top-right-radius: 6px;">
+            <strong>Legal Documents</strong>
+            <button class="btn btn-sm text-white" (click)="toggleSection('legalDocs', $event)">
+                <i [class]="showLegalDocs ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
+            </button>
+        </div>
+
+        <!-- Collapsible Table -->
+        <div *ngIf="showLegalDocs" class="border border-top-0 p-3 rounded-bottom">
+            <form [formGroup]="legalForm" class="w-100">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 style="color: #673AB7">KYC Confirmation Requirements</h4>
+
+                        <div class="row">
+                            <!-- Left Side (Text) -->
+                            <div class="col-md-6 text-black p-3">
+                                <p class="mb-0">
+                                    The company, its related companies, Directors, and beneficial owners
+                                    <a href="#" class="text-black text-decoration-underline">confirms that it does
+                                        not</a>
+                                    have any contracts, dealings, bank accounts, or business activities with/in Iran,
+                                    Syria, Cuba, North Korea,
+                                    the Crimea region, Russia, Venezuela, Belarus, Ukraine, or a sanctioned
+                                    party/entity.
+                                </p>
+                            </div>
+
+                            <!-- Right Side (Form Fields) -->
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <!-- Tick to confirm -->
+                                    <div class="col-md-4 border-bottom p-2 d-flex align-items-center me-3">
+                                        <div class="form-check d-flex align-items-center mb-0" style="width: 100%;">
+                                            <input type="checkbox" class="form-check-input me-2"
+                                                [checked]="showSignature" (change)="toggleSignature($event)"
+                                                formControlName="conform" id="confirmTick" />
+                                            <label style="white-space: nowrap;" for="confirmTick">Tick to
+                                                confirm</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Signature shown based on flag -->
+                                    <div class="col-md-8 p-2 d-flex align-items-center" *ngIf="showSignature">
+                                        <label class="me-2" style="width: 30%;">Signature:</label>
+
+                                        <!-- Textbox -->
+                                        <input type="text" class="form-control me-2" placeholder="Enter signer name"
+                                            formControlName="signatureName" style="width: 50%;"
+                                            [readonly]="isViewScreen" />
+
+                                        <!-- Upload button only in edit mode -->
+                                        <ng-container *ngIf="isEditScreen">
+                                            <label for="signatureUpload" class="btn btn-outline-primary mb-0">
+                                                <i class="bi bi-upload"></i>
+                                            </label>
+                                            <input type="file" id="signatureUpload" formControlName="signature" hidden
+                                                (change)="onFileChange($event, 'signature')"
+                                                (change)="onSignatureFileSelected($event)" />
+                                        </ng-container>
+
+                                        <input type="hidden" formControlName="signatureFileName">
+                                        <input type="hidden" formControlName="signatureContentType">
+
+                                        <!-- File Preview Section -->
+                                        <ng-container
+                                            *ngIf="legalForm.get('signature')?.value; else noFileIconSignature">
+                                            <div style="position: relative; display: inline-block; margin-left: 1rem;">
+
+                                                <!-- If Image -->
+                                                <img *ngIf="getFileType(legalForm.get('signature')?.value) === 'image'"
+                                                    [src]="getSafeImage(legalForm.get('signature')?.value)"
+                                                    style="max-width: 50px; max-height: 50px; object-fit: contain; cursor: pointer"
+                                                    (click)="openImage(legalForm.get('signature')?.value)" />
+
+                                                <!-- If PDF -->
+                                                <button *ngIf="getFileType(legalForm.get('signature')?.value) === 'pdf'"
+                                                    class="btn btn-outline-danger btn-sm"
+                                                    (click)="openFile(legalForm.get('signature')?.value)">
+                                                    <i class="bx bxs-file-pdf"></i> View PDF
+                                                </button>
+
+                                                <!-- ❌ Cross icon - only in edit mode -->
+                                                <button *ngIf="isEditScreen" type="button" class="preview-remove-btn"
+                                                    (click)="removePreview('signature')" style="position: absolute; top: -8px; right: -8px; background: red; color: white;
+                                            border-radius: 50%; border: none; width: 20px; height: 20px;
+                                            line-height: 16px; font-size: 12px; cursor: pointer;">
+                                                    ✕
+                                                </button>
+                                            </div>
+                                        </ng-container>
+
+                                        <ng-template #noFileIconSignature>
+                                            <button class="btn btn-outline-secondary btn-sm" title="Preview"
+                                                *ngIf="isViewScreen">
+                                                <i class="bx bx-show"></i>
+                                            </button>
+                                        </ng-template>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+
+                    <div class="card-body">
+                        <h4 style="color: #673AB7">KYC Documentation Requirements</h4>
+                        <!-- <h5>(where documents are not available, please state reason)</h5> -->
+
+                        <div class="table-responsive mt-3">
+                            <table class="table table-bordered table-hover text-center align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Particulars</th>
+                                        <th>Select</th>
+                                        <th>Preview</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            List and identification documents (passport or national ID) of all Directors
+                                            & Ultimate Shareholders/Beneficiaries
+                                        </td>
+                                        <td class="text-start">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <!-- Upload icon button (only in Edit mode) -->
+                                                <label *ngIf="isEditScreen" class="btn btn-outline-primary btn-sm mb-0">
+                                                    <i class="bx bx-upload"></i>
+                                                    <input type="file" hidden
+                                                        (change)="onFileSelected($event, 'directorsDocuments')" />
+                                                </label>
+
+                                                <!-- Reason input (readonly in View mode) -->
+                                                <input type="text" class="form-control form-control-sm"
+                                                    formControlName="directorsReason" placeholder="Enter reason"
+                                                    style="max-width: 300px;" [readonly]="isViewScreen" />
+                                            </div>
+                                            <input type="hidden" formControlName="directorsDocumentsFileName" />
+                                            <input type="hidden" formControlName="directorsDocumentsType" />
+                                        </td>
+
+                                        <td>
+                                            <ng-container
+                                                *ngIf="legalForm.get('directorsDocuments')?.value; else noFileIconDirectors">
+                                                <div style="position: relative; display: inline-block;">
+                                                    <!-- If Image -->
+                                                    <img *ngIf="getFileType(legalForm.get('directorsDocuments')?.value) === 'image'"
+                                                        [src]="getSafeImage(legalForm.get('directorsDocuments')?.value)"
+                                                        style="max-width: 50px; max-height: 50px; object-fit: contain; cursor: pointer"
+                                                        (click)="openImage(legalForm.get('directorsDocuments')?.value)" />
+
+                                                    <!-- If PDF -->
+                                                    <button
+                                                        *ngIf="getFileType(legalForm.get('directorsDocuments')?.value) === 'pdf'"
+                                                        class="btn btn-outline-danger btn-sm"
+                                                        (click)="openFile(legalForm.get('directorsDocuments')?.value)">
+                                                        <i class="bx bxs-file-pdf"></i> View PDF
+                                                    </button>
+
+                                                    <!-- ❌ Cross icon (only in Edit mode) -->
+                                                    <button *ngIf="isEditScreen" type="button"
+                                                        class="preview-remove-btn"
+                                                        (click)="removePreview('directorsDocuments')"
+                                                        style="position: absolute; top: -8px; right: -8px; background: red; color: white; border-radius: 50%; border: none; width: 20px; height: 20px; line-height: 16px; font-size: 12px; cursor: pointer;">
+                                                        ✕
+                                                    </button>
+                                                </div>
+                                            </ng-container>
+
+                                            <ng-template #noFileIconDirectors>
+                                                <button class="btn btn-outline-secondary btn-sm" title="Preview">
+                                                    <i class="bx bx-show"></i>
+                                                </button>
+                                            </ng-template>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Certificate of Incorporation</td>
+                                        <td class="text-start">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <!-- Upload only in Edit mode -->
+                                                <label *ngIf="isEditScreen" class="btn btn-outline-primary btn-sm mb-0">
+                                                    <i class="bx bx-upload"></i>
+                                                    <input type="file" hidden
+                                                        (change)="onFileSelected($event, 'certificateIncorporation')" />
+                                                </label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    placeholder="Enter reason"
+                                                    formControlName="certificateIncorporationReason"
+                                                    style="max-width: 300px;" [readonly]="isViewScreen" />
+                                            </div>
+
+                                            <input type="hidden" formControlName="certificateIncorporationFileName" />
+                                            <input type="hidden"
+                                                formControlName="certificateIncorporationContentType" />
+                                        </td>
+
+                                        <td>
+                                            <ng-container
+                                                *ngIf="legalForm.get('certificateIncorporation')?.value; else noFileIconCertificate">
+                                                <div style="position: relative; display: inline-block;">
+                                                    <!-- If Image -->
+                                                    <img *ngIf="getFileType(legalForm.get('certificateIncorporation')?.value) === 'image'"
+                                                        [src]="getSafeImage(legalForm.get('certificateIncorporation')?.value)"
+                                                        style="max-width: 50px; max-height: 50px; object-fit: contain; cursor: pointer"
+                                                        (click)="openImage(legalForm.get('certificateIncorporation')?.value)" />
+
+                                                    <!-- If PDF -->
+                                                    <button
+                                                        *ngIf="getFileType(legalForm.get('certificateIncorporation')?.value) === 'pdf'"
+                                                        class="btn btn-outline-danger btn-sm"
+                                                        (click)="openFile(legalForm.get('certificateIncorporation')?.value)">
+                                                        <i class="bx bxs-file-pdf"></i> View PDF
+                                                    </button>
+
+                                                    <!-- Cross only in Edit mode -->
+                                                    <button *ngIf="isEditScreen" type="button"
+                                                        class="preview-remove-btn"
+                                                        (click)="removePreview('certificateIncorporation')"
+                                                        style="position: absolute; top: -8px; right: -8px; background: red; color: white; border-radius: 50%; border: none; width: 20px; height: 20px; line-height: 16px; font-size: 12px; cursor: pointer;">
+                                                        ✕
+                                                    </button>
+                                                </div>
+                                            </ng-container>
+
+                                            <ng-template #noFileIconCertificate>
+                                                <button class="btn btn-outline-secondary btn-sm" title="Preview">
+                                                    <i class="bx bx-show"></i>
+                                                </button>
+                                            </ng-template>
+                                        </td>
+                                    </tr>
+
+
+
+
+                                    <tr>
+                                        <td>A complete Organization Chart showing the company's group affiliation,
+                                            ownership %, and ultimate beneficial shareholder</td>
+                                        <td class="text-start">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <!-- Upload only in Edit mode -->
+                                                <label *ngIf="isEditScreen" class="btn btn-outline-primary btn-sm mb-0">
+                                                    <i class="bx bx-upload"></i>
+                                                    <input type="file" hidden
+                                                        (change)="onFileSelected($event, 'orgChart')" />
+                                                </label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    placeholder="Enter reason" formControlName="orgChartReason"
+                                                    style="max-width: 300px;" [readonly]="isViewScreen" />
+                                            </div>
+                                        </td>
+
+                                        <input type="hidden" formControlName="orgChartFileName" />
+                                        <input type="hidden" formControlName="orgChartContentType" />
+
+                                        <td>
+                                            <ng-container
+                                                *ngIf="legalForm.get('orgChart')?.value; else noFileIconOrgChart">
+                                                <div style="position: relative; display: inline-block;">
+                                                    <!-- If Image -->
+                                                    <img *ngIf="getFileType(legalForm.get('orgChart')?.value) === 'image'"
+                                                        [src]="getSafeImage(legalForm.get('orgChart')?.value)"
+                                                        style="max-width: 50px; max-height: 50px; object-fit: contain; cursor: pointer"
+                                                        (click)="openImage(legalForm.get('orgChart')?.value)" />
+
+                                                    <!-- If PDF -->
+                                                    <button
+                                                        *ngIf="getFileType(legalForm.get('orgChart')?.value) === 'pdf'"
+                                                        class="btn btn-outline-danger btn-sm"
+                                                        (click)="openFile(legalForm.get('orgChart')?.value)">
+                                                        <i class="bx bxs-file-pdf"></i> View PDF
+                                                    </button>
+
+                                                    <!-- Cross only in Edit mode -->
+                                                    <button *ngIf="isEditScreen" type="button"
+                                                        class="preview-remove-btn" (click)="removePreview('orgChart')"
+                                                        style="position: absolute; top: -8px; right: -8px; background: red; color: white; border-radius: 50%; border: none; width: 20px; height: 20px; line-height: 16px; font-size: 12px; cursor: pointer;">
+                                                        ✕
+                                                    </button>
+                                                </div>
+                                            </ng-container>
+
+                                            <ng-template #noFileIconOrgChart>
+                                                <button class="btn btn-outline-secondary btn-sm" title="Preview">
+                                                    <i class="bx bx-show"></i>
+                                                </button>
+                                            </ng-template>
+                                        </td>
+                                    </tr>
+
+
+
+
+                                    <tr>
+                                        <td>Bank reference from principal bankers</td>
+                                        <td class="text-start">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <!-- Upload only in Edit mode -->
+                                                <label *ngIf="isEditScreen" class="btn btn-outline-primary btn-sm mb-0">
+                                                    <i class="bx bx-upload"></i>
+                                                    <input type="file" hidden
+                                                        (change)="onFileSelected($event, 'bankReference')" />
+                                                </label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    placeholder="Enter reason" formControlName="bankReason"
+                                                    style="max-width: 300px;" [readonly]="isViewScreen" />
+                                            </div>
+                                            <input type="hidden" formControlName="bankReferenceFileName">
+                                            <input type="hidden" formControlName="bankReferenceContentType">
+                                        </td>
+
+                                        <td>
+                                            <ng-container
+                                                *ngIf="legalForm.get('bankReference')?.value; else noFileIconBank">
+                                                <div style="position: relative; display: inline-block;">
+                                                    <!-- If Image -->
+                                                    <img *ngIf="getFileType(legalForm.get('bankReference')?.value) === 'image'"
+                                                        [src]="getSafeImage(legalForm.get('bankReference')?.value)"
+                                                        style="max-width: 50px; max-height: 50px; object-fit: contain; cursor:pointer"
+                                                        (click)="openImage(legalForm.get('bankReference')?.value)" />
+
+                                                    <!-- If PDF -->
+                                                    <button
+                                                        *ngIf="getFileType(legalForm.get('bankReference')?.value) === 'pdf'"
+                                                        class="btn btn-outline-danger btn-sm"
+                                                        (click)="openFile(legalForm.get('bankReference')?.value)">
+                                                        <i class="bx bxs-file-pdf"></i> View PDF
+                                                    </button>
+
+                                                    <!-- Cross only in Edit mode -->
+                                                    <button *ngIf="isEditScreen" type="button"
+                                                        class="preview-remove-btn"
+                                                        (click)="removePreview('bankReference')"
+                                                        style="position: absolute; top: -8px; right: -8px; background: red; color: white; border-radius: 50%; border: none; width: 20px; height: 20px; line-height: 16px; font-size: 12px; cursor: pointer;">
+                                                        ✕
+                                                    </button>
+                                                </div>
+                                            </ng-container>
+
+                                            <ng-template #noFileIconBank>
+                                                <button class="btn btn-outline-secondary btn-sm" title="Preview">
+                                                    <i class="bx bx-show"></i>
+                                                </button>
+                                            </ng-template>
+                                        </td>
+                                    </tr>
+
+
+
+
+                                    <tr>
+                                        <td>Last 2 years financial statements or audited accounts</td>
+                                        <td class="text-start">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <!-- Upload (only Edit mode) -->
+                                                <label *ngIf="isEditScreen" class="btn btn-outline-primary btn-sm mb-0">
+                                                    <i class="bx bx-upload"></i>
+                                                    <input type="file" hidden
+                                                        (change)="onFileSelected($event, 'financialStatements')" />
+                                                </label>
+
+                                                <!-- Reason input (readonly in View mode) -->
+                                                <input type="text" class="form-control" placeholder="Enter reason"
+                                                    formControlName="financialReason" style="max-width: 300px;"
+                                                    [readonly]="isViewScreen" />
+                                            </div>
+                                            <input type="hidden" formControlName="financialStatementsFileName" />
+                                            <input type="hidden" formControlName="financialStatementsType" />
+                                        </td>
+
+                                        <td>
+                                            <ng-container
+                                                *ngIf="legalForm.get('financialStatements')?.value; else noFileIconFinancial">
+                                                <div style="position: relative; display: inline-block;">
+                                                    <!-- Image -->
+                                                    <img *ngIf="getFileType(legalForm.get('financialStatements')?.value) === 'image'"
+                                                        [src]="getSafeImage(legalForm.get('financialStatements')?.value)"
+                                                        style="max-width: 50px; max-height: 50px; object-fit: contain; cursor: pointer"
+                                                        (click)="openImage(legalForm.get('financialStatements')?.value)" />
+
+                                                    <!-- PDF -->
+                                                    <button
+                                                        *ngIf="getFileType(legalForm.get('financialStatements')?.value) === 'pdf'"
+                                                        class="btn btn-outline-danger btn-sm"
+                                                        (click)="openFile(legalForm.get('financialStatements')?.value)">
+                                                        <i class="bx bxs-file-pdf"></i> View PDF
+                                                    </button>
+
+                                                    <!-- ❌ Cross icon (only in Edit mode) -->
+                                                    <button *ngIf="isEditScreen" type="button"
+                                                        class="preview-remove-btn"
+                                                        (click)="removePreview('financialStatements')" style="position: absolute; top: -8px; right: -8px;
+                                                    background: red; color: white; border-radius: 50%;
+                                                    border: none; width: 20px; height: 20px;
+                                                    line-height: 16px; font-size: 12px; cursor: pointer;">
+                                                        ✕
+                                                    </button>
+                                                </div>
+                                            </ng-container>
+
+                                            <ng-template #noFileIconFinancial>
+                                                <button class="btn btn-outline-secondary btn-sm" title="Preview">
+                                                    <i class="bx bx-show"></i>
+                                                </button>
+                                            </ng-template>
+                                        </td>
+                                    </tr>
+
+
+
+
+                                    <tr>
+                                        <td>Latest Memorandum and Articles of Association or Constitution</td>
+                                        <td class="text-start">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <!-- Upload (only Edit mode) -->
+                                                <label *ngIf="isEditScreen" class="btn btn-outline-primary btn-sm mb-0">
+                                                    <i class="bx bx-upload"></i>
+                                                    <input type="file" hidden
+                                                        (change)="onFileSelected($event, 'memorandum')" />
+                                                </label>
+
+                                                <!-- Reason input (readonly in View mode) -->
+                                                <input type="text" class="form-control" placeholder="Enter reason"
+                                                    formControlName="memoranReason" style="max-width: 300px;"
+                                                    [readonly]="isViewScreen" />
+                                            </div>
+                                            <input type="hidden" formControlName="memorandumFileName" />
+                                            <input type="hidden" formControlName="memorandumContentType" />
+                                        </td>
+
+                                        <td>
+                                            <ng-container
+                                                *ngIf="legalForm.get('memorandum')?.value; else noFileIconMemorandum">
+                                                <div style="position: relative; display: inline-block;">
+                                                    <!-- Image -->
+                                                    <img *ngIf="getFileType(legalForm.get('memorandum')?.value) === 'image'"
+                                                        [src]="getSafeImage(legalForm.get('memorandum')?.value)"
+                                                        style="max-width: 50px; max-height: 50px; object-fit: contain; cursor: pointer"
+                                                        (click)="openImage(legalForm.get('memorandum')?.value)" />
+
+                                                    <!-- PDF -->
+                                                    <button
+                                                        *ngIf="getFileType(legalForm.get('memorandum')?.value) === 'pdf'"
+                                                        class="btn btn-outline-danger btn-sm"
+                                                        (click)="openFile(legalForm.get('memorandum')?.value)">
+                                                        <i class="bx bxs-file-pdf"></i> View PDF
+                                                    </button>
+
+                                                    <!-- ❌ Cross icon (only in Edit mode) -->
+                                                    <button *ngIf="isEditScreen" type="button"
+                                                        class="preview-remove-btn" (click)="removePreview('memorandum')"
+                                                        style="position: absolute; top: -8px; right: -8px;
+                                                background: red; color: white; border-radius: 50%;
+                                                border: none; width: 20px; height: 20px;
+                                                line-height: 16px; font-size: 12px; cursor: pointer;">
+                                                        ✕
+                                                    </button>
+                                                </div>
+                                            </ng-container>
+
+                                            <ng-template #noFileIconMemorandum>
+                                                <button class="btn btn-outline-secondary btn-sm" title="Preview">
+                                                    <i class="bx bx-show"></i>
+                                                </button>
+                                            </ng-template>
+                                        </td>
+                                    </tr>
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+
+        <!-- Sourcing Information -->
+        <div (click)="toggleSection('sourcingInfo')"
+            class="d-flex justify-content-between align-items-center px-3 py-2 mt-3"
+            style="background-color: #6f42c1; color: white; border-top-left-radius: 6px; border-top-right-radius: 6px;">
+            <strong>Sourcing Information</strong>
+            <button class="btn btn-sm text-white" (click)="toggleSection('sourcingInfo', $event)">
+                <i [class]="showSourcingInfo ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
+            </button>
+        </div>
+
+        <div *ngIf="showSourcingInfo" class="border border-top-0 p-3 rounded-bottom">
+            <form [formGroup]="sourceForm">
+
+                <div class="card m-3">
+                    <div class="card-body">
+
+
+                        <h4 style="color: #673AB7;">Name of Person Completing Questionnaire</h4>
+
+
+                        <!-- Row 1 -->
+                        <div class="row mb-3 mt-3">
+                            <!-- Position -->
+                            <div class="col-md-6 d-flex align-items-center">
+                                <label for="position" class="col-4 col-form-label">Position</label>
+                                <div class="col-8">
+                                    <input type="text" id="position" class="form-control" formControlName="position">
+                                </div>
+                            </div>
+
+                            <!-- Email Address -->
+                            <div class="col-md-6 d-flex align-items-center">
+                                <label for="emailaddress" class="col-4 col-form-label">Email Address</label>
+                                <div class="col-8">
+                                    <input type="text" id="emailaddress" class="form-control"
+                                        formControlName="emailaddress">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 2 -->
+                        <div class="row mb-3">
+                            <!-- Phone Number -->
+                            <div class="col-md-6 d-flex align-items-center">
+                                <label for="phonenumber" class="col-4 col-form-label">Phone Number</label>
+                                <div class="col-8">
+                                    <input type="text" id="phonenumber" class="form-control"
+                                        formControlName="phonenumber" maxlength="10" pattern="[0-9]*"
+                                        inputmode="numeric" (input)="onPhoneInput($event)" />
+
+                                </div>
+                            </div>
+
+                            <!-- Date -->
+                            <div class="col-md-6 d-flex align-items-center mb-3">
+                                <label for="date" class="col-4 col-form-label">Date</label>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" formControlName="date"
+                                        placeholder="dd/mm/yyyy">
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+    <div *ngIf="showDownloadPopup"
+        class="alert alert-success position-fixed top-50 start-50 translate-middle shadow-lg p-4 rounded"
+        style="z-index: 1050;">
+        <h5>Download Zip</h5>
+        <p>{{ downloadMessage }}</p>
+        <a [href]="downloadLink" class="btn btn-primary" download>Click to Download</a>
+        <button class="btn btn-outline-secondary ms-2" (click)="showDownloadPopup = false">Close</button>
+    </div>
+
+
+
+    <!-- <div class="card-footer">
+  <button class="btn btn-success" (click)="submitVendorForm()">SUBMIT</button>
+</div> -->
+    <div class="card-footer pb-4 pt-2">
+        <!-- Update button only in edit screen -->
+        <button *ngIf="isEditScreen" class="btn btn-success" (click)="openRemarksPopup()">
+            Update
+        </button>
+    </div>
+
+
+    <div class="modal" tabindex="-1" [ngClass]="{ 'show': showPopup }" style="display: block;" *ngIf="showPopup">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Enter Remarks</h5>
+                    <button type="button" class="btn-close" (click)="closePopup()"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea [(ngModel)]="remarks" rows="4" class="form-control"
+                        placeholder="Enter remarks (min 20 characters)"></textarea>
+                    <div *ngIf="remarks.length > 0 && remarks.length < 20" class="text-danger mt-2">
+                        Remarks must be at least 20 characters.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" [disabled]="isSubmitDisabled()"
+                        (click)="updateVendor()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Add this outside your table or wherever appropriate -->

@@ -1,0 +1,104 @@
+<div class="pe-4 ps-4">
+    <label class="fw-bold mt-3 fs-5 ms-5">
+        Delivery Scanned Items
+    </label>
+    <div class="card shadow-sm ms-5 mt-4 me-5">
+        <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-end align-items-center mb-3 gap-2"
+                style="border:2px solid #dddddd; border-top:8px solid #dddddd;">
+
+                <div class="d-flex flex-wrap gap-2 m-2">
+                    <button type="button" class="btn btn-outline-secondary">
+                        <i class="mdi mdi-export"></i> Export
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                        <i class="mdi mdi-printer"></i> Print
+                    </button>
+
+                    <ng-container>
+                        <button *ngIf="!showSearch" type="button" class="btn btn-primary"
+                            (click)="toggleSearch($event)">
+                            <i class="mdi mdi-magnify"></i>
+                        </button>
+
+                        <input *ngIf="showSearch" type="text" class="d-inline-block" style="width:200px;"
+                            placeholder="Search..." (click)="$event.stopPropagation()" (blur)="closeSearch()" />
+                    </ng-container>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered text-nowrap">
+                        <thead>
+                            <tr>
+
+                                <th>Row ID</th>
+                                <th>Order No.</th>
+                                <th>Order Item No</th>
+                                <th>User name</th>
+                                <th>Product Code</th>
+                                <th>Ean Code</th>
+                                <th>Serial No</th>
+                                <th>Quantity</th>
+                                <th>Driver Code</th>
+                                <th>Scanned Time</th>
+                                <th>Geo Location</th>
+                                <th>Latitude</th>
+                                <th>Longitude</th>
+                            </tr>
+                            <tr>
+
+                                <th><input type="text" class="form-control form-control-sm" placeholder="Search ID">
+                                </th>
+                                <th><input type="text" class="form-control form-control-sm" placeholder="Search Order">
+                                </th>
+                                <th><input type="text" class="form-control form-control-sm"
+                                        placeholder="Search Order Item"></th>
+                                <th><input type="text" class="form-control form-control-sm"
+                                        placeholder="Search User Name"></th>
+                                <th><input type="text" class="form-control form-control-sm"
+                                        placeholder="Search Product Code"></th>
+                                <th><input type="text" class="form-control form-control-sm" placeholder="Search Ean">
+                                </th>
+                                <th><input type="text" class="form-control form-control-sm"
+                                        placeholder="Search serialNo"></th>
+                                <th><input type="text" class="form-control form-control-sm"
+                                        placeholder="Search Quantity"></th>
+                                <th><input type="text" class="form-control form-control-sm" placeholder="Search Driver">
+                                </th>
+                                <th><input type="text" class="form-control form-control-sm" placeholder=""></th>
+                                <th><input type="text" class="form-control form-control-sm"
+                                        placeholder="Search Geo Location"></th>
+                                <th><input type="text" class="form-control form-control-sm"
+                                        placeholder="Search Latitude"></th>
+                                <th><input type="text" class="form-control form-control-sm"
+                                        placeholder="Search Longitude"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let o of orders">
+                                <td>{{ o.rowId }}</td>
+                                <td>{{ o.orderNo }}</td>
+                                <td>{{ o.orderItemNo }}</td>
+                                <td>{{ o.userName }}</td>
+                                <td>{{ o.productCode }}</td>
+                                <td>{{ o.eanCode }}</td>
+                                <td>{{ o.serialNo }}</td>
+                                <td>{{ o.quantity }}</td>
+                                <td>{{ o.driverCode }}</td>
+                                <td>{{ o.scannedTime }}</td>
+                                <td>{{ o.geoLocation }}</td>
+                                <td>{{ o.latitude }}</td>
+                                <td>{{ o.longitude }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+</div>

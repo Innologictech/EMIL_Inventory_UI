@@ -1,0 +1,41 @@
+.form-control1 {
+     display: block;
+  width: 79% !important;   /* takes 60% of parent div */
+  padding: 12px 15px !important;
+  border-radius: 5px !important;
+  border: 1px solid #777879 !important;
+  box-sizing: border-box;
+  font-size: 16px !important;
+  background-color: #fff !important;
+  background-clip: padding-box;
+  height: calc(1.9rem + 12px) !important;
+}
+
+.form-control2 {
+     display: block;
+  width: 98% !important;   /* takes 60% of parent div */
+  padding: 12px 15px !important;
+  border-radius: 5px !important;
+  border: 1px solid #777879 !important;
+  box-sizing: border-box;
+  font-size: 16px !important;
+  background-color: #fff !important;
+  background-clip: padding-box;
+  height: calc(1.9rem + 12px) !important;
+}
+/* .form-control1 {
+  display: block;             
+  width: 60% !important;    
+  padding: 8px 12px !important;
+  border-radius: 5px !important;
+  border: 1px solid #777879 !important;
+  box-sizing: border-box;
+  font-size: 14px !important;
+  background-color: #fff !important;
+  height: calc(1.6rem + 10px) !important;
+} */
+
+.form-control1-sm {
+  font-size: 13px;
+  padding: 8px;
+}

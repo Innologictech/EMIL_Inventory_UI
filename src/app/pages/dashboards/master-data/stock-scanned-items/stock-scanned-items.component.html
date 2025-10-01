@@ -1,0 +1,79 @@
+<div class="pe-4 ps-4">
+    <label class="fw-bold mt-3 fs-5 ms-5">Stock Scanned Items</label>
+
+    <div class="card shadow-sm ms-5 mt-4 me-5">
+        <div class="card-body">
+            <!-- Action Buttons -->
+            <div class="d-flex flex-wrap justify-content-end align-items-center mb-3 gap-2"
+                style="border:2px solid #dddddd; border-top:8px solid #dddddd;">
+                <div class="d-flex flex-wrap gap-2 m-2">
+                    <button type="button" class="btn btn-outline-secondary">
+                        <i class="mdi mdi-export"></i> Export
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                        <i class="mdi mdi-printer"></i> Print
+                    </button>
+
+                    <ng-container>
+                        <button *ngIf="!showSearch" type="button" class="btn btn-primary"
+                            (click)="toggleSearch($event)">
+                            <i class="mdi mdi-magnify"></i>
+                        </button>
+
+                        <input *ngIf="showSearch" type="text" class="d-inline-block" style="width:200px;"
+                            placeholder="Search..." (click)="$event.stopPropagation()" (blur)="closeSearch()" />
+                    </ng-container>
+                </div>
+            
+
+            <div class="table-responsive">
+                <table class="table table-bordered text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>Row ID</th>
+                            <th>Scanned By</th>
+                            <th>Store Code</th>
+                            <th>Product Code</th>
+                            <th>Ean Code</th>
+                            <th>Quantity</th>
+                            <th>Serial No</th>
+                            <th>Scanned Time</th>
+                        </tr>
+                        <tr>
+                            <th><input type="text" class="form-control form-control-sm" placeholder="Search Row ID">
+                            </th>
+                            <th><input type="text" class="form-control form-control-sm" placeholder="Search Scanned By">
+                            </th>
+                            <th><input type="text" class="form-control form-control-sm" placeholder="Search Store Code">
+                            </th>
+                            <th><input type="text" class="form-control form-control-sm"
+                                    placeholder="Search Product Code"></th>
+                            <th><input type="text" class="form-control form-control-sm" placeholder="Search Ean Code">
+                            </th>
+                            <th><input type="text" class="form-control form-control-sm" placeholder="Search Quantity">
+                            </th>
+                            <th><input type="text" class="form-control form-control-sm" placeholder="Search Serial No">
+                            </th>
+                            <th><input type="text" class="form-control form-control-sm"
+                                    placeholder="Search Scanned Time"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of orders">
+                            <td>{{ item.rowId }}</td>
+                            <td>{{ item.scannedBy }}</td>
+                            <td>{{ item.storeCode }}</td>
+                            <td>{{ item.productCode }}</td>
+                            <td>{{ item.eanCode }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.serialNo }}</td>
+                            <td>{{ item.scannedTime }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>

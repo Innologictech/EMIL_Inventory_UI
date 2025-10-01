@@ -1,0 +1,115 @@
+<div style="background: #ce242a; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+  <div class="container" style="background: #ce242a;">
+    <div class="row justify-content-center">
+      <!-- Responsive column -->
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
+        <div class="card overflow-hidden shadow-lg">
+          
+       
+            <div class="row" style="padding: 30px;">
+             
+              <div class="col-5 align-self-end" style="background-color: black;width: 100%;">
+                <img src="assets/images/emi.png" alt="" class="img-fluid">
+              </div>
+
+              <!-- <div class="col-5 align-self-end text-center" style="background-color: black;">
+  <img src="assets/images/emi.png" alt="" class="img-fluid">
+</div> -->
+
+              <div class="text-center" style="background-color: #f7f7f7; width:100%; height:40px; ">
+                    <h5 style="color: #ce242a; margin: 0; padding-top: 0.5rem;">EMIL STOCK INVENTORY</h5>
+              </div>
+
+            </div>
+        
+
+          <!-- Card body -->
+          <div class="card-body pt-0">
+            <!-- Logo -->
+            <!-- <div class="text-center my-3">
+              <a routerLink="/">
+                <div class="avatar-md profile-user-wid mb-3">
+                  <span class="avatar-title rounded-circle bg-light">
+                    <img src="assets/images/logo.svg" alt="" class="rounded-circle" height="34">
+                  </span>
+                </div>
+              </a>
+            </div> -->
+
+            <!-- Login Form -->
+            <div class="p-2">
+              <form class="form-horizontal" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                
+                @if(error){
+                  <alert type="danger" [dismissible]="false">{{ error }}</alert>
+                }
+
+                <!-- Login Title -->
+                <div class="text-center text-danger mb-4">
+                  <h4>LOGIN</h4>
+                </div>
+
+                <!-- Employee Code -->
+                <div class="mb-3">
+                  <label for="employeeCode" class="text-danger">Employee Code</label>
+                  <input type="text" formControlName="employeeCode" class="form-control" id="employeeCode" placeholder="Enter Your Employee Code"
+                    [ngClass]="{ 'is-invalid': submitted && f.employeeCode?.errors }" />
+                  @if(submitted && f.employeeCode?.errors){
+                  <div class="invalid-feedback">
+                    @if(f.employeeCode.errors.required){
+                      <div>Employee Code is required</div>
+                    }
+                  </div>}
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                  <label for="password" class="text-danger">Password</label>
+                  <div class="input-group auth-pass-inputgroup">
+                    <input [type]="fieldTextType ? 'text' : 'password'" class="" style="width: 85%;border-right: 0px;" formControlName="password"
+                      placeholder="Enter password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+
+                    <button class="btn btn-light ms-0" style="background-color: #e8f0fe;border-top: solid black 1px;border-right: solid black 1px;border-bottom: solid black 1px;" type="button" id="password-addon">
+                      <i class="mdi mdi-eye-outline"
+                        [ngClass]="{'mdi-eye-off-outline': !fieldTextType, 'mdi-eye-outline': fieldTextType}"
+                        (click)="toggleFieldTextType()"></i>
+                    </button>
+
+                    @if(submitted && f.password.errors){
+                    <div class="invalid-feedback">
+                      @if(f.password.errors.required){
+                        <span>Password is required</span>
+                      }
+                    </div>}
+                  </div>
+                </div>
+
+                <!-- Loader -->
+                <!-- <div id="elmLoader" class="text-center d-none">
+                  <div class="spinner-border text-primary avatar-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div> -->
+
+                <!-- Login Button -->
+                <div class="mt-3 d-grid">
+                  <button style="background-color:black;color: beige;" type="submit">Log In</button>
+                </div>
+
+                <!-- Forgot Password -->
+                <div class="mt-4 text-center">
+                  <a routerLink="/auth/reset-password" class="text-muted">
+                    <i class="mdi mdi-lock mr-1"></i> Forgot your password?
+                  </a>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

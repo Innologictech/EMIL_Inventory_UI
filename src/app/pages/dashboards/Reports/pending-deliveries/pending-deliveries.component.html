@@ -1,0 +1,71 @@
+<div class="pe-4 ps-4">
+  <label class="fw-bold mt-3 fs-5 ms-5">
+    Pending Deliveries
+  </label>
+
+  <div class="card shadow-sm mt-4">
+    <div class="card-body">
+
+      <!-- Filter Row -->
+      <div class="row filter-row align-items-end ">
+        
+        <!-- Date Range -->
+        <div class="col-md-4">
+          <label class="filter-label fw-bold">Date Range <span class="text-danger">*</span></label>
+          <input type="text"
+                    class="form-control pe-5"
+                    formControlName="invoicedate"
+                    bsDatepicker
+                    [bsConfig]="{ dateInputFormat: 'DD-MMM-YYYY', containerClass: 'theme-default' }"
+                    placeholder="Select Document Date"
+                    #dp="bsDatepicker">
+        </div>
+
+        <!-- Generate Report Button (smaller size) -->
+        <div class="col-md-3">
+          <button class="btn  btn-primary">Generate Report</button>
+        </div>
+      </div>
+
+      <!-- Info text -->
+      <!-- <div class="mt-2 text-muted small">
+        *Report will be generated up to a month back from the selected date.
+      </div> -->
+
+      <!-- Table with proper spacing -->
+      <div class="table-container mt-4 table-responsive">
+        <table class="table table-bordered mb-0">
+          <thead>
+            <tr>
+              <th>Created On</th>
+              <th>Sales Order</th>
+              <th>POS Bill Number</th>
+              <th>Billing Date</th>
+              <th>Order Type</th>
+              <th>Customer Name</th>
+              <th>Plant Name</th>
+              <th>Brand Name</th>
+              <th>Material Group</th>
+              <th>Item Material</th>
+              <th>Item Description</th>
+              <th>Ord Qty</th>
+              <th>Del Del</th>
+              <th>Yet To Qty</th>
+              <th>Gross Value</th>
+              <th>Pending Gross</th>
+              <th>Transaction Type Code</th>
+              <th>Delivery Plant</th>
+              <th>Delivery Plant Name</th>
+              <th>Ean Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="20" class="no-data text-center">No Data Found!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

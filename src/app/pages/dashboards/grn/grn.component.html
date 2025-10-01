@@ -1,0 +1,397 @@
+<div class="pe-4 ps-4">
+  <!-- GRN Screen -->
+<div *ngIf="showFirstScreen">
+  <!-- GRN label outside the card -->
+  <label class="fw-semibold mt-3 fs-5 ms-5">
+    GRN
+  </label>
+
+     <div class="card shadow-sm ms-5 mt-4 me-5 ">
+  <div class="card-body justify-content-md-center">
+    <form [formGroup]="againstInvoice">
+      <div class="justify-content-center">
+        <div class="row col-12 mb-3">
+          <div class="col-md-3"></div>
+
+          <!-- Input + Submit in same column -->
+          <div class="col-md-6">
+            
+              <div class="mb-3 d-flex">
+        <div class="form-check me-4">
+          <input 
+            class="form-check-input" 
+            type="radio" 
+            id="vendor" 
+            name="grnType" 
+            value="vendor"
+            formControlName="grnType"
+            (change)="onGrnTypeChange('vendor')">
+          <label class="form-check-label" for="vendor">Vendor</label>
+        </div>
+
+        <div class="form-check">
+          <input 
+            class="form-check-input" 
+            type="radio" 
+            id="sto" 
+            name="grnType" 
+            value="sto"
+            formControlName="grnType"
+            (change)="onGrnTypeChange('sto')">
+          <label class="form-check-label" for="sto">STO</label>
+        </div>
+      </div>
+      <div class="w-100">
+        <label for="ponumber" class="fw-semibold mb-2">{{ poLabel }}</label>
+        <input 
+          type="text" 
+          class="form-control1" 
+          id="ponumber" 
+          [placeholder]="'Enter ' + poLabel"
+          formControlName="ponumber">
+      </div>
+
+      <!-- Submit Button -->
+         <button type="button" class="btn btn-primary mt-2" (click)="goToSecondScreen()">
+                    Submit
+                </button>
+          </div>
+
+          <div class="col-md-3"></div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <!-- <div class="mt-4 me-5 ms-5 card p-4 shadow d-flex justify-content-center align-items-center" >
+
+    <div class="w-50 d-flex flex-column align-items-start">
+
+      <div class="mb-3 d-flex">
+        <div class="form-check me-4">
+          <input 
+            class="form-check-input" 
+            type="radio" 
+            id="vendor" 
+            name="grnType" 
+            value="vendor"
+            formControlName="grnType"
+            (change)="onGrnTypeChange('vendor')">
+          <label class="form-check-label" for="vendor">Vendor</label>
+        </div>
+
+        <div class="form-check">
+          <input 
+            class="form-check-input" 
+            type="radio" 
+            id="sto" 
+            name="grnType" 
+            value="sto"
+            formControlName="grnType"
+            (change)="onGrnTypeChange('sto')">
+          <label class="form-check-label" for="sto">STO</label>
+        </div>
+      </div>
+
+      <div class="w-100">
+        <label for="ponumber" class="fw-semibold mb-2">{{ poLabel }}</label>
+        <input 
+          type="text" 
+          class="form-control1" 
+          id="ponumber" 
+          [placeholder]="'Enter ' + poLabel"
+          formControlName="ponumber">
+      </div>
+
+      <div class="mt-3">
+         <button type="button" class="btn btn-primary" (click)="goToSecondScreen()">
+                    Submit
+                </button>
+      </div>
+
+    </div>
+  </div> -->
+
+</div>
+
+<!-- Second Screen -->
+<div *ngIf="showSecondScreen">
+   <label class="fw-semibold mt-3 fs-5 ms-5">
+    GRN >> <span>{{poLabel}} # </span>
+  </label>
+  <div class="mt-4 ms-5 me-5 card p-4 shadow">
+    
+    <!-- Row for 6 + 6 split -->
+    <div class="row">
+      
+      <!-- Left Side: PO Item Scan -->
+      <div class="col-lg-5 col-md-12 mb-3 ">
+   
+
+  <!-- First Screen: Item, Serial, Quantity -->
+   
+  <div *ngIf="!showGrnConfirmation">
+        <h5 class="fw-semibold mb-3">PO Item Scan</h5>
+<div class="border rounded p-3">
+    <!-- Item -->
+    <div class="mb-3">
+      <label for="item" class="form-label fw-semibold">Item</label>
+      <input type="text" id="item" class="form-control2" formControlName="item" placeholder="Item code & Description">
+    </div>
+
+    <!-- Serial No -->
+    <div class="mb-3">
+      <label for="serialNo" class="form-label fw-semibold">Serial No</label>
+      <input type="text" id="serialNo" class="form-control2" formControlName="serialNo" placeholder="Scan Serial Number">
+    </div>
+
+    <!-- Quantity -->
+    <div class="mb-3">
+      <label for="quantity" class="form-label fw-semibold">Quantity</label>
+      <input type="number" id="quantity" class="form-control2" formControlName="quantity">
+    </div>
+
+    <div class="row">
+      <!-- Done Button on Left -->
+      <div class="col-6 d-flex justify-content-start">
+        <button type="button" class="btn btn-success" (click)="showGrnConfirmation = true">Done</button>
+      </div>
+
+      <!-- Next Button on Right -->
+      <div class="col-6 d-flex justify-content-end">
+        <button type="button" class="btn btn-primary">Next</button>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Second Screen: GRN Confirmation -->
+  <div *ngIf="showGrnConfirmation">
+    <h5 class="fw-semibold mb-3">GRN Confirmation to SAP</h5>
+
+    <div class="mb-3">
+      <label for="vendornumber" class="form-label fw-semibold">Vendor Invoice Number</label>
+      <input type="text" class="form-control2" formControlName="vendornumber" placeholder="Enter Vendor Invoice Number">
+    </div>
+
+  <div class="mb-3">
+  <label for="vendordate" class="form-label fw-semibold">Vendor Invoice Date</label>
+   <div class="position-relative mb-2">
+           <input type="text"
+       class="form-control"
+       formControlName="invoicedate"
+       bsDatepicker
+       [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-default' }"
+       placeholder="Select Vendor Invoice Date"
+       #dp="bsDatepicker">
+
+<!-- Calendar icon inside the input -->
+<i class="bi bi-calendar position-absolute top-50 end-0 translate-middle-y me-3"
+   style="cursor:pointer;"
+   (click)="dp.toggle()"></i>
+
+            </div>
+</div>
+
+
+
+    <div class="row justify-content-center mt-3">
+      <!-- Cancel Button -->
+      <div class="col-auto me-1">
+        <button type="button" class="btn" 
+          style="background-color: #f7f7f7; color: black; border: 1px solid #ccc;"
+          (click)="showGrnConfirmation = false">
+          Cancel
+        </button>               
+      </div>
+
+      <!-- Confirm GRN to SAP Button -->
+      <div class="col-auto">
+        <button type="button" class="btn" 
+          style="background-color: #f9bc0b; color: white; border: none;">
+          Confirm GRN to SAP
+        </button>
+      </div>
+    </div>
+  </div>
+
+<div class="border rounded p-3 mt-3">
+  <!-- Counts Row -->
+  <div class="row text-center mb-3">
+   <div class="col-6">
+      <h6 class="mb-1" style="color: #f36270;">Pending</h6>
+      <p class="mb-0 fw-bold" style="color: #f36270;">4</p>
+    </div>
+    <!-- Scanned Count -->
+    <div class="col-6">
+      <h6 class="mb-1 text-success">Scanned</h6>
+      <p class="mb-0 fw-bold text-success">5</p>
+    </div>
+  </div>
+
+  <!-- Button Row -->
+  <div class="row">
+    <div class="col d-flex justify-content-center">
+      <button type="button"  style="background-color: #f36270; color: white; border: none;" (click)="openScannedItems()">Scanned Items</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+    </div>
+
+    
+      
+
+      <!-- Right Side: PO Item List -->
+   
+<div class="col-lg-7 col-md-12 mb-3">
+  <h5 class="fw-semibold mb-3">PO Item List</h5>
+  <div class="border rounded p-0"> <!-- remove inner padding -->
+
+    <!-- Header Details -->
+    <div class="border-bottom p-3 mb-0" style="background-color: #f7f7f7 ;"> <!-- border touches the main border -->
+      <div class="row">
+  <div class="col-6">
+    <div><label>PO Number:</label></div>
+    <div><label>Vendor Code:</label></div>
+  </div>
+  <div class="col-6 text-end">
+    <div><label>PO Date:</label></div>
+    <div><label>Vendor Name:</label></div>
+  </div>
+</div>
+
+    </div>
+
+    <!-- Section Title -->
+   <div class="border-bottom p-3 mb-0 fw-semibold text-end" style="color: #348CD4;">
+  Serial Number Required Materials
+</div>
+
+    <!-- Table -->
+    <div class="table-responsive p-3">
+      <table class="table table-bordered text-center align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Item No.</th>
+            <th>Description</th>
+            <th>Open Qty.</th>
+            <th>Pending Qty.</th>
+            <th>Scanned Qty.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1001</td>
+            <td>Item A</td>
+            <td>50</td>
+            <td>20</td>
+            <td>30</td>
+          </tr>
+          <tr>
+            <td>1002</td>
+            <td>Item B</td>
+            <td>100</td>
+            <td>50</td>
+            <td>50</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+
+      
+
+    </div>
+
+    <!-- Back button full width -->
+    <!-- <div class="mt-3 text-center">
+      <button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
+    </div> -->
+
+  </div>
+</div>
+
+<div *ngIf="showThirdScreen">
+  <div class="mt-4 card p-4 shadow d-flex justify-content-center align-items-center" 
+       style="min-height: 30vh; margin-left: 50px; margin-right: 50px;">
+
+      <div class="col-lg-12 col-md-12 mb-3">
+  <div class="border rounded p-0"> <!-- remove inner padding -->
+
+    <!-- Header Details -->
+    <div class="border-bottom p-3 mb-0" style="background-color: #f7f7f7;"> <!-- border touches the main border -->
+      <div class="text-end">
+        <ng-container>
+      <button *ngIf="!showSearch" type="button" class="btn btn-primary" (click)="toggleSearch($event)">
+        <i class="mdi mdi-magnify"></i>
+      </button>
+        <input *ngIf="showSearch"
+             type="text"
+             class="d-inline-block"
+             style="width:200px;"  
+             placeholder="Search..."
+             (click)="$event.stopPropagation()"
+             (blur)="closeSearch()" />
+          </ng-container>
+</div>
+
+    </div>
+
+  <div class="table-responsive">
+  <table class="table table-bordered text-center align-middle mb-0">
+    <thead class="table-light">
+      <tr>
+        <th>Actions</th>
+        <th>ID</th>
+        <th>Store Code</th>
+        <th>Scanned By</th>
+        <th>Item</th>
+        <th>Ean code</th>
+        <th>Serial no</th>
+        <th>Scan qty</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="d-flex border-0">
+  <!-- Checkbox -->
+  <input type="checkbox" class="form-check-input me-2">
+
+  <!-- Refresh Icon -->
+  <button type="button" class="btn btn-outline-secondary btn-sm p-2" style="width: 50px;">
+    <i class="bi bi-arrow-repeat"></i>
+  </button>
+</td>
+
+        <td><input type="text" class="form-control form-control-sm" placeholder="Search ID"></td>
+        <td><input type="text" class="form-control form-control-sm" placeholder="Search Store Code"></td>
+        <td><input type="text" class="form-control form-control-sm" placeholder="Search Scanned By"></td>
+        <td><input type="text" class="form-control form-control-sm" placeholder="Search Item"></td>
+        <td><input type="text" class="form-control form-control-sm" placeholder="Search Ean code"></td>
+        <td><input type="text" class="form-control form-control-sm" placeholder="Search Serial no"></td>
+        <td><input type="number" class="form-control form-control-sm" placeholder="Search Scan qty"></td>
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+  </div>
+</div>
+
+  </div>
+</div>
+</div>
+
+

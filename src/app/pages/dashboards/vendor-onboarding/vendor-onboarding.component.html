@@ -1,0 +1,1316 @@
+<div class="vendor-onboarding-wrapper">
+  <h2 class="text-center text-uppercase fw-bold" style="color: #673AB7;">Vendor Onboarding</h2>
+  <p class="text-center text-muted">Fill all form field to go to next step</p>
+
+  <!-- Progress Steps -->
+  <div class="position-relative mb-4">
+    <div class="d-flex justify-content-between align-items-center position-relative">
+
+      <!-- Grey base line (full background) -->
+      <div class="position-absolute top-50 start-0 w-100"
+        style="height: 2px; background-color: #ccc; z-index: 0; transform: translateY(-50%);">
+      </div>
+
+      <!-- Blue progress line that grows -->
+      <div class="position-absolute top-50 start-0" [style.width.%]="(currentStep / (steps.length - 1)) * 100"
+        style="height: 2px; background-color: #0d6efd; z-index: 1; transform: translateY(-50%); transition: width 0.4s ease;">
+      </div>
+
+      <!-- Step Circles and Labels -->
+      <ng-container *ngFor="let step of steps; let i = index">
+        <div class="d-flex flex-column align-items-center position-relative" style="flex: 1; z-index: 2;">
+          <div class="rounded-circle d-flex align-items-center justify-content-center mb-1"
+            [ngClass]="{ 'bg-primary text-white': currentStep >= i, 'bg-light border': currentStep < i }"
+            style="width: 40px; height: 40px; font-size: 1.2rem;">
+            <i [class]="step.icon"></i>
+          </div>
+          <small [class.font-weight-bold]="currentStep === i" [class.text-muted]="currentStep !== i">
+            {{ step.name }}
+          </small>
+        </div>
+      </ng-container>
+
+    </div>
+  </div>
+
+
+
+
+  <!-- Progress Bar -->
+  <div class="progress mb-4" style="height: 15px; background-color: #f1f1f1;">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+      [style.width.%]="(currentStep / (steps.length - 1)) * 100" style="background-color: #673AB7; background-size: 1rem 1rem; background-image: repeating-linear-gradient(
+          45deg,
+          rgba(255, 255, 255, 0.15),
+          rgba(255, 255, 255, 0.15) 1rem,
+          transparent 1rem,
+          transparent 2rem
+       );">
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <!-- Forms by Step -->
+  <div class="row mt-3" *ngIf="currentStep === 0">
+    <form [formGroup]="businessForm" class="w-100">
+
+      <!-- Card 1: Corporate Information -->
+      <div class="col-md-12 col-lg-12 col-sm-12 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h4 style="color: #673AB7;" class="mb-4">Corporate Information:</h4>
+
+            <div class="row mb-3">
+              <label class="col-md-3">Full Registered Name of Counterparty<span class="text-danger">*</span></label>
+              <div class="col-md-9">
+                <input class="form-control" type="text" formControlName="registeredCounterparty" />
+                <div class="text-danger mt-1"
+                  *ngIf="businessForm.get('registeredCounterparty')?.invalid && businessForm.get('registeredCounterparty')?.touched">
+                  Name is required.
+                </div>
+
+              </div>
+            </div>
+
+
+
+
+            <div class="row mb-3">
+              <label class="col-md-3">Parent Company</label>
+              <div class="col-md-9">
+                <input class="form-control" type="text" formControlName="parentCompany" />
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-md-3">Registered Address<span class="text-danger">*</span></label>
+              <div class="col-md-9">
+                <input class="form-control" type="text" formControlName="registeredAddress"/>
+                 <div class="text-danger mt-1"
+                      *ngIf="businessForm.get('registeredAddress')?.invalid && businessForm.get('registeredAddress')?.touched">
+                     Registration Address is required.
+                    </div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-md-3">Address of Head Office (if different)</label>
+              <div class="col-md-9">
+                <input class="form-control" type="text" formControlName="headOfficeAddress" />
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-md-3">Website</label>
+              <div class="col-md-9">
+                <input class="form-control" type="text" formControlName="website" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Company Registration -->
+      <div class="col-12 mb-3">
+        <div class="card">
+          <div class="card-body">
+
+
+            <div class="row mb-3">
+              <!-- Left Field -->
+              <h4 style="color: #673AB7;" class="mb-4">Company Registration:</h4>
+
+              <div class="col-md-6 ">
+            <div class="row mb-3">
+              <label class="col-md-4 col-form-label">Incorporation Date</label>
+              <div class="col-md-8 position-relative">
+                <input
+                  type="text"
+                  class="form-control pe-5"  
+                  formControlName="incorporationDate"
+                  bsDatepicker
+                  [bsConfig]="bsConfig"
+                  placeholder="DD-MM-YYYY"
+                  #dp="bsDatepicker"
+                  readonly
+                />
+                <i 
+                  class="bi bi-calendar-event position-absolute top-50 end-0 translate-middle-y me-4" 
+                  style="cursor: pointer;"
+                  (click)="dp.toggle()">
+                </i>
+              </div>
+            </div>
+
+          <div class="row mb-3">
+                  <label class="col-md-4">Company Registration Number<span class="text-danger">*</span></label>
+                  <div class="col-md-8">
+                    <input type="text" formControlName="registrationNumber" class="form-control" />
+                     <div class="text-danger mt-1"
+                      *ngIf="businessForm.get('registrationNumber')?.invalid && businessForm.get('registrationNumber')?.touched">
+                     Registration Number is required.
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Right Field -->
+              <div class="col-md-6">
+                <div class="row mb-2">
+                  <label class="col-md-4">Country or State of Incorporation</label>
+                  <div class="col-md-8">
+                    <input type="text" formControlName="incorporationCountry" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label class="col-md-4">GST/VAT Number or W9 Number</label>
+                  <div class="col-md-8">
+                    <input type="text" formControlName="taxNumber" class="form-control" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 mt-3">
+              <div class="row mb-3">
+                <label class="col-md-6">Stock Exchange(s) and Listing(s)</label>
+                <div class="col-md-6">
+                  <input type="text" formControlName="stockExchange" class="form-control" />
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-md-6">
+                  If publicly quoted, please name Stock Exchange(s) and Listing(s)
+                </label>
+                <div class="col-md-6">
+                  <input type="text" formControlName="quotedExchangeDetails" class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-md-6">
+                  Otherwise, please provide details of the ultimate beneficial owners of the company and their % share
+                </label>
+                <div class="col-md-6">
+                  <input type="text" formControlName="beneficialOwnersDetails" class="form-control">
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-lg-4 col-md-12">
+              <h4 style="color: #673AB7;" class="mb-4 mt-4">Status / Ownership (Please Tick):</h4>
+
+              <div class="row align-items-center mb-3">
+
+                <div class="col-md-2">
+                  <input type="checkbox" class="form-check-input" formControlName="publicCompany" id="publicCompany" />
+                </div>
+                <label class="col-md-6">Public Company</label>
+              </div>
+
+              <div class="row align-items-center mb-3">
+
+                <div class="col-md-2">
+                  <input type="checkbox" class="form-check-input" formControlName="privateCompany"
+                    id="privateCompany" />
+                </div>
+                <label class="col-md-6">Private Company</label>
+              </div>
+
+              <div class="row align-items-center mb-3">
+
+                <div class="col-md-2">
+                  <input type="checkbox" class="form-check-input" formControlName="partnership" id="partnership" />
+                </div>
+                <label class="col-md-6">Partnership</label>
+              </div>
+
+              <div class="row align-items-center mb-3">
+
+                <div class="col-md-2">
+                  <input type="checkbox" class="form-check-input" formControlName="individual" id="individual" />
+                </div>
+                <label class="col-md-6">Individual</label>
+              </div>
+
+              <div class="row align-items-center mb-3">
+
+                <div class="col-md-2">
+                  <input type="checkbox" class="form-check-input" formControlName="governmentEntity"
+                    id="governmentEntity" />
+                </div>
+                <label class="col-md-6">State or Government Entity</label>
+              </div>
+            </div>
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </form>
+  </div>
+
+
+
+  <!-- Personal Tab -->
+  <div *ngIf="currentStep === 1">
+    <form [formGroup]="personalForm" class="w-100">
+
+      <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+              <h4 style="color: #673AB7;">Counterparty Primary Contact Info:</h4>
+
+              <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-6">
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Name<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input #cpNameInput type="text" formControlName="cpname" class="form-control" />
+                      <div class="text-danger"
+                      *ngIf="personalForm.get('cpname')?.invalid && personalForm.get('cpname')?.touched">
+                      Name is required.
+                    </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Title</label>
+                    <div class="col-md-9">
+                      <input type="text" formControlName="cptitle" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Telephone</label>
+                    <div class="col-md-9">
+                    <input 
+                      type="text" 
+                      formControlName="cptelephone" 
+                      class="form-control"
+                      (keypress)="allowPhoneCharacters($event)" 
+                    />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6">
+                  <div class="row mb-2 mt-3">
+                    <label for="cpmobile" class="col-md-3 ">Mobile<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="text" id="cpmobile" maxlength="10" pattern="[0-9]*" inputmode="numeric" (input)="onPhoneInput($event,personalForm, 'cpmobile')" formControlName="cpmobile" class="form-control" />
+                      <div class="text-danger mt-1"
+                      *ngIf="personalForm.get('cpmobile')?.invalid && personalForm.get('cpmobile')?.touched">
+                      Mobile Number is required.
+                    </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Fax Number</label>
+                    <div class="col-md-9">
+                      <input type="tel" formControlName="cpfaxnumber" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">E-mail<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="email" formControlName="cpemail" class="form-control" />
+                       <div *ngIf="personalForm.get('cpemail')?.invalid && personalForm.get('cpemail')?.touched"
+                      class="text-danger">
+                      <div *ngIf="personalForm.get('cpemail')?.errors?.required">Email is required.</div>
+                      <div *ngIf="personalForm.get('cpemail')?.errors?.email">Please enter a valid email.</div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 2: Operations Contact Info -->
+            <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+
+              <h4 style="color: #673AB7;">Operations Contact Info:</h4>
+
+              <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-6">
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Name<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="text" formControlName="opname" class="form-control" />
+                      <div class="text-danger"
+                      *ngIf="personalForm.get('opname')?.invalid && personalForm.get('opname')?.touched">
+                      Name is required.
+                    </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Title</label>
+                    <div class="col-md-9">
+                      <input type="text" formControlName="optitle" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Telephone</label>
+                    <div class="col-md-9">
+                      <input type="tel" formControlName="optelephone" class="form-control" (keypress)="allowPhoneCharacters($event)" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6">
+                  <div class="row mb-2 mt-3">
+                    <label for="opmobile" class="col-md-3 ">Mobile<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="text" id="opmobile" maxlength="10" pattern="[0-9]*" inputmode="numeric" (input)="onPhoneInput($event,personalForm, 'opmobile')" formControlName="opmobile" class="form-control" />
+                      <div class="text-danger mt-1"
+                        *ngIf="personalForm.get('opmobile')?.invalid && personalForm.get('opmobile')?.touched">
+                        Mobile number is required.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Fax Number</label>
+                    <div class="col-md-9">
+                      <input type="tel" formControlName="opfaxnumber" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">E-mail<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="email" formControlName="opemail" class="form-control" />
+                       <div *ngIf="personalForm.get('opemail')?.invalid && personalForm.get('opemail')?.touched"
+                      class="text-danger">
+                      <div *ngIf="personalForm.get('opemail')?.errors?.required">Email is required.</div>
+                      <div *ngIf="personalForm.get('opemail')?.errors?.email">Please enter a valid email.</div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 3: Credit/Finance Contact Info -->
+            <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+
+              <h4 style="color: #673AB7;">Credit/Finance Contact Info:</h4>
+
+              <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-6">
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Name<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="text" formControlName="cfname" class="form-control" />
+                      <div class="text-danger"
+                      *ngIf="personalForm.get('cfname')?.invalid && personalForm.get('cfname')?.touched">
+                      Name is required.
+                    </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Title</label>
+                    <div class="col-md-9">
+                      <input type="text" formControlName="cftitle" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Telephone</label>
+                    <div class="col-md-9">
+                      <input type="tel" formControlName="cftelephone" class="form-control" (keypress)="allowPhoneCharacters($event)" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6">
+                  <div class="row mb-2 mt-3">
+                    <label for="cfmobile" class="col-md-3 ">Mobile<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="text" id="cfmobile" maxlength="10" pattern="[0-9]*" inputmode="numeric" (input)="onPhoneInput($event,personalForm, 'cfmobile')" formControlName="cfmobile" class="form-control" />
+                       <div class="text-danger"
+                        *ngIf="personalForm.get('cfmobile')?.invalid && personalForm.get('cfmobile')?.touched">
+                        Mobile Number is required.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Fax Number</label>
+                    <div class="col-md-9">
+                      <input type="tel" formControlName="cffaxnumber" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">E-mail<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="email" formControlName="cfemail" class="form-control" />
+                       <div *ngIf="personalForm.get('cfemail')?.invalid && personalForm.get('cfemail')?.touched"
+                      class="text-danger">
+                      <div *ngIf="personalForm.get('cfemail')?.errors?.required">Email is required.</div>
+                      <div *ngIf="personalForm.get('cfemail')?.errors?.email">Please enter a valid email.</div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+             <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+              <h4 style="color: #673AB7;">Accounting Department Contact Info:</h4>
+
+              <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-6">
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Name<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="text" formControlName="adname" class="form-control" />
+                      <div class="text-danger"
+                        *ngIf="personalForm.get('adname')?.invalid && personalForm.get('adname')?.touched">
+                         Name is required.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Title</label>
+                    <div class="col-md-9">
+                      <input type="text" formControlName="adtitle" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Telephone</label>
+                    <div class="col-md-9">
+                      <input type="tel" formControlName="adtelephone" class="form-control" (keypress)="allowPhoneCharacters($event)" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6">
+                  <div class="row mb-2 mt-3">
+                    <label for="admobile" class="col-md-3 ">Mobile<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="text" id="admobile" maxlength="10" pattern="[0-9]*" inputmode="numeric" (input)="onPhoneInput($event,personalForm, 'admobile')" formControlName="admobile" class="form-control" />
+                     <div class="text-danger"
+                        *ngIf="personalForm.get('admobile')?.invalid && personalForm.get('admobile')?.touched">
+                         Mobile Number is required.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Fax Number</label>
+                    <div class="col-md-9">
+                      <input type="tel" formControlName="adfaxnumber" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">E-mail<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="email" formControlName="ademail" class="form-control" />
+                       <div *ngIf="personalForm.get('ademail')?.invalid && personalForm.get('ademail')?.touched"
+                      class="text-danger">
+                      <div *ngIf="personalForm.get('ademail')?.errors?.required">Email is required.</div>
+                      <div *ngIf="personalForm.get('ademail')?.errors?.email">Please enter a valid email.</div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+             <!-- Column 2: Director Contact A -->
+            <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+              <h4 style="color: #673AB7;">Director Contact Info A:</h4>
+
+              <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-6">
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Name<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="text" formControlName="dcaname" class="form-control" />
+                       <div class="text-danger"
+                        *ngIf="personalForm.get('dcaname')?.invalid && personalForm.get('dcaname')?.touched">
+                         Name is required.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Title</label>
+                    <div class="col-md-9">
+                      <input type="text" formControlName="dcatitle" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Telephone</label>
+                    <div class="col-md-9">
+                      <input type="tel" formControlName="dcatelephone" class="form-control" (keypress)="allowPhoneCharacters($event)" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6">
+                  <div class="row mb-2 mt-3">
+                    <label for="dcamobile" class="col-md-3 ">Mobile<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="text" id="dcamobile" maxlength="10" pattern="[0-9]*" inputmode="numeric" (input)="onPhoneInput($event,personalForm, 'dcamobile')" formControlName="dcamobile" class="form-control" />
+                       <div class="text-danger"
+                        *ngIf="personalForm.get('dcamobile')?.invalid && personalForm.get('dcamobile')?.touched">
+                         Mobile Number is required.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Fax Number</label>
+                    <div class="col-md-9">
+                      <input type="tel" formControlName="dcafaxnumber" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">E-mail<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="email" formControlName="dcaemail" class="form-control" />
+                      <div *ngIf="personalForm.get('dcaemail')?.invalid && personalForm.get('dcaemail')?.touched"
+                      class="text-danger">
+                      <div *ngIf="personalForm.get('dcaemail')?.errors?.required">Email is required.</div>
+                      <div *ngIf="personalForm.get('dcaemail')?.errors?.email">Please enter a valid email.</div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 3: Director Contact B -->
+            <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+              <h4 style="color: #673AB7;">Director Contact Info B:</h4>
+
+              <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-6">
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Name<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="text" formControlName="dcbname" class="form-control" />
+                      <div class="text-danger"
+                        *ngIf="personalForm.get('dcbname')?.invalid && personalForm.get('dcbname')?.touched">
+                         Name is required.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Title</label>
+                    <div class="col-md-9">
+                      <input type="text" formControlName="dcbtitle" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Telephone</label>
+                    <div class="col-md-9">
+                      <input type="tel" formControlName="dcbtelephone" class="form-control" (keypress)="allowPhoneCharacters($event)"/>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6">
+                  <div class="row mb-2 mt-3">
+                    <label for="dcbmobile" class="col-md-3 ">Mobile<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="text" id="dcbmobile" maxlength="10" pattern="[0-9]*" inputmode="numeric" (input)="onPhoneInput($event, personalForm, 'dcbmobile')" formControlName="dcbmobile" class="form-control" />
+                    <div class="text-danger"
+                        *ngIf="personalForm.get('dcbmobile')?.invalid && personalForm.get('dcbmobile')?.touched">
+                         Mobile Number is required.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">Fax Number</label>
+                    <div class="col-md-9">
+                      <input type="tel" formControlName="dcbfaxnumber" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-2 mt-3">
+                    <label class="col-md-3 ">E-mail<span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input type="email" formControlName="dcbemail" class="form-control" />
+                      <div *ngIf="personalForm.get('dcbemail')?.invalid && personalForm.get('dcbemail')?.touched"
+                      class="text-danger">
+                      <div *ngIf="personalForm.get('dcbemail')?.errors?.required">Email is required.</div>
+                      <div *ngIf="personalForm.get('dcbemail')?.errors?.email">Please enter a valid email.</div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    
+
+    </form>
+
+
+
+  </div>
+
+  <!-- Bank Tab -->
+  <div *ngIf="currentStep === 2">
+    <form [formGroup]="BankForm" class="w-100">
+      <div class="col-md-12 col-lg-12 col-sm-12 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h4 style="color: #673AB7;">Banking Information:</h4>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+              <div class="row mt-3">
+                <label class="col-lg-3 col-md-3 col-sm-12">Name of Principal Bankers<span class="text-danger">*</span></label>
+                <div class="col-lg-9 col-md-9 col-sm-12">
+                <input #principalbankers type="text" formControlName="principalbankers" class="form-control" />                   <div class="text-danger"
+                        *ngIf="BankForm.get('principalbankers')?.invalid && BankForm.get('principalbankers')?.touched">
+                         Bank Name is required.
+                      </div>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <label class="col-lg-3 col-md-3 col-sm-12 ">Bank Branch Address</label>
+                <div class="col-lg-9 col-md-9 col-sm-12">
+                  <input type="text" formControlName="branchaddress" class=form-control />
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <label class="col-lg-3 col-md-3 col-sm-12 ">Name of Account Manager & Contact Details</label>
+                <div class="col-lg-9 col-md-9 col-sm-12">
+                  <input type="text" formControlName="contactdetails" class=form-control />
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <label class="col-lg-3 col-md-3 col-sm-12 ">Bank Details</label>
+                <div class="col-lg-9 col-md-9 col-sm-12">
+                  <input type="text" formControlName="bankdetails" class=form-control />
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <label class="col-lg-3 col-md-3 col-sm-12 ">Account Number<span class="text-danger">*</span></label>
+                <div class="col-lg-9 col-md-9 col-sm-12">
+                  <input 
+                    type="text" 
+                    formControlName="accountnumber" 
+                    class="form-control"
+                  />
+                  <div class="text-danger mt-1"
+                    *ngIf="BankForm.get('accountnumber')?.invalid && BankForm.get('accountnumber')?.touched">
+                    Account Number is required.
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <label class="col-lg-3 col-md-3 col-sm-12 ">Account Name</label>
+                <div class="col-lg-9 col-md-9 col-sm-12">
+                  <input type="text" formControlName="accountname" class=form-control />
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <label class="col-lg-3 col-md-3 col-sm-12 ">SWIFT CODE</label>
+                <div class="col-lg-9 col-md-9 col-sm-12">
+                  <input type="text" formControlName="swiftcode" class=form-control />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <!-- Legal Tab -->
+  <div *ngIf="currentStep === 3">
+    <form [formGroup]="legalForm" class="w-100">
+      <div class="card">
+        <div class="card-body">
+          <h4 style="color: #673AB7;">KYC Confirmation Requirements:</h4>
+
+          <div class="row">
+            <!-- Left Side (Text) -->
+            <div class="col-md-8 text-black p-3">
+              <p class="mb-0">
+                The company, its related companies, Directors, and beneficial owners
+                <a href="#" class="text-black text-decoration-underline">confirms that it does not</a>
+                have any contracts, dealings, bank accounts, or business activities with/in Iran, Syria, Cuba, North
+                Korea,
+                the Crimea region, Russia, Venezuela, Belarus, Ukraine, or a sanctioned party/entity.
+              </p>
+            </div>
+
+            <!-- Right Side (Form Fields) -->
+            <div class="col-md-4">
+              <div class="row">
+                <!-- Tick to confirm -->
+                <div class="col-md-4 border-bottom p-2 d-flex align-items-center me-3">
+                  <div class="form-check d-flex align-items-center mb-0" style="width: 100%;">
+                    <input type="checkbox" class="form-check-input me-2" [checked]="showSignature"
+                      (change)="toggleSignature($event)" formControlName="conform" id="confirmTick" />
+                    <label style="white-space: nowrap;" for="confirmTick">Tick to confirm</label>
+                  </div>
+                </div>
+
+                <!-- Signature shown based on flag -->
+                <div class="col-md-8 p-2 d-flex align-items-center" *ngIf="showSignature">
+                  <label class="me-2" style="width: 30%;">Signature:</label>
+
+                  <!-- Textbox -->
+                  <input type="text" class="form-control me-2" placeholder="Enter signer name"
+                    formControlName="signatureName" style="width: 50%;" />
+
+                  <!-- Upload button -->
+                  <label for="signatureUpload" class="btn btn-outline-primary btn-sm mb-0">
+                    <i class="bi bi-upload"></i>
+                  </label>
+
+                  <input type="file" id="signatureUpload" formControlName="signature"
+                    (change)="onFileChange($event,'sign')" hidden />
+                  <ng-container *ngIf="previewMap['sign']; else showIcon">
+                    <div style="position: relative; display: inline-block;">
+                    <!-- If image -->
+                    <img *ngIf="signatureBase64?.contentType.startsWith('image/')" [src]="previewMap['sign']"
+                      alt="Preview"
+                      style="width:50px; height:50px; object-fit:cover; border:1px solid #ccc; margin-left: 1rem;"
+                      (click)="onPreviewClick('sign')" />
+
+                    <!-- If PDF -->
+                    <embed *ngIf="signatureBase64?.contentType === 'application/pdf'" [src]="previewMap['sign']"
+                      type="application/pdf" width="50" height="50" style="border:1px solid #ccc; margin-left: 1rem;"
+                      (click)="onPreviewClick('sign')" />
+                       <button type="button" class="preview-remove-btn" (click)="removePreview('sign')">
+                          ✕
+                        </button>
+                        </div>
+                  </ng-container>
+
+                  <ng-template #showIcon>
+                    <button class="btn btn-outline-secondary btn-sm" title="Preview" type="button">
+                      <i class="bx bx-show"></i>
+                    </button>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-4">
+
+        <div class="card-body">
+          <h4 style="color: #673AB7;">KYC Documentation Requirements:</h4>
+          <!-- <h5>(where documents are not available, please state reason)</h5> -->
+
+          <div class="table-responsive mt-3">
+            <table class="table table-bordered table-hover text-center align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>Particulars</th>
+                  <th>Select</th>
+                  <th>Preview</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>List and identification documents (passport or national ID) of all Directors & Ultimate
+                    Shareholders/Beneficiaries</td>
+                  <td class="text-start">
+                    <div class="d-flex align-items-center gap-2">
+                      <!-- Upload icon button -->
+                      <label class="btn btn-outline-primary btn-sm mb-0">
+                        <i class="bx bx-upload"></i>
+                        <input type="file" (change)="onFileChange($event, 'national') " formControlName="nationalId"
+                          formContr hidden />
+                        <div class="text-danger mt-1"
+                          *ngIf="legalForm.get('nationalId')?.invalid && legalForm.get('nationalId')?.touched">
+                          Upload is required.
+                        </div>
+                      </label>
+                      <input type="text" formControlName="nationalIdReason" class="form-control form-control-sm"
+                        placeholder="Enter reason (If not available)" style="max-width: 300px;" />
+                    </div>
+                  </td>
+                  <td>
+                    <ng-container *ngIf="previewMap['national']; else showIcon">
+                  <div *ngIf="passportBase64" style="position: relative; display: inline-block;">
+                    
+                    <!-- If image -->
+                    <img *ngIf="passportBase64?.contentType.startsWith('image/')"
+                        [src]="previewMap['national']"
+                        alt="Preview"
+                        style="width:50px; height:50px; object-fit:cover; border:1px solid #ccc; cursor:pointer;"
+                        (click)="onPreviewClick('national')" />
+
+                    <!-- If PDF -->
+                    <button *ngIf="passportBase64?.contentType === 'application/pdf'"
+                            class="btn btn-outline-danger btn-sm"
+                            (click)="onPreviewClick('national')">
+                      <i class="bx bxs-file-pdf"></i> View PDF
+                    </button>
+
+                    <!-- ❌ Cross icon overlay -->
+                    <button type="button"
+                            class="preview-remove-btn"
+                            (click)="removePreview('national')"
+                            style="position: absolute; top: -8px; right: -8px; background: red; color: white; border-radius: 50%; border: none; width: 20px; height: 20px; line-height: 16px; font-size: 12px; cursor: pointer;">
+                      ✕
+                    </button>
+                  </div>
+                </ng-container>
+
+                <ng-template #showIcon>
+                  <button class="btn btn-outline-secondary btn-sm" title="Preview">
+                    <i class="bx bx-show"></i>
+                  </button>
+                </ng-template>
+
+                  </td>
+
+                  <!-- <td><button class="btn btn-outline-secondary btn-sm" title="Preview" type="button"
+                      (click)="onPreviewClick('national')"><i class="bx bx-show"></i></button></td> -->
+
+                </tr>
+                <tr>
+                  <td>Certificate of Incorporation</td>
+                  <td class="text-start">
+                    <div class="d-flex align-items-center gap-2">
+                      <!-- Upload icon button -->
+                      <label class="btn btn-outline-primary btn-sm mb-0">
+                        <i class="bx bx-upload"></i>
+                        <input type="file" (change)="onFileChange($event, 'incorporation')"
+                          formControlName="incorporationId" hidden />
+                      </label>
+                      <input type="text" class="form-control" formControlName="incorporationIdReason"
+                        placeholder="Enter reason (If not available)" style="max-width: 300px;" />
+                    </div>
+                  </td>
+                  <td>
+                   <ng-container *ngIf="previewMap['incorporation']; else showIcon">
+                      <div *ngIf="incorporationCertificateBase64" style="position: relative; display: inline-block;">
+                        <!-- If image -->
+                        <img *ngIf="incorporationCertificateBase64?.contentType.startsWith('image/')"
+                            [src]="previewMap['incorporation']"
+                            alt="Preview"
+                            style="width:50px; height:50px; object-fit:cover; border:1px solid #ccc; cursor:pointer;"
+                            (click)="onPreviewClick('incorporation')" />
+
+                        <!-- If PDF -->
+                        <button *ngIf="incorporationCertificateBase64?.contentType === 'application/pdf'"
+                                class="btn btn-outline-danger btn-sm"
+                                (click)="onPreviewClick('incorporation')">
+                          <i class="bx bxs-file-pdf"></i> View PDF
+                        </button>
+
+                        <!-- ❌ Cross icon overlay -->
+                        <button type="button"
+                                class="preview-remove-btn"
+                                (click)="removePreview('incorporation')"
+                                style="position: absolute; top: -8px; right: -8px; background: red; color: white; border-radius: 50%; border: none; width: 20px; height: 20px; line-height: 16px; font-size: 12px; cursor: pointer;">
+                          ✕
+                        </button>
+                      </div>
+                    </ng-container>
+
+                    <ng-template #showIcon>
+                      <button class="btn btn-outline-secondary btn-sm" title="Preview">
+                        <i class="bx bx-show"></i>
+                      </button>
+                    </ng-template>
+
+                  </td>
+                </tr>
+                <tr>
+                  <td>A complete Organization Chart showing the company's group affiliation, ownership %, and ultimate
+                    beneficial shareholder</td>
+                  <td class="text-start">
+                    <div class="d-flex align-items-center gap-2">
+                      <!-- Upload icon button -->
+                      <label class="btn btn-outline-primary btn-sm mb-0">
+                        <i class="bx bx-upload"></i>
+                        <input type="file" (change)="onFileChange($event, 'affiliation')" formControlName="affiliation"
+                          hidden />
+                      </label>
+                      <input type="text" class="form-control" formControlName="affiliationReason"
+                        placeholder="Enter reason (If not available)" style="max-width: 300px;" />
+                    </div>
+                  </td>
+                  <td>
+                    <ng-container *ngIf="previewMap['affiliation']; else showIcon">
+                      <div *ngIf="companyChartBase64" style="position: relative; display: inline-block;">
+                        <!-- If image -->
+                        <img *ngIf="companyChartBase64?.contentType.startsWith('image/')"
+                          [src]="previewMap['affiliation']" alt="Preview"
+                          style="width:50px; height:50px; object-fit:cover; border:1px solid #ccc;"
+                          (click)="onPreviewClick('affiliation')" />
+
+                             <button *ngIf="companyChartBase64?.contentType === 'application/pdf'"
+                                class="btn btn-outline-danger btn-sm"
+                                (click)="onPreviewClick('incorporation')">
+                          <i class="bx bxs-file-pdf"></i> View PDF
+                        </button>
+
+                        <!-- If PDF -->
+                        <!-- <embed *ngIf="companyChartBase64?.contentType === 'application/pdf'"
+                          [src]="previewMap['affiliation']" type="application/pdf" width="50" height="50"
+                          style="border:1px solid #ccc;" (click)="onPreviewClick('affiliation')" /> -->
+
+                        <button type="button" class="preview-remove-btn" (click)="removePreview('affiliation')">
+                          ✕
+                        </button>
+                      </div>
+                    </ng-container>
+                    <ng-template #showIcon>
+                      <button class="btn btn-outline-secondary btn-sm" title="Preview" type="button">
+                        <i class="bx bx-show"></i>
+                      </button>
+                    </ng-template>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td>Bank reference from principal bankers</td>
+                  <td class="text-start">
+                    <div class="d-flex align-items-center gap-2">
+                      <!-- Upload icon button -->
+                      <label class="btn btn-outline-primary btn-sm mb-0">
+                        <i class="bx bx-upload"></i>
+                        <input type="file" (change)="onFileChange($event, 'bankreference')"
+                          formControlName="bankReference" hidden />
+                      </label>
+                      <input type="text" class="form-control" formControlName="bankReferenceReason"
+                        placeholder="Enter reason (If not available)" style="max-width: 300px;" />
+                    </div>
+                  </td>
+                  <td>
+                    <ng-container *ngIf="previewMap['bankreference']; else showIcon">
+                      <div *ngIf="bankReferenceBase64" style="position: relative; display: inline-block;">
+                        <!-- If image -->
+                        <img *ngIf="bankReferenceBase64?.contentType.startsWith('image/')"
+                          [src]="previewMap['bankreference']" alt="Preview"
+                          style="width:50px; height:50px; object-fit:cover; border:1px solid #ccc;"
+                          (click)="onPreviewClick('bankreference')" />
+
+                        <!-- If PDF -->
+
+
+                        <button *ngIf="bankReferenceBase64?.contentType === 'application/pdf'"
+                                class="btn btn-outline-danger btn-sm"
+                                (click)="onPreviewClick('bankreference')">
+                          <i class="bx bxs-file-pdf"></i> View PDF
+                        </button>
+
+                        <!-- <embed *ngIf="bankReferenceBase64?.contentType === 'application/pdf'"
+                          [src]="previewMap['bankreference']" type="application/pdf" width="50" height="50"
+                          style="border:1px solid #ccc;" (click)="onPreviewClick('bankreference')" /> -->
+
+                        <button type="button" class="preview-remove-btn" (click)="removePreview('bankreference')">
+                          ✕
+                        </button>
+                      </div>
+                    </ng-container>
+
+                    <ng-template #showIcon>
+                      <button class="btn btn-outline-secondary btn-sm" title="Preview" type="button">
+                        <i class="bx bx-show"></i>
+                      </button>
+                    </ng-template>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td>Last 2 years financial statements or audited accounts</td>
+                  <td class="text-start">
+                    <div class="d-flex align-items-center gap-2">
+                      <!-- Upload icon button -->
+                      <label class="btn btn-outline-primary btn-sm mb-0">
+                        <i class="bx bx-upload"></i>
+                        <input type="file" (change)="onFileChange($event, 'financial')"
+                          formControlName="financialStatements" hidden />
+                      </label>
+                      <input type="text" class="form-control" formControlName="financialStatementsReason"
+                        placeholder="Enter reason (If not available)" style="max-width: 300px;" />
+                    </div>
+                  </td>
+                  <td>
+                    <ng-container *ngIf="previewMap['financial']; else showIcon">
+                      <div *ngIf="financialStatementsBase64" style="position: relative; display: inline-block;">
+                        <!-- If image -->
+                        <img *ngIf="financialStatementsBase64?.contentType.startsWith('image/')"
+                          [src]="previewMap['financial']" alt="Preview"
+                          style="width:50px; height:50px; object-fit:cover; border:1px solid #ccc;"
+                          (click)="onPreviewClick('financial')" />
+
+                        <!-- If PDF -->
+
+                        
+                        <button *ngIf="financialStatementsBase64?.contentType === 'application/pdf'"
+                                class="btn btn-outline-danger btn-sm"
+                                (click)="onPreviewClick('financial')">
+                          <i class="bx bxs-file-pdf"></i> View PDF
+                        </button>
+
+
+                        <!-- <embed *ngIf="financialStatementsBase64?.contentType === 'application/pdf'"
+                          [src]="previewMap['financial']" type="application/pdf" width="50" height="50"
+                          style="border:1px solid #ccc;" (click)="onPreviewClick('financial')" /> -->
+                        <button type="button" class="preview-remove-btn" (click)="removePreview('financial')">
+                          ✕
+                        </button>
+                      </div>
+                    </ng-container>
+
+                    <ng-template #showIcon>
+                      <button class="btn btn-outline-secondary btn-sm" title="Preview" type="button">
+                        <i class="bx bx-show"></i>
+                      </button>
+                    </ng-template>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td>Latest Memorandum and Articles of Association or Constitution</td>
+                  <td class="text-start">
+                    <div class="d-flex align-items-center gap-2">
+                      <!-- Upload icon button -->
+                      <label class="btn btn-outline-primary btn-sm mb-0">
+                        <i class="bx bx-upload"></i>
+                        <input type="file" (change)="onFileChange($event, 'memorandum')" formControlName="memorandum"
+                          hidden />
+                      </label>
+                      <input type="text" class="form-control" formControlName="memorandumReason"
+                        placeholder="Enter reason (If not available)" style="max-width: 300px;" />
+                    </div>
+                  </td>
+                  <td>
+                    <ng-container *ngIf="previewMap['memorandum']; else showIcon">
+                      <div *ngIf="memorandumBase64" style="position: relative; display: inline-block;">
+                        <!-- If image -->
+                        <img *ngIf="memorandumBase64?.contentType.startsWith('image/')" [src]="previewMap['memorandum']"
+                          alt="Preview" style="width:50px; height:50px; object-fit:cover; border:1px solid #ccc;"
+                          (click)="onPreviewClick('memorandum')" />
+
+                        <!-- If PDF -->
+
+                            <button *ngIf="memorandumBase64?.contentType === 'application/pdf'"
+                                class="btn btn-outline-danger btn-sm"
+                                (click)="onPreviewClick('memorandum')">
+                          <i class="bx bxs-file-pdf"></i> View PDF
+                        </button>
+
+                        <!-- <embed *ngIf="memorandumBase64?.contentType === 'application/pdf'"
+                          [src]="previewMap['memorandum']" type="application/pdf" width="50" height="50"
+                          style="border:1px solid #ccc;" /> -->
+                          
+                        <button type="button" class="preview-remove-btn" (click)="removePreview('memorandum')">
+                          ✕
+                        </button>
+                      </div>
+                    </ng-container>
+
+                    <ng-template #showIcon>
+                      <button class="btn btn-outline-secondary btn-sm" title="Preview" type="button">
+                        <i class="bx bx-show"></i>
+                      </button>
+                    </ng-template>
+                  </td>
+
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </form>
+
+
+  </div>
+
+  <!-- Finish Tab -->
+  <div *ngIf="currentStep === 4">
+    <form [formGroup]="finishForm">
+
+      <div class="card m-3">
+        <div class="card-body">
+
+
+          <h4 style="color: #673AB7;">Name of Person Completing Questionnaire:</h4>
+
+
+          <!-- Row 1 -->
+          <div class="row mb-3 mt-3">
+            <!-- Position -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="position" class="col-4 col-form-label">Position</label>
+              <div class="col-8">
+              <input #positionInput type="text" id="position" class="form-control" formControlName="position">              </div>
+            </div>
+
+            <!-- Email Address -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="emailaddress" class="col-4 col-form-label">Email Address<span class="text-danger">*</span></label>
+              <div class="col-8">
+                <input type="text" id="emailaddress" class="form-control" formControlName="emailaddress">
+                <div *ngIf="finishForm.get('emailaddress')?.invalid && finishForm.get('emailaddress')?.touched"
+                  class="text-danger">
+                  <div *ngIf="finishForm.get('emailaddress')?.errors?.required">Email is required.</div>
+                  <div *ngIf="finishForm.get('emailaddress')?.errors?.email">Please enter a valid email.</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="row mb-3">
+            <!-- Phone Number -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="phonenumber" class="col-4 col-form-label">Phone Number<span class="text-danger">*</span></label>
+              <div class="col-8">
+                 <input type="text"
+                     id="phonenumber"
+                     maxlength="10"
+                     pattern="[0-9]*"
+                     inputmode="numeric"
+                     (input)="onPhoneInput($event, finishForm, 'phonenumber')"
+                     formControlName="phonenumber"
+                     class="form-control" />
+              <div class="text-danger mt-1"
+                   *ngIf="finishForm.get('phonenumber')?.invalid && finishForm.get('phonenumber')?.touched">
+                Phone Number is required.
+              </div>
+              </div>
+            </div>
+
+            <!-- Date -->
+            <div class="col-md-6 d-flex align-items-center mb-3">
+              <label for="date" class="col-4 col-form-label">Date</label>
+              <div class="col-8">
+                <input type="text" class="form-control" formControlName="date" placeholder="dd/mm/yyyy">
+
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Navigation Buttons -->
+<div class="d-flex justify-content-between mt-n2 mb-3 w-100">
+    <!-- Left side: Previous button or placeholder -->
+    <div>
+      <button *ngIf="currentStep > 0" class="btn btn-secondary" (click)="prevStep()">
+        Previous
+      </button>
+      <!-- Empty div to preserve space when Previous is hidden -->
+      <div *ngIf="currentStep === 0" style="width: 100px;"></div>
+    </div>
+
+    <!-- Right side: Next or Submit button -->
+    <div>
+      <!-- Show Next until last step -->
+      <button *ngIf="currentStep < steps.length - 1" class="btn btn-primary" (click)="nextStep()">
+        Next
+      </button>
+
+      <!-- Show Submit only on last step -->
+      <button *ngIf="currentStep === steps.length - 1" class="btn btnSave btn-raised" (click)="onSubmit()">
+        Submit
+      </button>
+    </div>
+  </div>
+
+
+
+
+</div>
+
+<!-- <div *ngIf="previewFileBase64" class="mt-3">
+  <h5>Preview</h5>
+  <iframe 
+    [src]="previewFileBase64" 
+    width="100%" 
+    height="500px" 
+    style="border:1px solid #ccc;">
+  </iframe>
+</div> -->
+
+
+<!-- Fullscreen Preview -->
+<div *ngIf="previewFileBase64" class="preview-overlay">
+  <div class="preview-header">
+    <button class="close-btn" (click)="closePreview()">✖ Cancel</button>
+  </div>
+  <iframe [src]="previewFileBase64" class="preview-frame">
+  </iframe>
+</div>

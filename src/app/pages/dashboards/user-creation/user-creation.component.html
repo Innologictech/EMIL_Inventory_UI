@@ -1,0 +1,246 @@
+<!-- <div class="d-flex justify-content-between align-items-center border-bottom py-2 px-3 flex-wrap">
+    <h5 class="fw-bold mb-2 mb-md-0" style="margin-left: 0;">User Management</h5>
+    <div class="text-muted small">
+        <i class="mdi mdi-monitor"></i> > Dashboard
+    </div>
+</div> -->
+
+<div class="px-md-5 ms-4">
+  <label class="fw-bold mt-3 fs-5 ms-5">User Management</label>
+</div>
+<div class=" py-3 px-md-5 ms-0"
+    style="background-color:#ffffff; margin-left: 7%!important; margin-right:7%!important ;margin-top: 2%;">
+    <!-- Tab Buttons -->
+    <div class="my-3 d-flex flex-wrap gap-2">
+        <button type="button" class="btn border-0"
+            [ngClass]="{'btn-danger text-white': selectedTab==='All', 'btn-outline-secondary': selectedTab!=='All'}"
+            (click)="onSelectTab('All')">All</button>
+        <button type="button" class="btn border-0"
+            [ngClass]="{'btn-danger text-white': selectedTab==='Inventory', 'btn-outline-secondary': selectedTab!=='Inventory'}"
+            (click)="onSelectTab('Inventory')">Inventory</button>
+        <button type="button" class="btn border-0"
+            [ngClass]="{'btn-danger text-white': selectedTab==='Driver', 'btn-outline-secondary': selectedTab!=='Driver'}"
+            (click)="onSelectTab('Driver')">Driver</button>
+        <button type="button" class="btn border-0"
+            [ngClass]="{'btn-danger text-white': selectedTab==='Dispatch', 'btn-outline-secondary': selectedTab!=='Dispatch'}"
+            (click)="onSelectTab('Dispatch')">Dispatch</button>
+        <button type="button" class="btn border-0"
+            [ngClass]="{'btn-danger text-white': selectedTab==='Store', 'btn-outline-secondary': selectedTab!=='Store'}"
+            (click)="onSelectTab('Store')">Store</button>
+        <button type="button" class="btn border-0"
+            [ngClass]="{'btn-danger text-white': selectedTab==='GRN', 'btn-outline-secondary': selectedTab!=='GRN'}"
+            (click)="onSelectTab('GRN')">GRN</button>
+        <button type="button" class="btn border-0"
+            [ngClass]="{'btn-danger text-white': selectedTab==='Multirole', 'btn-outline-secondary': selectedTab!=='Multirole'}"
+            (click)="onSelectTab('Multirole')">Multi-Role</button>
+        <button type="button" class="btn border-0"
+            [ngClass]="{'btn-danger text-white': selectedTab==='Administrator', 'btn-outline-secondary': selectedTab!=='Administrator'}"
+            (click)="onSelectTab('Administrator')">Administrator</button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container-fluid my-4 p-3" style="border:2px solid #dddddd; border-top:8px solid #dddddd;">
+
+        <!-- Top Buttons -->
+        <div *ngIf="show" class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+            <div>
+                <button type="button" class="btn btn-outline-primary" (click)="onAddUserClick()">
+                    <i class="mdi mdi-plus"></i> Add User
+                </button>
+            </div>
+            <div class="d-flex flex-wrap gap-2">
+                <button type="button" class="btn btn-outline-secondary">
+                    <i class="mdi mdi-export"></i> Export
+                </button>
+                <button type="button" class="btn btn-outline-secondary">
+                    <i class="mdi mdi-printer"></i> Print
+                </button>
+                <!-- <button *ngIf="!showSearch" type="button" class="btn btn-primary" (click)="toggleSearch($event)">
+          <i class="mdi mdi-magnify"></i>
+        </button> -->
+                <!-- Search toggle -->
+                <ng-container>
+                    <button *ngIf="!showSearch" type="button" class="btn btn-primary" (click)="toggleSearch($event)">
+                        <i class="mdi mdi-magnify"></i>
+                    </button>
+
+                    <input *ngIf="showSearch" type="text" class="d-inline-block" style="width:200px;"
+                        placeholder="Search..." (click)="$event.stopPropagation()" (blur)="closeSearch()" />
+                </ng-container>
+            </div>
+        </div>
+
+        <!-- Add User Form -->
+        <div *ngIf="showAddUserForm">
+            <!-- <h6 class="fw-bold mb-3">Add User</h6> -->
+            <div class="bg-light fw-semibold px-3 py-2 mb-4 border-bottom">
+                Add User
+            </div>
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+                <!-- Role -->
+                <div class="row mb-3">
+                    <label class="col-12 col-md-2 col-form-label fw-semibold">Role*</label>
+                    <div class="col-12 col-md-4">
+                        <select class="form-select" formControlName="role">
+                            <option value="" disabled>Select Role</option>
+                            <option *ngFor="let r of roles" [value]="r">{{ r }}</option>
+                        </select>
+                        <div *ngIf="submitted && f.role.errors" class="text-danger small">
+                            Role is required
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Store -->
+                <div class="row mb-3">
+                    <label class="col-12 col-md-2 col-form-label">Store*</label>
+                    <div class="col-12 col-md-4">
+                        <select class="form-select" formControlName="store">
+                            <option value="" disabled>Select Store</option>
+                            <option *ngFor="let s of stores" [value]="s">{{ s }}</option>
+                        </select>
+                        <div *ngIf="submitted && f.store.errors" class="text-danger small">
+                            Store is required
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Username -->
+                <div class="row mb-3">
+                    <label class="col-12 col-md-2 col-form-label">User name*</label>
+                    <div class="col-12 col-md-4">
+                        <input type="text" class="form-control" formControlName="username"
+                            placeholder="Enter user name">
+                        <div *ngIf="submitted && f.username.errors" class="text-danger small">
+                            Username is required
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emp Code -->
+                <div class="row mb-3">
+                    <label class="col-12 col-md-2 col-form-label">Emp code*</label>
+                    <div class="col-12 col-md-4">
+                        <input type="text" class="form-control" formControlName="empCode" placeholder="Enter emp code">
+                        <div *ngIf="submitted && f.empCode.errors" class="text-danger small">
+                            Employee code is required
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="row mb-3">
+                    <label class="col-12 col-md-2 col-form-label">Password*</label>
+                    <div class="col-12 col-md-4">
+                        <div class="input-group">
+                            <input [type]="fieldTextType ? 'text' : 'password'" class="form-control"
+                                formControlName="password" placeholder="Enter password">
+                            <span class="input-group-text" (click)="toggleFieldTextType()" style="cursor:pointer;">
+                                <i class="mdi"
+                                    [ngClass]="{'mdi-eye-outline': fieldTextType, 'mdi-eye-off-outline': !fieldTextType}"></i>
+                            </span>
+                        </div>
+                        <div *ngIf="submitted && f.password.errors" class="text-danger small">
+                            Password is required
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="row mb-3">
+                    <label class="col-12 col-md-2 col-form-label">Email</label>
+                    <div class="col-12 col-md-4">
+                        <input type="email" class="form-control" formControlName="email" placeholder="Enter email">
+                        <div *ngIf="submitted && f.email.errors" class="text-danger small">
+                            Enter a valid email
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile -->
+                <div class="row mb-3">
+                    <label class="col-12 col-md-2 col-form-label">Mobile no</label>
+                    <div class="col-12 col-md-4">
+                        <input type="text" class="form-control" formControlName="mobile"
+                            placeholder="Enter mobile number">
+                        <div *ngIf="submitted && f.mobile.errors" class="text-danger small">
+                            Mobile number must be 10 digits
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="row mt-4">
+                    <div class="col-12 col-md-6 d-flex flex-wrap gap-2">
+                        <button type="submit" class="btn btn-success">
+                            <i class="mdi mdi-check"></i> Save
+                        </button>
+                        <button type="button" class="btn btn-info text-white" (click)="onSaveAndBack()">
+                            <i class="mdi mdi-backup-restore"></i> Save and go back to list
+                        </button>
+                        <button type="button" class="btn btn-primary" (click)="onCancel()">
+                            <i class="mdi mdi-alert"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Tab Content -->
+        <div *ngIf="showselectedTab" class="col-md-12 mt-3">
+            <div class="table-responsive">
+                <table class="table table-bordered text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>Actions</th>
+                            <th>User ID</th>
+                            <th>Role</th>
+                            <th>Store</th>
+                            <th>User name</th>
+                            <th>Emp code</th>
+                            <th>Status</th>
+                            <th>Reset Password</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <button type="button" class="btn btn-outline-secondary btn-sm p-2" style="width: 50px;">
+                                    <i class="bi bi-arrow-repeat"></i>
+                                </button>
+                            </th>
+                            <th><input type="text" class="form-control form-control-sm" placeholder="Search ID"></th>
+                            <th><input type="text" class="form-control form-control-sm" placeholder="Search Role"></th>
+                            <th><input type="text" class="form-control form-control-sm" placeholder="Search Store"></th>
+                            <th><input type="text" class="form-control form-control-sm" placeholder="Search Name"></th>
+                            <th><input type="text" class="form-control form-control-sm" placeholder="Search Emp Code">
+                            </th>
+                            <th><input type="text" class="form-control form-control-sm" placeholder="Search Status">
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let u of filteredUsers">
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary btn-sm">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                            </td>
+                            <td>{{ u.username }}</td>
+                            <td>{{ u.role }}</td>
+                            <td>{{ u.store }}</td>
+                            <td>{{ u.email }}</td>
+                            <td>{{ u.mobile }}</td>
+                            <td>{{ u.status }}</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary btn-sm">
+                                    <i class="bi bi-pencil"></i> Reset Password
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>

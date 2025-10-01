@@ -1,0 +1,184 @@
+<div class="pe-4 ps-4">
+  <label class="fw-bold mt-3 fs-5 ms-5">
+    Start Storage Location Transfer
+  </label>
+
+  <div class="mt-4 card p-4 me-5 ms-5 shadow-sm">
+    <!-- Row with From and To inputs -->
+    <form [formGroup]="locationForm">
+      <div class="row col-12 mb-3">
+        <!-- From Location -->
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+          <label class="fw-semibold">From Location</label>
+          <input
+            type="text"
+            class="form-control"
+            id="fromLocation"
+            placeholder="Enter From Location"
+            formControlName="fromLocation"
+          />
+        </div>
+
+        <!-- To Location -->
+        <div class="col-md-4">
+          <label class="fw-semibold">To Location</label>
+          <input
+            type="text"
+            class="form-control"
+            id="toLocation"
+            placeholder="Enter To Location"
+            formControlName="toLocation"
+          />
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+
+      <!-- Submit button centered -->
+      <div class="row mb-3">
+        <div class="col-12 text-center">
+          <button
+            type="button"
+            class="btn btn-primary mt-3"
+            (click)="onSubmitLocation()"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Second Screen (Initially Hidden) -->
+    <div *ngIf="showSecondScreen">
+      <div
+        class="mt-4 card p-4 shadow"
+        style="min-height: 30vh; margin-left: 50px; margin-right: 50px"
+      >
+        <form [formGroup]="poForm" (ngSubmit)="onSubmitPO()">
+          <div class="row">
+            <!-- Left Side: Item Scan -->
+            <div class="col-lg-5 col-md-12 mb-3">
+              <h5 class="fw-semibold mb-3">Item Scan</h5>
+              <div class="border rounded p-3">
+                <!-- Item -->
+                <div class="mb-3">
+                  <label for="item" class="form-label fw-semibold">Item</label>
+                  <input
+                    type="text"
+                    id="item"
+                    class="form-control2"
+                    formControlName="item"
+                    placeholder="Type Item Code/Description"
+                  />
+                </div>
+
+                <!-- Serial No -->
+                <div class="mb-3">
+                  <label for="serialNo" class="form-label fw-semibold"
+                    >Serial Number</label
+                  >
+                  <input
+                    type="text"
+                    id="serialNo"
+                    class="form-control2"
+                    formControlName="serialNo"
+                    placeholder="Scan Serial Number"
+                  />
+                </div>
+
+                <!-- Quantity -->
+                <div class="mb-3">
+                  <label for="quantity" class="form-label fw-semibold"
+                    >Quantity</label
+                  >
+                  <input
+                    type="number"
+                    id="quantity"
+                    class="form-control2"
+                    formControlName="quantity"
+                    value="1"
+                  />
+                </div>
+
+                <div class="row">
+                  <!-- Done Button on Left -->
+                  <div class="col-6 d-flex justify-content-start">
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      (click)="onDone()"
+                    >
+                      Confirm Process Done!
+                    </button>
+                  </div>
+
+                  <!-- Next Button on Right -->
+                  <div class="col-6 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Total Scanned Items -->
+              <div class="border rounded p-3 mt-3 text-center">
+                <h6 class="text-success mb-0">
+                  Total Scanned Items <span class="fw-bold">{{ scannedItems.length }}</span>
+                </h6>
+              </div>
+            </div>
+
+            <!-- Right Side: Scanned Items List -->
+            <div class="col-lg-7 col-md-12 mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-semibold mb-0">Scanned Items List</h5>
+                <button class="btn btn-danger">Scanned Items</button>
+              </div>
+
+              <!-- From-To Info -->
+              <div class="border rounded p-2 mb-2">
+                <div class="d-flex justify-content-between fw-semibold">
+                  <span>From: <span class="text-danger">{{ fromLocation }}</span></span>
+                  <span>To: <span class="text-danger">{{ toLocation }}</span></span>
+                </div>
+              </div>
+
+              <!-- Table -->
+              <div class="table-responsive">
+                <table class="table table-bordered align-middle text-center mb-0">
+                  <thead style="background-color:#f7f7f7;">
+                    <tr>
+                      <th>Product Description</th>
+                      <th>Product Code</th>
+                      <th>Serial No.</th>
+                      <th>Qty.</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of scannedItems; let i = index">
+                      <td>{{ item.description }}</td>
+                      <td>{{ item.code }}</td>
+                      <td>{{ item.serial }}</td>
+                      <td>{{ item.qty }}</td>
+                      <td>
+                        <button
+                          class="btn btn-sm btn-danger"
+                          (click)="removeItem(i)"
+                        >
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

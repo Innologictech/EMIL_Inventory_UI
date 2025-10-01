@@ -1,0 +1,55 @@
+.topnav-menu .navbar-nav {
+    display: flex;
+    justify-content: center; /* Center the items */
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .navbar-nav .nav-item {
+    visibility: visible !important;
+      display: inline-block !important;
+    list-style: none;
+    padding: 10px 15px;
+  }
+  
+  .navbar-nav .nav-item a {
+    text-decoration: none;
+    color: #dedbdb;
+    font-weight: 500;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-nav .nav-item a:hover {
+    color: white;
+  }
+/* Top-level menu links */
+// .topnav-menu .navbar-nav > .nav-item > a {
+//   color: #0f0f0f !important;
+// }
+
+/* Submenu links */
+.topnav-menu .navbar-nav .dropdown-menu .dropdown-item {
+  color: #0f0f0f !important;        /* Set text color */
+  background-color: #ffffff !important;  /* Optional: set background */
+  font-weight: 500;
+}
+
+/* Submenu hover */
+.topnav-menu .navbar-nav .dropdown-menu .dropdown-item:hover {
+  color: #ffffff !important;        /* Hover text color */
+  background-color: #afb0b1 !important; /* Hover background */
+}
+
+/* Nested submenus (if any) */
+.topnav-menu .navbar-nav .dropdown-menu .dropdown .dropdown-item {
+  color: #0f0f0f !important;
+}
+
+.topnav-menu .navbar-nav .dropdown-menu .dropdown .dropdown-item:hover {
+  color: #ffffff !important;
+  background-color: #afb0b1 !important;
+}
+
+
+  

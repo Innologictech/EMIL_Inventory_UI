@@ -1,0 +1,73 @@
+.status-approved {
+    color: #28a745;
+    font-weight: 500;
+}
+
+.status-pending {
+    color: #ffc107;
+    font-weight: 500;
+}
+
+.dropdown-menu {
+    min-width: 10rem;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+.accordion-button {
+  font-weight: bold;
+}
+/* .modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+} */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-dialog {
+  max-width: 500px;
+}
+/* In your component CSS or global styles */
+.table-responsive {
+    width: 100% !important;
+    margin: 0 auto;
+}
+
+table {
+    min-width: 100%;
+    table-layout: auto;
+}
+
+th, td {
+    white-space: nowrap;
+}
+
+.preview-remove-btn {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+

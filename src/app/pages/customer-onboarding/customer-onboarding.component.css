@@ -1,0 +1,508 @@
+.container {
+  max-width: 100%;
+  margin: 2rem auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #eaeef0;
+}
+.container {
+  max-width: 100%;
+  margin: 2rem auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: white;
+}
+
+
+h1 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+ 
+.document-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button[type="submit"] {
+  background-color: #3498db;
+  color: white;
+}
+
+button[type="submit"]:disabled {
+  background-color: #4dcf4a;
+  cursor: not-allowed;
+}
+
+button[type="button"] {
+  background-color: #e74c3c;
+  color: white;
+}
+
+/* .ng-invalid:not(form) {
+  border-left: 4px solid #e74c3c;
+} */
+/* corporate Information section */
+.corporate-info-form {
+  width: 100%;
+  /* max-width: 800px; */
+  margin: 30px auto;
+  background-color: white; /* Light background */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft box shadow */
+  padding: 30px;
+
+  fieldset {
+    border: none; /* Remove border */
+    padding: 0; /* Remove inner padding if padding is on parent */
+  }
+
+  legend {
+    padding: 0 10px;
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .form-row {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .form-label {
+    width: 40%;
+    padding-right: 12%;
+    text-align: right;
+
+    label {
+      font-weight: 500;
+      color: #0e0d0d;
+    }
+  }
+
+  .form-input {
+    width: 60%;
+
+    input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #171717;
+      border-radius: 4px;
+      font-size: 14px;
+
+      &:focus {
+        outline: none;
+        border-color: #66afe9;
+        box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
+      }
+    }
+  }
+}
+
+.corporate-info-form1 {
+  width: 100%;
+  /* max-width: 800px; */
+  margin: 30px auto;
+  background-color: white; /* Light background */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft box shadow */
+  padding: 30px;
+
+  fieldset {
+    border: none; /* Remove border */
+    padding: 0; /* Remove inner padding if padding is on parent */
+  }
+
+  legend {
+    padding: 0 10px;
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .form-row {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .form-label {
+    width: 40%;
+    padding-right: 12%;
+    text-align: right;
+
+    label {
+      font-weight: 500;
+      color: #0e0d0d;
+    }
+  }
+
+  .form-input {
+    width: 60%;
+
+    input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #171717;
+      border-radius: 4px;
+      font-size: 14px;
+
+      &:focus {
+        outline: none;
+        border-color: #66afe9;
+        box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
+      }
+    }
+  }
+}
+.corporate-info-form2 {
+  width: 100%;
+  /* max-width: 800px; */
+  margin: 30px auto;
+  background-color: white; /* Light background */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft box shadow */
+  padding: 30px;
+
+  fieldset {
+    border: none; /* Remove border */
+    padding: 0; /* Remove inner padding if padding is on parent */
+  }
+
+  legend {
+    padding: 0 10px;
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .form-row {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .form-label {
+    width: 40%;
+    padding-right: 12%;
+    text-align: right;
+
+    label {
+      font-weight: 500;
+      color: #0e0d0d;
+    }
+  }
+
+  .form-input {
+    width: 60%;
+
+    input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #171717;
+      border-radius: 4px;
+      font-size: 14px;
+
+      &:focus {
+        outline: none;
+        border-color: #66afe9;
+        box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
+      }
+    }
+  }
+}
+
+
+.registration-section {
+  background:white; /* Soft light background */
+  padding: 24px;
+  margin-top: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(185, 16, 16, 0.1); /* Box shadow instead of border */
+}
+
+
+.dual-heading {
+  display: flex;
+  justify-content: space-between; /* This keeps both headings on one line */
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+legend {
+  font-weight: bold;
+  color: #0e0d0d;
+  font-size: 1.1em;
+  padding: 0;
+  flex: 1; /* Allows the first heading to take available space */
+}
+
+.ownership-legend {
+  font-weight: bold;
+  color: #0e0d0d;
+  font-size: 1.1em;
+  padding: 0;
+  margin-left: auto; /* Pushes it to the right */
+  padding-right: 66px; /* Adds some space from the left heading */
+  text-align: right; /* Aligns text to right within its container */
+}
+
+.registration-grid {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.registration-fields,
+.ownership-fields {
+  flex: 1;
+}
+
+.form-row {
+  margin-bottom: 15px;
+}
+
+.form-row label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #0e0d0d;
+}
+
+.form-row input[type="text"],
+.form-row input[type="date"] {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #171717;
+  border-radius: 4px;
+}
+
+
+.horizontal-layout {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.horizontal-layout label {
+  flex: 0 0 30%; /* Adjust this percentage to control label width */
+  margin-bottom: 0;
+}
+
+.horizontal-layout input[type="text"],
+.horizontal-layout textarea {
+  flex: 1;
+}
+
+/* For textarea to align properly with the label */
+.horizontal-layout textarea {
+  align-self: flex-start;
+  margin-top: 8px; /* Adjust to match your input field alignment */
+}
+
+.contact-info-container {
+  width: 100%;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 4px;
+  background: white;
+
+  margin-top:30px;
+}
+.contact-info-container1 {
+  width: 100%;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 4px;
+  background: white;
+   margin-top: 30px;
+}
+
+.contact-headings {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-right: 100px;
+}
+
+.contact-headings h3 {
+  flex: 1;
+  margin: 0;
+  padding: 0 10px;
+  font-size: 1.1em;
+  color: #0e0d0d;
+  text-align: center;
+}
+
+.contact-columns {
+  display: flex;
+  gap: 20px;
+}
+
+.contact-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-field {
+  display: flex;
+  align-items: center;
+}
+
+.contact-field label {
+  flex: 0 0 100px;
+  font-weight: 500;
+  color: #0e0d0d;
+}
+
+.contact-field input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #171717;
+  border-radius: 4px;
+}
+.confirmation-container {
+  width: 100%;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 4px;
+  background: white;
+  margin-top: 30px;
+}
+
+.confirmation-title h3 {
+  margin: 0 0 15px 0;
+  font-size: 1.2em;
+  color: #0e0d0d;
+  text-align: left;
+  font-weight: bold;
+}
+
+.dual-column-layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.confirmation-text {
+  flex: 1;
+  padding: 10px;
+  background-color: #e5ebec;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.confirmation-text p {
+  margin: 0;
+  line-height: 1.5;
+  color: #100e0e;
+}
+
+.confirmation-fields {
+  flex: 0 0 40%;
+  min-width: 300px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.form-row label {
+  flex: 0 0 120px;
+  font-weight: 500;
+  color: #0e0d0d;
+  margin-right: 10px;
+}
+
+.form-row input[type="text"] {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #171717;
+  border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dual-column-layout {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .confirmation-fields {
+    flex: 1;
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .form-row label {
+    flex: none;
+    margin-bottom: 5px;
+    margin-right: 0;
+  }
+  
+  .form-row input[type="text"] {
+    width: 100%;
+  }
+}
+
+.registration-section1 {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  background: white;
+  border-radius: 4px;
+  margin-top:30px;
+}
+.registration-grid1 {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+
+

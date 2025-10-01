@@ -1,0 +1,27 @@
+<div class="pe-4 ps-4">
+  <label class="fw-bold mt-3 fs-5 ms-5">
+    Dispatch » <span style="color: #ce242a;">Sales Return</span>
+   </label>
+   <div class="card shadow-sm ms-5 mt-4 me-5" >
+  <div class="card-body justify-content-md-center">
+    <form [formGroup]="salesReturn">
+      <div class="justify-content-center">
+        <div class="row col-12 mb-3">
+          <div class="col-md-3"></div>
+
+          <!-- Input + Submit in same column -->
+          <div class="col-md-6">
+            <label class="fw-semibold">Sales Return Invoice Number</label>
+            <input type="text" class="form-control mb-2" formControlName="invoicenumber"
+              placeholder="Type to search Sales return invoice Number">
+
+            <!-- Submit button just below input, aligned to start -->
+            <button type="submit" class="btn-md btnSubmit mt-2">Submit</button>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>

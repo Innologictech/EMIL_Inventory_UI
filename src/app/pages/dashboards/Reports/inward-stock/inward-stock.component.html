@@ -1,0 +1,71 @@
+<div class="pe-4 ps-4">
+  <label class="fw-bold mt-3 fs-5 ms-5">
+    <span style="color: #ce242a;">Inward Stock</span> Report
+  </label>
+
+  <div class="card shadow-sm ms-5 mt-4 me-5">
+    <div class="card-body">
+      <form [formGroup]="inward">
+       <div class="row col-12 mb-3">
+  <div class="col-md-4">
+    <label class="fw-semibold">Date Range <span class="text-danger">*</span></label>
+    <div class="position-relative mb-2">
+      <input 
+        type="text"
+        class="form-control"
+        formControlName="daterange"
+        bsDaterangepicker
+        [bsConfig]="bsRangeConfig"
+        placeholder="Select Date Range"/>
+      <i class="bi bi-calendar position-absolute top-50 end-0 translate-middle-y me-3"
+         style="cursor:pointer;"></i>
+    </div>
+  </div>
+
+  <div class="col-md-4 mt-4" style="white-space: nowrap;">
+    <button type="button" class="btn-md btnSubmit mt-2" (click)="generateReport()">Generate Report</button>
+  </div>
+</div>
+
+<!-- Table, initially hidden -->
+<div *ngIf="showTable" class="table-responsive">
+  <table class="table table-bordered text-center align-middle mb-0">
+    <thead class="table-light">
+      <tr>
+        <th>STO PO No.</th>
+        <th>Item No.</th>
+        <th>Posting Date</th>
+        <th>Invoice No.</th>
+        <th>Vendor Code</th>
+        <th>Brand</th>
+        <th>Material Group</th>
+        <th>Product Code</th>
+        <th>Product Description</th>
+        <th>Quantity</th>
+        <th>UOM</th>
+        <th>Serial No.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+      </form>
+    </div>
+  </div>
+</div>

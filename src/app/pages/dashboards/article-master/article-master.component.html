@@ -1,0 +1,79 @@
+<div class="ps-4 pe-4">
+  <label class="fw-semibold mt-3 fs-5 ms-5">
+Article Master
+  </label>
+
+<div class="card shadow-sm mt-4 ms-5 me-5" >
+
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th class="text-start" style="width: 20%;">Material Code</th>
+            <th class="text-start" style="width: 25%;">Material Description</th>
+            <th class="text-start" style="width: 20%;">Old article code</th>
+            <th class="text-start" style="width: 15%;">Serial</th>
+            <th class="text-start" style="width: 20%;">Ean code</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" class="form-control" placeholder="Search Material Code"></td>
+            <td><input type="text" class="form-control" placeholder="Search Material Description"></td>
+            <td><input type="text" class="form-control" placeholder="Search Old article code"></td>
+
+            <td class="d-flex align-items-center">
+              <input type="text" class="form-control" style="width: 40px; text-align: center;">
+            </td>
+
+            <td><input type="text" class="form-control" placeholder="Search Ean code"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Search button -->
+    <button class="btn btn-primary position-absolute end-0 top-0 mb-2" style="width: 40px; height: 40px;">
+      <i class="bi bi-search"></i>
+    </button>
+
+    <!-- Pagination + Entries info -->
+ <div class="d-flex justify-content-between align-items-center mt-3">
+  <!-- Show entries -->
+  <div class="d-flex align-items-center">
+    <span class="me-2">Show</span>
+    <select class="form-select form-select-sm" style="width: 60px;">
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+    </select>
+    <span class="ms-2">entries</span>
+  </div>
+
+  <!-- Display info + Pagination together -->
+  <div class="d-flex align-items-center">
+    <div class="me-3">
+      Displaying 1 to 10 items
+    </div>
+    <div class="d-flex align-items-center">
+      <button class="btn btn-light btn-sm me-1"><i class="bi bi-chevron-bar-left"></i></button>
+      <button class="btn btn-light btn-sm me-1"><i class="bi bi-chevron-left"></i></button>
+      <input type="text" class="form-control form-control-sm text-center mx-1" value="1" style="width: 40px;">
+      <button class="btn btn-light btn-sm me-1"><i class="bi bi-chevron-right"></i></button>
+      <button class="btn btn-light btn-sm"><i class="bi bi-chevron-bar-right"></i></button>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Gear button -->
+    <button class="btn btn-light position-absolute bottom-0 end-0 m-3" style="width: 40px; height: 40px;">
+      <i class="bi bi-gear"></i>
+    </button>
+  </div>
+</div>
+</div>
+
+ 
