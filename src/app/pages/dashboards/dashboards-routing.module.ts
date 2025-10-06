@@ -44,6 +44,12 @@ import { StockScannedItemsComponent } from './master-data/stock-scanned-items/st
 import { DispatchScannedItemsComponent } from './master-data/dispatch-scanned-items/dispatch-scanned-items.component';
 import { GrnScannedItemsComponent } from './master-data/grn-scanned-items/grn-scanned-items.component';
 import { DeliveryScannedItemsComponent } from './master-data/delivery-scanned-items/delivery-scanned-items.component';
+import { EANScanComponent } from './ean-scan/ean-scan.component';
+import { StockScanComponent } from './stock-scan/stock-scan.component';
+import { InwardScanComponent } from './inward-scan/inward-scan.component';
+import { OutwardScanComponent } from './outward-scan/outward-scan.component';
+import { StockqtyoverviewReportComponent } from './stockqtyoverview-report/stockqtyoverview-report.component';
+import { StockserialsReportComponent } from './stockserials-report/stockserials-report.component';
 
 
 const routes: Routes = [
@@ -55,152 +61,35 @@ const routes: Routes = [
     path:'',
     component:DashboardComponent
 },
-    {
-        path: 'sampleComponent',
-        component: SampleComponentComponent
-    },
+{
+    path:'eanscan',
+    component:EANScanComponent
+},
+{
+    path:'stockscan',
+    component:StockScanComponent
+},
+{
+    path:'inwardscan',
+    component:InwardScanComponent
+},
+{
+    path:'outwardscan',
+    component:OutwardScanComponent
+},
+{
+    path:'stockqty',
+    component:StockqtyoverviewReportComponent
+},
+{
+    path:'stockserial',
+    component:StockserialsReportComponent
+},
+
+
+
+
     
-    {
-        path: 'UserCreation',
-        component: UserCreationComponent
-    },
-     {
-        path: 'UserCreation',
-        component: UserCreationComponent
-    },
-    //  {
-    //     path: 'vendor-onboarding-link',
-    //     component: VendorOnboardingComponent
-    // },
-    {
-        path:'vendoronboardinglink',
-        component:VendorOnboarding2Component
-
-    },
-
-     {
-        path:'mystore',
-        component:MystoreComponent
-
-    },
-
-     {
-        path:'mystore-warehouse',
-        component:MystoreWarehouseComponent
-
-    },
-
-      {
-        path:'scan-stock-items',
-        component:ScanStockItemsComponent
-
-    },
-
-
-{
-    path:'grn',
-    component:GrnComponent
-},
-
-{
-    path:'assigndelivery',
-    component:AssignDeliveryComponent
-},
-
-{
-    path:'inventory',
-    component:InventoryComponent
-},
-
-{
-path:"storagelocationtransfer",
-component:StorageLocationTransferComponent
-},
-
-{
-path:"article-master",
-component:ArticleMasterComponent
-},
-{
-    path:"against-invoice",
-    component:AgainstInvoiceComponent
-},
-{
-    path:"againststo",
-    component:AgainstStoComponent
-},
-{
-    path:"salesreturn",
-    component:SalesReturnComponent
-},
-{
-    path:"gatepassprint",
-    component:GatepassPrintComponent
-},
-{
-    path:"invoiceprint",
-    component:InvoicePrintComponent
-},
-{
-    path:"stockoverview",
-    component:StockoverviewComponent
-},
-{
-    path:"stockstatus",
-    component:StockstatusComponent
-},
-{
-    path:"openstolist",
-    component:OpenstoorderListComponent
-},
-{
-    path:"inwardstock",
-    component:InwardStockComponent
-},
-{
-    path:"inwardstock",
-    component:InwardStockComponent
-},
-{
-    path:"stockintransit",
-    component:StockInTransitComponent
-},
-{
-    path:"salesdeliveries",
-    component:SalesDeliveriesComponent
-},
-{
-    path:"pendingdeliveries",
-    component:PendingDeliveriesComponent
-},
-{
-    path:"mb51",
-    component:MB51Component
-},
-{
-    path:"article-master2",
-    component:ArticleMasterComponent
-},
-{
-    path:"site-master",
-    component:SiteMasterComponent
-},
-{
-    path:"stock-scanned-items",
-    component:StockScannedItemsComponent
-},
-{
-    path:"dispatch-scanned-items",
-    component:DispatchScannedItemsComponent
-},
-{
-    path:"grn-scanned-items",
-    component:GrnScannedItemsComponent
-},
-{
-    path:"delivery-scanned-items",
-    component:DeliveryScannedItemsComponent
-},
 
 
 

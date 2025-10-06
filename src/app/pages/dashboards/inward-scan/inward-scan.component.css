@@ -1,0 +1,9 @@
+.table th {
+  padding: 10px !important;
+   border-bottom: 2px solid #ddd !important;
+  /* background-color: #090979 !important; */
+  /* background-color: rgb(88 98 145)!important; */
+  color: rgb(22, 22, 22);
+  text-align-last: left !important;
+
+}
