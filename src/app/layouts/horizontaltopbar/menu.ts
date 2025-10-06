@@ -9,9 +9,24 @@ export const MENU: MenuItem[] = [
   { id: 4, label: 'INWARD SCAN', link: '/inwardscan', icon: 'bi-box-arrow-in-down' },
   { id: 5, label: 'OUTWARD SCAN', link: '/outwardscan', icon: 'bi-box-arrow-up' },
   { id: 6, label: 'Stock Qty Overview Report', link: '/stockqty', icon: 'bi-card-list' },
-  { id: 7, label: 'Stock Serials Report', link: '/stockserial', icon: 'bi-upc' }
+  { id: 7, label: 'Stock Serials Report', link: '/stockserial', icon: 'bi-upc' },
 
+   {
+  id: 8,                    
+  label: 'Reports',
+  icon: 'bx-cylinder',
+  subItems: [
+    {
+      id: 1,               
+      label: 'STOCK TO SAP',
+      link: '/stock-to-sap', 
+      parentId: 7,          
+      icon: 'bx-receipt',   
+    }
     
+  ]
+},
+ 
 
 
    

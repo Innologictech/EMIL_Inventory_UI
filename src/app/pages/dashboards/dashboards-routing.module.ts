@@ -50,6 +50,8 @@ import { InwardScanComponent } from './inward-scan/inward-scan.component';
 import { OutwardScanComponent } from './outward-scan/outward-scan.component';
 import { StockqtyoverviewReportComponent } from './stockqtyoverview-report/stockqtyoverview-report.component';
 import { StockserialsReportComponent } from './stockserials-report/stockserials-report.component';
+import { StockMasterComponent } from './master-data/stock-master/stock-master.component';
+import { StockToSapComponent } from './Reports/stock-to-sap/stock-to-sap.component';
 
 
 const routes: Routes = [
@@ -86,7 +88,15 @@ const routes: Routes = [
     component:StockserialsReportComponent
 },
 
+{
+    path:"stock-master",
+    component:StockMasterComponent
+},
 
+{
+    path:"stock-to-sap",
+    component:StockToSapComponent
+}
 
 
     
