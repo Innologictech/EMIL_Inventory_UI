@@ -56,7 +56,7 @@ export class UserCreationComponent implements OnInit {
   }
 
   // Sample data
-  roles = [ 'All','Inventory', 'Driver', 'Dispatch', 'Store', 'GRN', 'Multi-Role', 'Administrator'];
+  roles = [ 'All','Inventory', 'EanScan', 'Dispatch', 'Store', 'GRN', 'Multi-Role', 'Administrator'];
   stores = ['Store A', 'Store B', 'Store C'];
 
   // Sample user list

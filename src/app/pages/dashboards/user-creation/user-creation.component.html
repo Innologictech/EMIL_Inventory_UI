@@ -16,11 +16,11 @@
             [ngClass]="{'btn-danger text-white': selectedTab==='All', 'btn-outline-secondary': selectedTab!=='All'}"
             (click)="onSelectTab('All')">All</button>
         <button type="button" class="btn border-0"
+            [ngClass]="{'btn-danger text-white': selectedTab==='EanScan', 'btn-outline-secondary': selectedTab!=='EanScan'}"
+            (click)="onSelectTab('Driver')">EAN Scan</button>    
+        <button type="button" class="btn border-0"
             [ngClass]="{'btn-danger text-white': selectedTab==='Inventory', 'btn-outline-secondary': selectedTab!=='Inventory'}"
             (click)="onSelectTab('Inventory')">Inventory</button>
-        <button type="button" class="btn border-0"
-            [ngClass]="{'btn-danger text-white': selectedTab==='Driver', 'btn-outline-secondary': selectedTab!=='Driver'}"
-            (click)="onSelectTab('Driver')">Driver</button>
         <button type="button" class="btn border-0"
             [ngClass]="{'btn-danger text-white': selectedTab==='Dispatch', 'btn-outline-secondary': selectedTab!=='Dispatch'}"
             (click)="onSelectTab('Dispatch')">Dispatch</button>

@@ -1,79 +1,211 @@
-<div class="ps-4 pe-4">
-  <label class="fw-semibold mt-3 fs-5 ms-5">
-Article Master
-  </label>
+<div class="px-md-5 ms-4">
+  <label class="fw-bold mt-3 fs-5 ms-5">Article Master</label>
+</div>
 
-<div class="card shadow-sm mt-4 ms-5 me-5" >
 
-  <div class="card-body">
-    <div class="table-responsive">
-      <table class="table table-borderless">
-        <thead>
-          <tr>
-            <th class="text-start" style="width: 20%;">Material Code</th>
-            <th class="text-start" style="width: 25%;">Material Description</th>
-            <th class="text-start" style="width: 20%;">Old article code</th>
-            <th class="text-start" style="width: 15%;">Serial</th>
-            <th class="text-start" style="width: 20%;">Ean code</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><input type="text" class="form-control" placeholder="Search Material Code"></td>
-            <td><input type="text" class="form-control" placeholder="Search Material Description"></td>
-            <td><input type="text" class="form-control" placeholder="Search Old article code"></td>
+<div class=" py-3 px-md-5 ms-0"
+    style="background-color:#ffffff; margin-left: 7%!important; margin-right:7%!important ;margin-top: 2%;">
+<div class="container-fluid my-4 p-3" style="border:2px solid #dddddd; border-top:8px solid #dddddd;">
 
-            <td class="d-flex align-items-center">
-              <input type="text" class="form-control" style="width: 40px; text-align: center;">
-            </td>
-
-            <td><input type="text" class="form-control" placeholder="Search Ean code"></td>
-          </tr>
-        </tbody>
-      </table>
+  <!-- Top Buttons -->
+  <div *ngIf="show" class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+    <div>
+      <button type="button" class="btn btn-outline-primary" (click)="onAddUserClick()">
+        <i class="mdi mdi-plus"></i> Add Article
+      </button>
     </div>
+    <div class="d-flex flex-wrap gap-2">
+      <button type="button" class="btn btn-outline-secondary">
+        <i class="mdi mdi-export"></i> Export
+      </button>
+      <button type="button" class="btn btn-outline-secondary">
+        <i class="mdi mdi-printer"></i> Print
+      </button>
+      <!-- <button *ngIf="!showSearch" type="button" class="btn btn-primary" (click)="toggleSearch($event)">
+          <i class="mdi mdi-magnify"></i>
+        </button> -->
+      <!-- Search toggle -->
+      <ng-container>
+        <button *ngIf="!showSearch" type="button" class="btn btn-primary" (click)="toggleSearch($event)">
+          <i class="mdi mdi-magnify"></i>
+        </button>
 
-    <!-- Search button -->
-    <button class="btn btn-primary position-absolute end-0 top-0 mb-2" style="width: 40px; height: 40px;">
-      <i class="bi bi-search"></i>
-    </button>
-
-    <!-- Pagination + Entries info -->
- <div class="d-flex justify-content-between align-items-center mt-3">
-  <!-- Show entries -->
-  <div class="d-flex align-items-center">
-    <span class="me-2">Show</span>
-    <select class="form-select form-select-sm" style="width: 60px;">
-      <option value="10">10</option>
-      <option value="25">25</option>
-      <option value="50">50</option>
-    </select>
-    <span class="ms-2">entries</span>
+        <input *ngIf="showSearch" type="text" class="d-inline-block" style="width:200px;" placeholder="Search..."
+          (click)="$event.stopPropagation()" (blur)="closeSearch()" />
+      </ng-container>
+    </div>
   </div>
 
-  <!-- Display info + Pagination together -->
-  <div class="d-flex align-items-center">
-    <div class="me-3">
-      Displaying 1 to 10 items
+  <!-- Add User Form -->
+  <div *ngIf="showAddArticleForm">
+    <!-- <h6 class="fw-bold mb-3">Add User</h6> -->
+    <div class="bg-light fw-semibold px-3 py-2 mb-4 border-bottom">
+      Add Article
     </div>
-    <div class="d-flex align-items-center">
-      <button class="btn btn-light btn-sm me-1"><i class="bi bi-chevron-bar-left"></i></button>
-      <button class="btn btn-light btn-sm me-1"><i class="bi bi-chevron-left"></i></button>
-      <input type="text" class="form-control form-control-sm text-center mx-1" value="1" style="width: 40px;">
-      <button class="btn btn-light btn-sm me-1"><i class="bi bi-chevron-right"></i></button>
-      <button class="btn btn-light btn-sm"><i class="bi bi-chevron-bar-right"></i></button>
-    </div>
+    <form [formGroup]="materialForm" (ngSubmit)="onSubmit()">
+
+      <!-- New Material Code -->
+      <div class="row mb-3">
+        <label class="col-md-3 col-form-label fw-semibold">New Material Code*</label>
+        <div class="col-md-9">
+          <input type="text" class="form-control" formControlName="newMaterialCode">
+          <div *ngIf="submitted && f.newMaterialCode.errors" class="text-danger small">
+            New Material Code is required
+          </div>
+        </div>
+      </div>
+
+      <!-- Material Description -->
+      <div class="row mb-3">
+        <label class="col-md-3 col-form-label fw-semibold">Material Description*</label>
+        <div class="col-md-9">
+          <input type="text" class="form-control" formControlName="materialDescription">
+          <div *ngIf="submitted && f.materialDescription.errors" class="text-danger small">
+            Material Description is required
+          </div>
+        </div>
+      </div>
+
+      <!-- Old Material Code -->
+      <div class="row mb-3">
+        <label class="col-md-3 col-form-label fw-semibold">Old Material Code*</label>
+        <div class="col-md-9">
+          <input type="text" class="form-control" formControlName="oldMaterialCode">
+          <div *ngIf="submitted && f.oldMaterialCode.errors" class="text-danger small">
+            Old Material Code is required
+          </div>
+        </div>
+      </div>
+
+      <!-- Serial Profile -->
+      <div class="row mb-3">
+        <label class="col-md-3 col-form-label fw-semibold">Serial Profile</label>
+        <div class="col-md-9">
+          <input type="text" class="form-control" formControlName="serialProfile">
+        </div>
+      </div>
+
+      <!-- Existing EAN Code -->
+      <div class="row mb-3">
+        <label class="col-md-3 col-form-label fw-semibold">Existing EAN Code</label>
+        <div class="col-md-9">
+          <input type="text" class="form-control" formControlName="eanCode">
+        </div>
+      </div>
+
+      <!-- Material Type -->
+      <div class="row mb-3">
+        <label class="col-md-3 col-form-label fw-semibold">Material Type</label>
+        <div class="col-md-9">
+          <input type="text" class="form-control" formControlName="materialType">
+        </div>
+      </div>
+
+      <!-- Merchant Category -->
+      <div class="row mb-3">
+        <label class="col-md-3 col-form-label fw-semibold">Merchant Category</label>
+        <div class="col-md-9">
+          <input type="text" class="form-control" formControlName="merchantCategory">
+        </div>
+      </div>
+
+      <!-- Brand -->
+      <div class="row mb-3">
+        <label class="col-md-3 col-form-label fw-semibold">Brand</label>
+        <div class="col-md-9">
+          <input type="text" class="form-control" formControlName="brand">
+        </div>
+      </div>
+
+      <!-- UOM -->
+      <div class="row mb-3">
+        <label class="col-md-3 col-form-label fw-semibold">Uom</label>
+        <div class="col-md-9">
+          <input type="text" class="form-control" formControlName="uom">
+        </div>
+      </div>
+
+      <!-- OTC / Non OTC -->
+      <div class="row mb-3">
+        <label class="col-md-3 col-form-label fw-semibold">OTC / Non OTC</label>
+        <div class="col-md-9">
+          <select class="form-select" formControlName="otcType">
+            <option value="" disabled>Select Option</option>
+            <option value="OTC">OTC</option>
+            <option value="Non-OTC">Non OTC</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="row mt-4">
+        <div class="col-12 d-flex gap-2">
+          <button type="submit" class="btn btn-success">
+            <i class="bi bi-check2"></i> Save
+          </button>
+          <button type="button" class="btn btn-info text-white" (click)="onSaveAndBack()">
+            <i class="bi bi-arrow-left-circle"></i> Save & Go Back
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="onCancel()">
+            <i class="bi bi-x-circle"></i> Cancel
+          </button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+  <!-- Tab Content -->
+ <div  *ngIf="showTable" class="col-md-12 mt-3">
+  <div class="table-responsive">
+    <table class="table table-bordered text-nowrap">
+      <thead>
+        <tr>
+          <th>Actions</th>
+          <th>New Material Code</th>
+          <th>Old Material Code</th>
+          <th>Material Description</th>
+          <th>Serial Profile</th>
+          <th>Existing EAN Code</th>
+          <th>New EAN Code</th>
+          <th>Is EAN Updated?</th>
+        </tr>
+        <tr>
+          <th>
+            <button type="button" class="btn btn-outline-secondary btn-sm p-2" style="width: 50px;">
+              <i class="bi bi-arrow-repeat"></i>
+            </button>
+          </th>
+          <th><input type="text" class="form-control form-control-sm" placeholder="Search New Material Code"></th>
+          <th><input type="text" class="form-control form-control-sm" placeholder="Search Old Material Code"></th>
+          <th><input type="text" class="form-control form-control-sm" placeholder="Search Material Description"></th>
+          <th><input type="text" class="form-control form-control-sm" placeholder="Search Serial Profile"></th>
+          <th><input type="text" class="form-control form-control-sm" placeholder="Search Existing EAN Code"></th>
+          <th><input type="text" class="form-control form-control-sm" placeholder="Search New EAN Code"></th>
+          <th><input type="text" class="form-control form-control-sm" placeholder="Search Is EAN Updated?"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let m of materials">
+          <td>
+            <button type="button" class="btn btn-outline-secondary btn-sm">
+              <i class="bi bi-pencil"></i>
+            </button>
+          </td>
+          <td>{{ m.newMaterialCode }}</td>
+          <td>{{ m.oldMaterialCode }}</td>
+          <td>{{ m.materialDescription }}</td>
+          <td>{{ m.serialProfile }}</td>
+          <td>{{ m.existingEAN }}</td>
+          <td>{{ m.newEAN }}</td>
+          <td>{{ m.isUpdated }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
 
-
-    <!-- Gear button -->
-    <button class="btn btn-light position-absolute bottom-0 end-0 m-3" style="width: 40px; height: 40px;">
-      <i class="bi bi-gear"></i>
-    </button>
-  </div>
 </div>
 </div>
-
- 
