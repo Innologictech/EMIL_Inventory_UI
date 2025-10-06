@@ -26,6 +26,43 @@ export const MENU: MenuItem[] = [
     
   ]
 },
+ {
+  id: 9,                    
+  label: 'User Management',
+  icon: 'bx-cylinder',
+link:'/user-management'
+},
+
+{
+  id: 10,                    
+  label: 'Master Data',
+  icon: 'bx-cylinder',
+ subItems: [
+    {
+      id: 1,               
+      label: 'Article Master',
+      link: '/article-master', 
+      parentId: 10,          
+      icon: 'bx-receipt',   
+    },
+    {
+      id: 1,               
+      label: 'Site Master',
+      link: '/site-master', 
+      parentId: 10,          
+      icon: 'bx-receipt',   
+    },
+    {
+      id: 1,               
+      label: 'Stock Master',
+      link: '/stock-master', 
+      parentId: 10,          
+      icon: 'bx-receipt',   
+    },
+    
+  ]
+},
+ 
  
 
 

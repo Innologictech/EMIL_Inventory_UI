@@ -97,8 +97,27 @@ const routes: Routes = [
     path:"stock-to-sap",
     component:StockToSapComponent
 }
+,
+{
+    path:"user-management",
+    component:UserCreationComponent
+}
+,
+{
+    path:"article-master",
+    component:ArticleMasterComponent
+},
 
-
+{
+    path:"site-master",
+    component:SiteMasterComponent
+}
+,
+{
+    path:"stock-master",
+    component:StockMasterComponent
+}
+,
     
 
 
