@@ -90,16 +90,33 @@
 
                 <!-- Toolbar -->
                 <div class="row g-3 mt-4 align-items-center">
-                    <div class="col-12 col-md-4 d-flex align-items-center">
-                        <label for="entries" class="me-2 mt-2">Show</label>
-                        <select id="entries" class="form-select form-select-sm w-auto">
-                            <option value="5">5</option>
-                            <option value="10" selected>10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                        </select>
-                        <span class="ms-2">entries</span>
-                    </div>
+                   <div class="col-12 col-md-4 d-flex align-items-center">
+  <label for="entries" class="me-2 mt-2">Show</label>
+
+  <div class="position-relative d-flex align-items-center">
+    <select id="entries"
+            class="form-select form-select-sm w-auto pe-4"
+            style="appearance:none;
+                   -webkit-appearance:none;
+                   -moz-appearance:none;
+                   background:transparent;
+                   background-image:none;
+                   padding-right:1.5rem;">
+      <option value="5">5</option>
+      <option value="10" selected>10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+    </select>
+
+    <!-- Custom up & down arrows -->
+    <div class="position-absolute end-0 pe-2 d-flex flex-column justify-content-center" style="pointer-events:none;">
+      <i class="bi bi-caret-up-fill" style="font-size:10px; line-height:6px;"></i>
+      <i class="bi bi-caret-down-fill" style="font-size:10px; line-height:6px;"></i>
+    </div>
+  </div>
+
+  <span class="ms-2">entries</span>
+</div>
 
                     <div class="col-12 col-md-4 d-flex align-items-center">
                         <label for="search" class="me-2 mt-2 fw-semibold">Search:</label>
