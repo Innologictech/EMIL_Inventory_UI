@@ -1,10 +1,10 @@
-<div class="pe-4 ps-4">
+<div>
     <form [formGroup]="eanScan">
-  <label class="fw-semibold mt-0 fs-5 ms-5 mt-2">
+  <label class="fw-semibold mt-0 fs-5 ms-7s mt-2">
     EAN Code <span style="color: #f36270;">Scan</span>
   </label>
 
-  <div class="mt-2 ms-5 me-5 card p-4 shadow">
+  <div class="mt-2 ms-9 me-9 card p-4 shadow">
     
     <!-- Row for 6 + 6 split -->
     <div class="row">
@@ -82,15 +82,12 @@
         </thead>
         <tbody>
           <tr>
-            <td>1001</td>
-            <td>Item A</td>
+            <td></td>
+            <td></td>
             <td class="text-center">
            <button class="btn btn-sm" 
                 style="background-color: #f36270; color: white;"
-                (click)="onDelete()">
-        <i class="bi bi-trash"></i>
-        </button>
-
+                (click)="onDelete()"><i class="bi bi-trash"></i></button>
             </td>           
           </tr>
           

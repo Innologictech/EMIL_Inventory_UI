@@ -1,11 +1,11 @@
-<div class="pe-4 ps-4">
-    <label class="fw-bold mt-3 fs-5 ms-5">GRN Scanned Items</label>
+<div>
+    <label class="fw-bold mt-3 fs-5 ms-7">GRN Scanned Items</label>
 
-    <div class="card shadow-sm ms-5 mt-4 me-5">
+    <div class="card shadow-sm ms-8 mt-4 me-8">
         <div class="card-body">
             <!-- Action Buttons -->
-            <div class="d-flex flex-wrap justify-content-end align-items-center mb-3 gap-2"
-                style="border:2px solid #dddddd; border-top:8px solid #dddddd;">
+            <!-- <div class="d-flex flex-wrap justify-content-end align-items-center mb-3 gap-2"
+                style="border:2px solid #dddddd; border-top:8px solid #dddddd;"> -->
                 <div class="d-flex flex-wrap gap-2 m-2">
                     <button type="button" class="btn btn-outline-secondary">
                         <i class="mdi mdi-export"></i> Export
@@ -14,7 +14,7 @@
                         <i class="mdi mdi-printer"></i> Print
                     </button>
 
-                    <ng-container>
+                a    <ng-container>
                         <button *ngIf="!showSearch" type="button" class="btn btn-primary"
                             (click)="toggleSearch($event)">
                             <i class="mdi mdi-magnify"></i>
@@ -76,6 +76,6 @@
                 </div>
 
 
-        </div>
+        <!-- </div> -->
     </div>
 </div>
