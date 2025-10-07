@@ -14,7 +14,7 @@ export const MENU: MenuItem[] = [
    {
   id: 8,                    
   label: 'Reports',
-  icon: 'bx-cylinder',
+  icon: 'bi-stack',
   subItems: [
     {
       id: 1,               
@@ -36,7 +36,7 @@ link:'/user-management'
 {
   id: 10,                    
   label: 'Master Data',
-  icon: 'bx-cylinder',
+  icon: 'bi-stack',
  subItems: [
     {
       id: 1,               

@@ -1,0 +1,42 @@
+.search{
+   width:120px; 
+}
+
+.stock{
+       width: 250px !important;
+    height: 36px !important;
+}
+
+
+
+/* Medium screens (tablets) */
+@media (max-width: 992px) {
+    .search {
+        width: 100px;
+    }
+    .form-control {
+        width: 200px;
+        height: 34px;
+    }
+}
+
+/* Small screens (phones) */
+@media (max-width: 576px) {
+    .search {
+        width: 80px;
+    }
+    .form-control {
+        width: 150px;
+        height: 32px;
+    }
+}
+
+.btn-secondary {
+  background-color: #6d767e;
+  color: white;
+  /* border-color: #6d767e; */
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
