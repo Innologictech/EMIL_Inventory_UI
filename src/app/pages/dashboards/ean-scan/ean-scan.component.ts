@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,7 +12,17 @@ import Swal from 'sweetalert2';
 })
 export class EANScanComponent {
 
-  eanScan: FormGroup;
+  eanScan!: FormGroup;
+
+  constructor(private fb: FormBuilder) {}
+
+   ngOnInit(): void {
+    this.eanScan = this.fb.group({
+      eanCode: ['', Validators.required],   
+      productName: [''],
+    });
+  }
+
   
   onDelete() {
   Swal.fire({

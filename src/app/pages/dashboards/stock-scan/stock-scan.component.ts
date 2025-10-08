@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import * as React from 'preact/compat';
 import Swal from 'sweetalert2';
 
@@ -12,7 +12,22 @@ import Swal from 'sweetalert2';
   styleUrl: './stock-scan.component.css'
 })
 export class StockScanComponent {
-  stockScan:FormGroup;
+  stockScan!: FormGroup;
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+      // ✅ Initialize your form properly here
+      this.stockScan = this.fb.group({
+        productCode: ['', Validators.required],   // example field
+        serialNumber: [''],
+        quantity:[''],
+        storageLocation:[''],
+
+
+        // quantity: [0]
+      });
+    }
   onDelete() {
     Swal.fire({
       title: 'Are you sure?',

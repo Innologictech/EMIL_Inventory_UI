@@ -94,6 +94,16 @@ downloadVendorProfile(payload: any) {
 getVendorById(id: string) {
   return this.http.get(environment.baseUrl + '/onboard/getVendorById/' + id);
 }
+
+getUsercreation(){
+  return this.http.get(environment.baseUrl+'/emil/getAllUserList');
+
+}
+
+getRoles(){
+  return this.http.get(environment.baseUrl+'/emil/getAllRoles');
+
+}
   
 
 }

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,7 +12,19 @@ import Swal from 'sweetalert2';
 })
 export class InwardScanComponent {
 
-inwardScan:FormGroup;
+inwardScan!:FormGroup;
+
+  constructor(private fb: FormBuilder) {}
+
+   ngOnInit(): void {
+    this.inwardScan = this.fb.group({
+      orderpoNumber: ['', Validators.required],   
+      eanCode: [''],
+      serialNumber:[''],
+      quantity:['']
+    });
+  }
+
   onDelete() {
     Swal.fire({
       title: 'Are you sure?',
